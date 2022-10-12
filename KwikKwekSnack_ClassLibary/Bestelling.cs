@@ -3,13 +3,27 @@
     public class Bestelling
     {
         private int _id { get; set; }
-        private int totalPrice { get; set; }
-        private List <Product> products;
+        private double _totalPrice { get; set; }
+        private List <Product> _products;
         
         public Bestelling(int id)
         {
-            products = new List<Product>();
+            _products = new List<Product>();
             _id = id;
+        }
+
+        public double GetTotalPrice()
+        {
+            int price = 0;
+
+            return price;
+        }
+
+        enum status
+        {
+            wachtrij,
+            wordtBereid,
+            gereed
         }
 
     }

@@ -8,9 +8,9 @@ namespace KwikKwekSnack_ClassLibary
 {
     public abstract class Product
     {
-        string Name { get; set; }
-        string Description { get; }
-        string ImageUrl { get; set; }
-        int Price { get; set; }
+        string _name { get; set; }
+        string _description { get; }
+        string _imageUrl { get; set; }
+        double _price { get; set; }
     }
 }
