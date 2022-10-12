@@ -4,11 +4,11 @@
     {
         private int _id { get; set; }
         private int totalPrice { get; set; }
-        private products<Product;
+        private List <Product> products;
         
         public Bestelling(int id)
         {
-            product = new < Product > ();
+            products = new List<Product>();
             _id = id;
         }
 
