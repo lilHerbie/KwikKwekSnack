@@ -9,7 +9,7 @@ namespace KwikKwekSnack_ClassLibary
 
     public class Drink: Product
     {
-        private Size _size;
+        private Size _size { get; set; }
     }
 
 
