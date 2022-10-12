@@ -2,10 +2,10 @@
 {
     public class Order
     {
-        private int OrderId { get; set; }
-        private double TotalPrice { get; set; }
-        private List <Product> Products;
-        private Status Status { get; set; }
+        public int OrderId { get; set; }
+        public double TotalPrice { get; set; }
+        public List <Product> Products;
+        public Status Status { get; set; }
 
     /*public Order(int id)
         {

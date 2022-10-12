@@ -18,7 +18,8 @@ namespace KwikKwekSnack_ClassLibary
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer("Server=localhost;Database=KwikKwekSnackDB;Trusted_Connection=True");
+                optionsBuilder.UseSqlServer("Server=localhost;Database=KwikKwekSnackDB;Trusted_Connection=True;");
+
             }
         }
 

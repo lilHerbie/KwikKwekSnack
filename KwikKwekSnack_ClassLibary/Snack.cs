@@ -10,7 +10,7 @@ namespace KwikKwekSnack_ClassLibary
     public class Snack : Product
     {
         public int SnackId { get; set; }
-        public List<Extra> Extras { get; set; }
+        public Extra extra { get; set; }
         public int StartPrice { get; set; }
 
       /*  public Snack(int startPrice)

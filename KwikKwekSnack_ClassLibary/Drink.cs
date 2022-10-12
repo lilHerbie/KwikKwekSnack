@@ -10,7 +10,7 @@ namespace KwikKwekSnack_ClassLibary
     public class Drink: Product
     {
         public int DrinkId { get; set; }
-        private Size Size { get; set; }
+        public Size Size { get; set; }
     }
 
     public enum Size
