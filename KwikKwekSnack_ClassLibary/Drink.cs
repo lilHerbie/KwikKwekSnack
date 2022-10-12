@@ -9,12 +9,11 @@ namespace KwikKwekSnack_ClassLibary
 
     public class Drink: Product
     {
-        private Size _size { get; set; }
+        public int DrinkId { get; set; }
+        private Size Size { get; set; }
     }
 
-
-
-    enum Size
+    public enum Size
     {
         S,
         M,

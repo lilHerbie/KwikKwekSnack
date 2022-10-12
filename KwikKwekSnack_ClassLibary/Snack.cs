@@ -9,14 +9,14 @@ namespace KwikKwekSnack_ClassLibary
 {
     public class Snack : Product
     {
-        private List<Extra>_extras;
-        private int _startPrice { get; set; }
+        public int SnackId { get; set; }
+        public List<Extra> Extras { get; set; }
+        public int StartPrice { get; set; }
 
-        public Snack(int startPrice)
+      /*  public Snack(int startPrice)
         {
-            _startPrice = startPrice;
-
-        }
+            this.StartPrice = startPrice; 
+        }*/
     }
 
     public enum Extra
