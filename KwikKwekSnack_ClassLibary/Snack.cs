@@ -7,23 +7,15 @@ using System.Threading.Tasks;
 
 namespace KwikKwekSnack_ClassLibary
 {
-    public class Snack : Product
+    public class Snack
     {
-        public int SnackId { get; set; }
-        public Extra extra { get; set; }
+        public int SnackId { get;set; }
+        public string Name { get; set; }
+        public string Description { get; }
+        public string ImageUrl { get; set; }
+        public double Price { get; set; }
+        public List<Extra> Extras { get; set; }
         public int StartPrice { get; set; }
 
-      /*  public Snack(int startPrice)
-        {
-            this.StartPrice = startPrice; 
-        }*/
-    }
-
-    public enum Extra
-    {
-        kaas,
-        sla,
-        uit,
-        tomaat
     }
 }

@@ -10,7 +10,6 @@ namespace KwikKwekSnack_ClassLibary
     public class KwikKwekSnackContext : DbContext
     {
         public DbSet<Order> Orders { get; set; }
-
         public DbSet<Snack> Snacks { get; set; }
         public DbSet<Drink> Drinks { get; set; }
 
