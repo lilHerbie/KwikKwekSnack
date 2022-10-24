@@ -1,26 +1,23 @@
 ﻿namespace KwikKwekSnack_ClassLibary
 {
-    public class Bestelling
+    public class Order
     {
-        private int _id { get; set; }
-        private double _totalPrice { get; set; }
-        private List <Product> _products;
-        private status _status { get; set; }
+        public int _id { get; set; }
+        public double _totalPrice { get; set; }
+        public status _status { get; set; }
+        public List<DrinkLine> Drinks { get; set; }
+        public List<SnackLine> Snacks { get; set; }
 
-    public Bestelling(int id)
+
+
+        public Order(int id)
         {
-            _products = new List<Product>();
+            Drinks = new List<DrinkLine>();
+            Snacks = new List<SnackLine>();
             _id = id;
         }
 
-        public double GetTotalPrice()
-        {
-            int price = 0;
-
-            return price;
-        }
-
-        enum status
+        public enum status
         {
             wachtrij,
             wordtBereid,
