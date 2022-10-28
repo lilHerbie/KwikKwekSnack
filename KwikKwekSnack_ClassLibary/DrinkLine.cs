@@ -11,7 +11,8 @@ namespace KwikKwekSnack_ClassLibary
         public bool HasStraw { get; set; }
         public bool HasIce { get; set; }
         public int Id { get; set; }
-        public Size size { get; set; }
+        public Size Size { get; set; }
+        public Drink Drink { get; set; }   
     }
 
     public enum Size

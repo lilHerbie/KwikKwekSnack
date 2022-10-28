@@ -9,18 +9,13 @@ namespace KwikKwekSnack_ClassLibary
 {
     public class Snack
     {
-        public int _startPrice { get; set; }
-        public string _name { get; set; }
-        public string _description { get; }
-        public string _imageUrl { get; set; }
-        public double _price { get; set; }
-    
+        public int Id { get; set; }
+        public double StartPrice { get; set; }
+        public string Name { get; set; }
+        public string Description { get; }
+        public string ImageUrl { get; set; }
+        public double Price { get; set; }
 
-    public Snack(int startPrice)
-        {
-            _startPrice = startPrice;
-        }
+
     }
-
-    
 }

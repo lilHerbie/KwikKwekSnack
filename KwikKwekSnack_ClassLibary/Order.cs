@@ -2,9 +2,9 @@
 {
     public class Order
     {
-        public int _id { get; set; }
-        public double _totalPrice { get; set; }
-        public status _status { get; set; }
+        public int Id { get; set; }
+        public double TotalPrice { get; set; }
+        public status Status { get; set; }
         public List<DrinkLine> Drinks { get; set; }
         public List<SnackLine> Snacks { get; set; }
 
@@ -14,7 +14,7 @@
         {
             Drinks = new List<DrinkLine>();
             Snacks = new List<SnackLine>();
-            _id = id;
+            Id = id;
         }
 
         public enum status

@@ -9,21 +9,10 @@ namespace KwikKwekSnack_ClassLibary
 
     public class Drink
     {
-        public Size _size { get; set; }
-        public string _name { get; set; }
-        public string _description { get; }
-        public string _imageUrl { get; set; }
-        public double _price { get; set; }
-    }
-}
-
-
-
-    enum Size
-    {
-        S,
-        M,
-        L,
-        XL
+        public int ID { get; set; } 
+        public string Name { get; set; }
+        public string Description { get; }
+        public string ImageUrl { get; set; }
+        public double Price { get; set; }
     }
 }
