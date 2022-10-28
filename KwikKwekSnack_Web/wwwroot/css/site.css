@@ -17,6 +17,11 @@ body {
   margin-bottom: 60px;
 }
 
+section{
+    display: flex;
+    flex-direction: column;
+}
+
 
 .menuContainer{
     display:flex;
@@ -39,4 +44,15 @@ body {
     object-fit: cover;
     height: 100%;
     width: 100%;
+}
+
+.overzicht {
+    width: 30%;
+    height: 200px;
+    background: red;
+    border: solid black 3px;
+}
+
+.orderSection{
+    flex-direction: row;
 }
