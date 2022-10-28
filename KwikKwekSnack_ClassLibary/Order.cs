@@ -15,14 +15,14 @@
             Drinks = new List<DrinkLine>();
             Snacks = new List<SnackLine>();
             Id = id;
-        }
+    }
 
         public enum status
-        {
-            wachtrij,
-            wordtBereid,
-            gereed
-        }
+    {
+        wachtrij,
+        wordtBereid,
+        gereed
+    }
 
     }
 }

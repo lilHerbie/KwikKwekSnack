@@ -19,4 +19,5 @@ namespace KwikKwekSnack_ClassLibary
         SnackLines = new List<SnackLine>();
         }
     }
+
 }
