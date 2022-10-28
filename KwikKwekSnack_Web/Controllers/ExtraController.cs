@@ -97,7 +97,17 @@ namespace KwikKwekSnack_Web.Controllers
         // GET: ExtraController/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            try
+            {
+                using (var ctx = new DatabaseContext())
+                {
+                    return View(ctx.Extras.Find(id));
+                }
+            }
+            catch (Exception)
+            {
+                return RedirectToAction("Index", "Home");
+            }
         }
 
         // POST: ExtraController/Delete/5
@@ -107,18 +117,14 @@ namespace KwikKwekSnack_Web.Controllers
         {
             try
             {
-                if (ModelState.IsValid)
-                {
-                    using (var ctx = new DatabaseContext())
-                    {
-                        ctx.Attach(model);
-                        ctx.Extras.Update(model);
-                        ctx.SaveChanges();
-                    }
-                    return RedirectToAction(nameof(Index));
 
+                using (var ctx = new DatabaseContext())
+                {
+                    ctx.Extras.Attach(model);
+                    ctx.Extras.Remove(model);
+                    ctx.SaveChanges();
                 }
-                return View(model);
+                return RedirectToAction(nameof(Index)); return View(model);
             }
             catch
             {
