@@ -16,3 +16,27 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+
+.menuContainer{
+    display:flex;
+    justify-content: space-between;
+    flex-direction: row;
+    width: 70%;
+    aspect-ratio: 1/1;
+    flex-wrap: wrap;
+}
+
+.menuContainer a{
+    width: 32.9%;
+    aspect-ratio: 1/1;
+    background: red;
+    border: solid black 3px;
+    margin: 0 0 0.5%;
+}
+
+.menuContainer img{
+    object-fit: cover;
+    height: 100%;
+    width: 100%;
+}
