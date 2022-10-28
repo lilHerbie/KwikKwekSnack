@@ -130,17 +130,14 @@ namespace KwikKwekSnack_Web.Controllers
         {
             try
             {
-                if (ModelState.IsValid)
-                {
+             
                     using (var ctx = new DatabaseContext())
                     {
                         ctx.Snacks.Attach(model);
                         ctx.Snacks.Remove(model);
                         ctx.SaveChanges();
                     }
-                    return RedirectToAction(nameof(Index));
-                }
-                return View(model);
+                    return RedirectToAction(nameof(Index));return View(model);
             }
             catch
             {
