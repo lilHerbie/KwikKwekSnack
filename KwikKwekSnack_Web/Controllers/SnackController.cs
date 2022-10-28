@@ -19,7 +19,18 @@ namespace KwikKwekSnack_Web.Controllers
         // GET: SnackController/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            try
+            {
+                using (var ctx = new DatabaseContext())
+                {
+                    return View(ctx.Snacks.Find(id));
+                }
+            }
+            catch (Exception)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            
         }
 
         // GET: SnackController/Create
@@ -42,6 +53,8 @@ namespace KwikKwekSnack_Web.Controllers
                         ctx.Snacks.Add(model);
                         ctx.SaveChanges();
                     }
+                    return RedirectToAction(nameof(Index));
+                    
                 }
                 return View(model);
             }
@@ -54,17 +67,39 @@ namespace KwikKwekSnack_Web.Controllers
         // GET: SnackController/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            try
+            {
+                using (var ctx = new DatabaseContext())
+                {
+                    ctx.Snacks.Find(id);
+                }
+                return View();
+            }
+            catch (Exception)
+            {
+                return RedirectToAction("Index", "Home");
+            }
         }
 
         // POST: SnackController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(Snack model)
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                if (ModelState.IsValid)
+                {
+                    using (var ctx = new DatabaseContext())
+                    {
+                        ctx.Attach(model);
+                        ctx.Snacks.Update(model);
+                        ctx.SaveChanges();
+                    }
+                    return RedirectToAction(nameof(Index));
+
+                }
+                return View(model);
             }
             catch
             {
@@ -75,17 +110,37 @@ namespace KwikKwekSnack_Web.Controllers
         // GET: SnackController/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            try
+            {
+                using (var ctx = new DatabaseContext())
+                {
+                    return View(ctx.Snacks.Find(id));
+                }
+            }
+            catch (Exception)
+            {
+                return RedirectToAction("Index", "Home");
+            }
         }
 
         // POST: SnackController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public ActionResult Delete(Snack model)
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                if (ModelState.IsValid)
+                {
+                    using (var ctx = new DatabaseContext())
+                    {
+                        ctx.Snacks.Attach(model);
+                        ctx.Snacks.Remove(model);
+                        ctx.SaveChanges();
+                    }
+                    return RedirectToAction(nameof(Index));
+                }
+                return View(model);
             }
             catch
             {
