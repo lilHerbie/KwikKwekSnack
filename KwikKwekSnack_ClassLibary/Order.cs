@@ -8,8 +8,6 @@
         public List<DrinkLine> Drinks { get; set; }
         public List<SnackLine> Snacks { get; set; }
 
-
-
         public Order(int id)
         {
             Drinks = new List<DrinkLine>();

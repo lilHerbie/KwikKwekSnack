@@ -13,6 +13,7 @@ namespace KwikKwekSnack_ClassLibary
         public int Id { get; set; }
         public Snack Snack { get; set; }
         public List<Extra> Extras { get; set; }
+        public double Price { get; set; }
 
         public SnackLine()
         {
