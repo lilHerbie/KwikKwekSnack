@@ -1,0 +1,60 @@
+﻿@using KwikKwekSnack_ClassLibary;
+
+@model Order
+
+
+@{
+    ViewData["Title"] = "Index";
+    List<Snack> snacks = ViewData["Snacks"] as List<Snack>;
+}
+
+<section class="orderSection">
+    <div class="menuContainer">
+        @{
+            foreach (Snack snack in snacks)
+            {
+                <a asp-action="AddSnack" asp-route-id="@Model.Id" asp-route-level="@snack.Id"><img src=@snack.ImageUrl /></a>
+            }
+        }
+        <a></a>
+        <a></a>
+        <a></a>
+        <a></a>
+        <a></a>
+        <a></a>
+        <a></a>
+        <a></a>
+    </div>
+    <div class="overzicht">
+        <h1>Overzicht</h1>
+        @{
+            foreach (var snackline in Model.Snacks)
+            {
+                <p>@snackline.Snack.Name</p>
+            }
+        }
+    </div>
+
+
+</section>
+
+
+
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.TotalPrice)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+
+</table>

@@ -16,3 +16,70 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+section{
+    display: flex;
+    flex-direction: column;
+}
+
+
+.menuContainer{
+    display:flex;
+    justify-content: space-between;
+    flex-direction: row;
+    width: 70%;
+    aspect-ratio: 1/1;
+    flex-wrap: wrap;
+}
+
+.menuContainer a{
+    width: 32.9%;
+    aspect-ratio: 1/1;
+    background: red;
+    border: solid black 3px;
+    margin: 0 0 0.5%;
+}
+
+.menuContainer img{
+    object-fit: cover;
+    height: 100%;
+    width: 100%;
+}
+
+.overzicht {
+    width: 30%;
+    height: 800px;
+    background: yellow;
+    border: solid black 3px;
+}
+
+.orderSection{
+    flex-direction: row;
+}
+
+.addSnackContainer {
+    width: 70%;
+}
+
+.addSnackContainer img{
+    width: 50%;
+    object-fit: cover;
+    margin-top: 20px;
+}
+
+.buttonsSection{
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-evenly;
+}
+
+.aspButton{
+    background-color: aliceblue;
+    width: 30%;
+    height: 30px;
+    text-align: center;
+    color: black;
+    text-decoration: none;
+
+
+}
