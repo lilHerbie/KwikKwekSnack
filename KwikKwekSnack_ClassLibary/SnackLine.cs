@@ -12,14 +12,14 @@ namespace KwikKwekSnack_ClassLibary
         [Key()]
         public int Id { get; set; }
         public Snack Snack { get; set; }
-        public List<SnackLineHasExta> SnackLineHasExtras { get; set; }
+        public List<Extra> Extras { get; set; }
         public decimal Price { get; set; }
         public int amount { get; set; }
 
 
         public SnackLine()
         {
-            SnackLineHasExtras = new List<SnackLineHasExta>();
+            Extras = new List<Extra>();
         }
     }
 }
