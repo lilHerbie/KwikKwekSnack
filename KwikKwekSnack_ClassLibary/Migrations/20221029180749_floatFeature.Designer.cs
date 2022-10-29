@@ -4,6 +4,7 @@ using KwikKwekSnack_ClassLibary;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace KwikKwekSnack_ClassLibary.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20221029180749_floatFeature")]
+    partial class floatFeature
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -42,8 +44,8 @@ namespace KwikKwekSnack_ClassLibary.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<decimal>("StartPrice")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<float>("StartPrice")
+                        .HasColumnType("real");
 
                     b.HasKey("ID");
 
@@ -70,8 +72,8 @@ namespace KwikKwekSnack_ClassLibary.Migrations
                     b.Property<int?>("OrderId")
                         .HasColumnType("int");
 
-                    b.Property<decimal>("Price")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<float>("Price")
+                        .HasColumnType("real");
 
                     b.Property<int>("Size")
                         .HasColumnType("int");
@@ -100,8 +102,8 @@ namespace KwikKwekSnack_ClassLibary.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<decimal>("Price")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<float>("Price")
+                        .HasColumnType("real");
 
                     b.HasKey("Id");
 
@@ -119,8 +121,8 @@ namespace KwikKwekSnack_ClassLibary.Migrations
                     b.Property<int>("Status")
                         .HasColumnType("int");
 
-                    b.Property<decimal>("TotalPrice")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<float>("TotalPrice")
+                        .HasColumnType("real");
 
                     b.HasKey("Id");
 
@@ -147,8 +149,8 @@ namespace KwikKwekSnack_ClassLibary.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<decimal>("StartPrice")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<float>("StartPrice")
+                        .HasColumnType("real");
 
                     b.HasKey("Id");
 
@@ -166,8 +168,8 @@ namespace KwikKwekSnack_ClassLibary.Migrations
                     b.Property<int?>("OrderId")
                         .HasColumnType("int");
 
-                    b.Property<decimal>("Price")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<float>("Price")
+                        .HasColumnType("real");
 
                     b.Property<int>("SnackId")
                         .HasColumnType("int");
