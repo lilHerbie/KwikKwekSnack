@@ -16,15 +16,12 @@ namespace KwikKwekSnack_Web.Controllers
                 ctx.SaveChanges();
                 ViewData["Snacks"] = ctx.Snacks.ToList();
             }
-            System.Diagnostics.Debug.WriteLine(order.Id);
             return View(order);
         }
 
         // GET: OrdersController/Edit/5
         public ActionResult AddSnack(int level, int id)
-        {
-
-            System.Diagnostics.Debug.WriteLine(id);
+        {     
             try
             {
                 SnackLine snackLine = new SnackLine();
@@ -32,6 +29,8 @@ namespace KwikKwekSnack_Web.Controllers
                 using (var ctx = new DatabaseContext())
                 {
                     order = ctx.Orders.Find(id);
+                    order.Snacks.Add(snackLine);
+                    snackLine.Snack = ctx.Snacks.Find(level);
                     ViewData["Snack"] = ctx.Snacks.Find(level);
                     ViewData["Extras"] = ctx.Extras.ToList();
                     ViewData["SnackLine"] = snackLine;

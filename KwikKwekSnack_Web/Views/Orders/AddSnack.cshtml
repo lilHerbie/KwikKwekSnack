@@ -1,6 +1,6 @@
 ﻿@using KwikKwekSnack_ClassLibary;
 
-@model Order
+@model Order;
 
 @{
     ViewData["Title"] = "Edit";
@@ -16,7 +16,7 @@
         @{
             foreach (Extra extra in extras)
             {
-                <p>@extra.Name</p>
+                <button type="radio" onclick=" "></button><p>@extra.Name</p>
             }
         }
 

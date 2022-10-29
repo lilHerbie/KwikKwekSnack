@@ -14,7 +14,7 @@ namespace KwikKwekSnack_ClassLibary
         [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         public Snack Snack { get; set; }
-        public List<SnackLineHasExta> SnackLineHasExtras { get; set; }
+        public List<Extra> SnackLineHasExtras { get; set; }
         public decimal Price { get; set; }
         public int amount { get; set; }
 
