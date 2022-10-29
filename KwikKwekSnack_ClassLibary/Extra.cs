@@ -11,6 +11,7 @@ namespace KwikKwekSnack_ClassLibary
     {
         [Key()]
         public int Id { get; set; }
+        [DataType(DataType.Currency)]
         public decimal Price { get; set; }
         public string Name { get; set; }
         public List<SnackLine> SnackLines { get; set; }

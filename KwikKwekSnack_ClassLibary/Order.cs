@@ -8,6 +8,7 @@ namespace KwikKwekSnack_ClassLibary
     {
         [Key()]
         public int Id { get; set; }
+        [DataType(DataType.Currency)]
         public decimal TotalPrice { get; set; }
         public status Status { get; set; }
         public List<DrinkLine> Drinks { get; set; }

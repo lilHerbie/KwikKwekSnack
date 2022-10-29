@@ -86,7 +86,17 @@ namespace KwikKwekSnack_Web.Controllers
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                if (ModelState.IsValid)
+                {
+                    using (var ctx = new DatabaseContext())
+                    {
+                        ctx.Attach(model);
+                        ctx.Extras.Update(model);
+                        ctx.SaveChanges();
+                    }
+                    return RedirectToAction(nameof(Index));
+                }
+                return View(model);
             }
             catch
             {
