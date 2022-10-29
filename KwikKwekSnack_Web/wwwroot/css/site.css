@@ -56,3 +56,30 @@ section{
 .orderSection{
     flex-direction: row;
 }
+
+.addSnackContainer {
+    width: 70%;
+}
+
+.addSnackContainer img{
+    width: 50%;
+    object-fit: cover;
+    margin-top: 20px;
+}
+
+.buttonsSection{
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-evenly;
+}
+
+.aspButton{
+    background-color: aliceblue;
+    width: 30%;
+    height: 30px;
+    text-align: center;
+    color: black;
+    text-decoration: none;
+
+
+}

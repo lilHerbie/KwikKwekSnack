@@ -16,65 +16,31 @@ namespace KwikKwekSnack_Web.Controllers
                 ctx.SaveChanges();
                 ViewData["Snacks"] = ctx.Snacks.ToList();
             }
+            System.Diagnostics.Debug.WriteLine(order.Id);
             return View(order);
-        }     
+        }
 
         // GET: OrdersController/Edit/5
         public ActionResult AddSnack(int level, int id)
         {
+
+            System.Diagnostics.Debug.WriteLine(id);
             try
             {
-                Order order;
                 SnackLine snackLine = new SnackLine();
+                Order order;
                 using (var ctx = new DatabaseContext())
                 {
                     order = ctx.Orders.Find(id);
                     ViewData["Snack"] = ctx.Snacks.Find(level);
                     ViewData["Extras"] = ctx.Extras.ToList();
                     ViewData["SnackLine"] = snackLine;
-                }    
+                }
                 return View(order);
             }
             catch (Exception)
             {
                 return RedirectToAction("Index", "Home");
-            }
-        }
-
-        public ActionResult AddExtraToSnackline(SnackLine snackline, Extra extra)
-        {
-            try
-            {
-                return View();
-            }
-            catch (Exception)
-            {
-                return RedirectToAction("Index", "Home");
-            }
-        }
-
-
-        //add snackline to order
-        public ActionResult AddToOrder(Order model)
-        {
-            try
-            {
-                if (ModelState.IsValid)
-                {
-                    using (var ctx = new DatabaseContext())
-                    {
-                        ctx.Attach(model);
-                        ctx.Orders.Update(model);
-                        ctx.SaveChanges();
-                    }
-                    return RedirectToAction(nameof(Index));
-
-                }
-                return View(model);
-            }
-            catch
-            {
-                return View();
             }
         }
     }

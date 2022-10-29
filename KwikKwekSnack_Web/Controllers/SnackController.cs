@@ -96,7 +96,6 @@ namespace KwikKwekSnack_Web.Controllers
                         ctx.SaveChanges();
                     }
                     return RedirectToAction(nameof(Index));
-
                 }
                 return View(model);
             }

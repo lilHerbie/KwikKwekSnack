@@ -10,7 +10,6 @@ namespace KwikKwekSnack_ClassLibary
         public status Status { get; set; }
         public List<DrinkLine> Drinks { get; set; }
         public List<SnackLine> Snacks { get; set; }
-
         public Order()
         {
             Drinks = new List<DrinkLine>();
