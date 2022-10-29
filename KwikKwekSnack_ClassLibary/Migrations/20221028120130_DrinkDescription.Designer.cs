@@ -4,6 +4,7 @@ using KwikKwekSnack_ClassLibary;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace KwikKwekSnack_ClassLibary.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20221028120130_DrinkDescription")]
+    partial class DrinkDescription
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,6 +23,21 @@ namespace KwikKwekSnack_ClassLibary.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
+
+            modelBuilder.Entity("ExtraSnackLine", b =>
+                {
+                    b.Property<int>("ExtrasId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SnackLinesId")
+                        .HasColumnType("int");
+
+                    b.HasKey("ExtrasId", "SnackLinesId");
+
+                    b.HasIndex("SnackLinesId");
+
+                    b.ToTable("ExtraSnackLine");
+                });
 
             modelBuilder.Entity("KwikKwekSnack_ClassLibary.Drink", b =>
                 {
@@ -42,8 +59,8 @@ namespace KwikKwekSnack_ClassLibary.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<decimal>("StartPrice")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<double>("StartPrice")
+                        .HasColumnType("float");
 
                     b.HasKey("ID");
 
@@ -70,13 +87,10 @@ namespace KwikKwekSnack_ClassLibary.Migrations
                     b.Property<int?>("OrderId")
                         .HasColumnType("int");
 
-                    b.Property<decimal>("Price")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<double>("Price")
+                        .HasColumnType("float");
 
                     b.Property<int>("Size")
-                        .HasColumnType("int");
-
-                    b.Property<int>("amount")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -100,8 +114,8 @@ namespace KwikKwekSnack_ClassLibary.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<decimal>("Price")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<double>("Price")
+                        .HasColumnType("float");
 
                     b.HasKey("Id");
 
@@ -119,8 +133,8 @@ namespace KwikKwekSnack_ClassLibary.Migrations
                     b.Property<int>("Status")
                         .HasColumnType("int");
 
-                    b.Property<decimal>("TotalPrice")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<double>("TotalPrice")
+                        .HasColumnType("float");
 
                     b.HasKey("Id");
 
@@ -147,8 +161,8 @@ namespace KwikKwekSnack_ClassLibary.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<decimal>("StartPrice")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<double>("StartPrice")
+                        .HasColumnType("float");
 
                     b.HasKey("Id");
 
@@ -166,13 +180,10 @@ namespace KwikKwekSnack_ClassLibary.Migrations
                     b.Property<int?>("OrderId")
                         .HasColumnType("int");
 
-                    b.Property<decimal>("Price")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<double>("Price")
+                        .HasColumnType("float");
 
                     b.Property<int>("SnackId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("amount")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -184,30 +195,19 @@ namespace KwikKwekSnack_ClassLibary.Migrations
                     b.ToTable("SnackLines");
                 });
 
-            modelBuilder.Entity("KwikKwekSnack_ClassLibary.SnackLineHasExta", b =>
+            modelBuilder.Entity("ExtraSnackLine", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                    b.HasOne("KwikKwekSnack_ClassLibary.Extra", null)
+                        .WithMany()
+                        .HasForeignKey("ExtrasId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<int?>("ExtraId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("SnackLineId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("amount")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ExtraId");
-
-                    b.HasIndex("SnackLineId");
-
-                    b.ToTable("SnackLineHasExta");
+                    b.HasOne("KwikKwekSnack_ClassLibary.SnackLine", null)
+                        .WithMany()
+                        .HasForeignKey("SnackLinesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("KwikKwekSnack_ClassLibary.DrinkLine", b =>
@@ -240,32 +240,11 @@ namespace KwikKwekSnack_ClassLibary.Migrations
                     b.Navigation("Snack");
                 });
 
-            modelBuilder.Entity("KwikKwekSnack_ClassLibary.SnackLineHasExta", b =>
-                {
-                    b.HasOne("KwikKwekSnack_ClassLibary.Extra", null)
-                        .WithMany("SnackLineHasExtras")
-                        .HasForeignKey("ExtraId");
-
-                    b.HasOne("KwikKwekSnack_ClassLibary.SnackLine", null)
-                        .WithMany("SnackLineHasExtras")
-                        .HasForeignKey("SnackLineId");
-                });
-
-            modelBuilder.Entity("KwikKwekSnack_ClassLibary.Extra", b =>
-                {
-                    b.Navigation("SnackLineHasExtras");
-                });
-
             modelBuilder.Entity("KwikKwekSnack_ClassLibary.Order", b =>
                 {
                     b.Navigation("Drinks");
 
                     b.Navigation("Snacks");
-                });
-
-            modelBuilder.Entity("KwikKwekSnack_ClassLibary.SnackLine", b =>
-                {
-                    b.Navigation("SnackLineHasExtras");
                 });
 #pragma warning restore 612, 618
         }

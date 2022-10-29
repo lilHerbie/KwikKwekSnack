@@ -13,7 +13,8 @@ namespace KwikKwekSnack_ClassLibary
         public int Id { get; set; }
         public Size Size { get; set; }
         public Drink Drink { get; set; }  
-        public double Price { get; set; }
+        public decimal Price { get; set; }
+        public int amount { get; set; }
     }
 
     public enum Size
