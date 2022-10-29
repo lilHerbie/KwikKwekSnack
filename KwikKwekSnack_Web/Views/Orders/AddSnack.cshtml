@@ -1,8 +1,44 @@
-﻿@model KwikKwekSnack_ClassLibary.Order
+﻿@using KwikKwekSnack_ClassLibary;
+
+@model Order
 
 @{
     ViewData["Title"] = "Edit";
+    Snack snack = ViewData["Snack"] as Snack;
+    SnackLine snackLine = ViewData["SnackLine"] as SnackLine;
+    List<Extra> extras = ViewData["Extras"] as List<Extra>;
 }
+
+<section class="orderSection">
+    <div>
+    <h1>@snack.Name</h1>
+    <img src=@snack.ImageUrl />
+    @{
+        foreach(Extra extra in extras){
+                <p>@extra.Name</p>
+            }
+        }
+    </div>
+
+    <div class="overzicht">
+        <h1>Overzicht</h1>
+        @{
+            if (Model != null)
+            {
+                foreach (var snackline in Model.Snacks)
+                {
+                    <p>@snackline.Snack.Name</p>
+                }
+            }
+
+
+        }
+    </div>
+</section>
+
+<div>
+    <a asp-action="AddToOrder">Add to order</a>
+</div>
 
 <h1>Edit</h1>
 

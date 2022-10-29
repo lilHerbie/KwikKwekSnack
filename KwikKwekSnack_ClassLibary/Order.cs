@@ -1,4 +1,7 @@
-﻿namespace KwikKwekSnack_ClassLibary
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+
+namespace KwikKwekSnack_ClassLibary
 {
     public class Order
     {
@@ -8,12 +11,11 @@
         public List<DrinkLine> Drinks { get; set; }
         public List<SnackLine> Snacks { get; set; }
 
-        public Order(int id)
+        public Order()
         {
             Drinks = new List<DrinkLine>();
             Snacks = new List<SnackLine>();
-            Id = id;
-    }
+        }
 
         public enum status
     {

@@ -12,8 +12,7 @@ namespace KwikKwekSnack_Web.Controllers
             using (var ctx = new DatabaseContext())
             {
                 return View(ctx.Snacks.ToList());
-            }
-                
+            }    
         }
 
         // GET: SnackController/Details/5
@@ -137,7 +136,9 @@ namespace KwikKwekSnack_Web.Controllers
                         ctx.Snacks.Remove(model);
                         ctx.SaveChanges();
                     }
-                    return RedirectToAction(nameof(Index));return View(model);
+                    return RedirectToAction(nameof(Index)
+                        )
+                    ;return View(model);
             }
             catch
             {

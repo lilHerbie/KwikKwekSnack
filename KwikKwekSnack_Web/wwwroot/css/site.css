@@ -48,8 +48,8 @@ section{
 
 .overzicht {
     width: 30%;
-    height: 200px;
-    background: red;
+    height: 800px;
+    background: yellow;
     border: solid black 3px;
 }
 

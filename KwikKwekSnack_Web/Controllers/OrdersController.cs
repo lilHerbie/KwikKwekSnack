@@ -9,74 +9,68 @@ namespace KwikKwekSnack_Web.Controllers
         // GET: OrdersController
         public ActionResult Index()
         {
+            Order order = new Order();
             using (var ctx = new DatabaseContext())
             {
-                return View(ctx.Orders.ToList());
+                ctx.Orders.Add(order);
+                ctx.SaveChanges();
+                ViewData["Snacks"] = ctx.Snacks.ToList();
             }
-        }
-
-        // GET: OrdersController/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
-
-        // GET: OrdersController/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: OrdersController/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
+            return View(order);
+        }     
 
         // GET: OrdersController/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: OrdersController/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult AddSnack(int level, int id)
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                Order order;
+                SnackLine snackLine = new SnackLine();
+                using (var ctx = new DatabaseContext())
+                {
+                    order = ctx.Orders.Find(id);
+                    ViewData["Snack"] = ctx.Snacks.Find(level);
+                    ViewData["Extras"] = ctx.Extras.ToList();
+                    ViewData["SnackLine"] = snackLine;
+                }    
+                return View(order);
             }
-            catch
+            catch (Exception)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+        }
+
+        public ActionResult AddExtraToSnackline(SnackLine snackline, Extra extra)
+        {
+            try
             {
                 return View();
             }
+            catch (Exception)
+            {
+                return RedirectToAction("Index", "Home");
+            }
         }
 
-        // GET: OrdersController/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
 
-        // POST: OrdersController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        //add snackline to order
+        public ActionResult AddToOrder(Order model)
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                if (ModelState.IsValid)
+                {
+                    using (var ctx = new DatabaseContext())
+                    {
+                        ctx.Attach(model);
+                        ctx.Orders.Update(model);
+                        ctx.SaveChanges();
+                    }
+                    return RedirectToAction(nameof(Index));
+
+                }
+                return View(model);
             }
             catch
             {
