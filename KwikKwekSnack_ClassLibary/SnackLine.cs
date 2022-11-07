@@ -14,7 +14,7 @@ namespace KwikKwekSnack_ClassLibary
         [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         public Snack Snack { get; set; }
-        public List<Extra> SnackLineHasExtras { get; set; }
+        public List<SnackLineHasExtra> SnackLineHasExtras { get; set; }
         public decimal Price { get; set; }
         public int amount { get; set; }
 
@@ -24,7 +24,7 @@ namespace KwikKwekSnack_ClassLibary
         public SnackLine()
         {        
             Id = Interlocked.Increment(ref lastId);
-            SnackLineHasExtras = new List<SnackLineHasExta>();
+            SnackLineHasExtras = new List<SnackLineHasExtra>();
         }
     }
 }

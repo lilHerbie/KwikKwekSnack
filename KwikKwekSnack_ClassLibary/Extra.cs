@@ -13,10 +13,10 @@ namespace KwikKwekSnack_ClassLibary
         public int Id { get; set; }
         public decimal Price { get; set; }
         public string Name { get; set; }
-        public List<SnackLineHasExta> SnackLineHasExtras { get; set; }
+        public List<SnackLineHasExtra> SnackLineHasExtras { get; set; }
 
         public Extra(){
-            SnackLineHasExtras = new List<SnackLineHasExta>();
+            SnackLineHasExtras = new List<SnackLineHasExtra>();
         }
     }
 
