@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using KwikKwekSnack_ClassLibary;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace KwikKwekSnack_ClassLibary
 {
@@ -17,6 +19,8 @@ namespace KwikKwekSnack_ClassLibary
         public string Description { get; set; }
         public string ImageUrl { get; set; }
         [DataType(DataType.Currency)]
+        [Column(TypeName = "money")]
+        [Range(0, 100)]
         public decimal StartPrice { get; set; }
         
 

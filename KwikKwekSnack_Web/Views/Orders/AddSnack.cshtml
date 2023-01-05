@@ -16,7 +16,12 @@
         @{
             foreach (Extra extra in extras)
             {
-                <button type="radio" onclick=" "></button><p>@extra.Name</p>
+                <div class="checkbox">
+                            <input type="checkbox" 
+                                   name="GerechtenBijMenu"
+                                   value="@extra.Id"/>
+                                   @extra.Name
+                </div>
             }
         }
 
@@ -37,7 +42,7 @@
         </section>
     </div>
 
-    <div class="overzicht">
+    @*<div class="overzicht">
         <h1>Overzicht</h1>
         @{
             foreach (var snackline in Model.Snacks)
@@ -45,7 +50,7 @@
                 <p>@snackline.Snack.Name</p>
             }
         }
-    </div>
+    </div>*@
 </section>
 
 
