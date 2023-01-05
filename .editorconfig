@@ -1,0 +1,4 @@
+﻿[*.cs]
+
+# CS0006: Metadata file 'C:\Users\herberalting\source\repos\KwikKwekSnack\KwikKwekSnack_ClassLibary\obj\Debug\net6.0\ref\KwikKwekSnack_ClassLibary.dll' could not be found
+dotnet_diagnostic.CS0006.severity = warning
