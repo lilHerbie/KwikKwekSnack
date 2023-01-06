@@ -5,13 +5,18 @@ namespace KwikKwekSnack_Web.Controllers
 {
     public class DrinkController : Controller
     {
+
+        DatabaseRepo _repo;
+
+        public DrinkController()
+        {
+            _repo = new DatabaseRepo();
+        }
+
         // GET: DrinkController
         public ActionResult Index()
         {
-            using (var ctx = new DatabaseContext())
-            {
-                return View(ctx.Drinks.ToList());
-            }
+            return View(_repo.GetAllDrinks());
            
         }
 
@@ -20,10 +25,7 @@ namespace KwikKwekSnack_Web.Controllers
         {
             try
             {
-                using (var ctx = new DatabaseContext())
-                {
-                    return View(ctx.Drinks.Find(id));
-                }
+                return View(_repo.GetDrink(id));
             }
             catch (Exception)
             {
@@ -40,21 +42,17 @@ namespace KwikKwekSnack_Web.Controllers
         // POST: DrinkController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Drink model)
+        public ActionResult Create(Drink drink)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
-                    using (var ctx = new DatabaseContext())
-                    {
-                        ctx.Drinks.Add(model);
-                        ctx.SaveChanges();
-                    }
+                    _repo.AddDrink(drink);
                     return RedirectToAction(nameof(Index));
 
                 }
-                return View(model);
+                return View(drink);
             }
             catch
             {
@@ -67,10 +65,7 @@ namespace KwikKwekSnack_Web.Controllers
         {
             try
             {
-                using (var ctx = new DatabaseContext())
-                {
-                    ctx.Drinks.Find(id);
-                }
+                _repo.GetDrink(id);
                 return View();
             }
             catch (Exception)
@@ -82,22 +77,17 @@ namespace KwikKwekSnack_Web.Controllers
         // POST: DrinkController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(Drink model)
+        public ActionResult Edit(Drink drink)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
-                    using (var ctx = new DatabaseContext())
-                    {
-                        ctx.Attach(model);
-                        ctx.Drinks.Update(model);
-                        ctx.SaveChanges();
-                    }
+                    _repo.UpdateDrink(drink);
                     return RedirectToAction(nameof(Index));
 
                 }
-                return View(model);
+                return View(drink);
             }
             catch
             {
@@ -110,8 +100,7 @@ namespace KwikKwekSnack_Web.Controllers
         {
             try
             {
-                using var ctx = new DatabaseContext();
-                return View(ctx.Drinks.Find(id));
+                return View(_repo.GetDrink(id));
             }
             catch (Exception)
             {
@@ -122,18 +111,13 @@ namespace KwikKwekSnack_Web.Controllers
         // POST: DrinkController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(Drink model)
+        public ActionResult Delete(Drink drink)
         {
             try
             {
 
-                using (var ctx = new DatabaseContext())
-                {
-                    ctx.Drinks.Attach(model);
-                    ctx.Drinks.Remove(model);
-                    ctx.SaveChanges();
-                }
-                return RedirectToAction(nameof(Index)); return View(model);
+                _repo.RemoveDrink(drink);
+                return RedirectToAction(nameof(Index)); return View(drink);
             }
             catch
             {

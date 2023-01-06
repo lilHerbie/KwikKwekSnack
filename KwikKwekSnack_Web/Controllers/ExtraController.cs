@@ -6,13 +6,18 @@ namespace KwikKwekSnack_Web.Controllers
 {
     public class ExtraController : Controller
     {
+
+        DatabaseRepo _repo;
+
+        public ExtraController()
+        {
+            _repo = new DatabaseRepo();
+        }
+
         // GET: ExtraController
         public ActionResult Index()
         {
-            using (var ctx = new DatabaseContext())
-            {
-                return View(ctx.Extras.ToList());
-            }
+            return View(_repo.GetAllExtras());
         }
 
         // GET: ExtraController/Details/5
@@ -20,10 +25,7 @@ namespace KwikKwekSnack_Web.Controllers
         {
             try
             {
-                using (var ctx = new DatabaseContext())
-                {
-                    return View(ctx.Extras.Find(id));
-                }
+                return View(_repo.GetExtra(id));
             }
             catch (Exception)
             {
@@ -41,21 +43,17 @@ namespace KwikKwekSnack_Web.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Extra model)
+        public ActionResult Create(Extra extra)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
-                    using (var ctx = new DatabaseContext())
-                    {
-                        ctx.Extras.Add(model);
-                        ctx.SaveChanges();
-                    }
-                    return RedirectToAction("Index");
+                    _repo.AddExtra(extra);
+                    return RedirectToAction(nameof(Index));
 
                 }
-                return View(model);
+                return View(extra);
             }
             catch
             {
@@ -68,10 +66,7 @@ namespace KwikKwekSnack_Web.Controllers
         {
             try
             {
-                using (var ctx = new DatabaseContext())
-                {
-                    ctx.Extras.Find(id);
-                }
+                _repo.GetExtra(id);
                 return View();
             }
             catch (Exception)
@@ -83,21 +78,16 @@ namespace KwikKwekSnack_Web.Controllers
         // POST: ExtraController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(Extra model)
+        public ActionResult Edit(Extra extra)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
-                    using (var ctx = new DatabaseContext())
-                    {
-                        ctx.Attach(model);
-                        ctx.Extras.Update(model);
-                        ctx.SaveChanges();
-                    }
+                    _repo.UpdateExtra(extra);
                     return RedirectToAction(nameof(Index));
                 }
-                return View(model);
+                return View(extra);
             }
             catch
             {
@@ -110,10 +100,7 @@ namespace KwikKwekSnack_Web.Controllers
         {
             try
             {
-                using (var ctx = new DatabaseContext())
-                {
-                    return View(ctx.Extras.Find(id));
-                }
+                return View(_repo.GetExtra(id));
             }
             catch (Exception)
             {
@@ -124,18 +111,13 @@ namespace KwikKwekSnack_Web.Controllers
         // POST: ExtraController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(Extra model)
+        public ActionResult Delete(Extra extra)
         {
             try
             {
 
-                using (var ctx = new DatabaseContext())
-                {
-                    ctx.Extras.Attach(model);
-                    ctx.Extras.Remove(model);
-                    ctx.SaveChanges();
-                }
-                return RedirectToAction(nameof(Index)); return View(model);
+                _repo.RemoveExtra(extra);
+                return RedirectToAction(nameof(Index)); return View(extra);
             }
             catch
             {
