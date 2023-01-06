@@ -15,7 +15,6 @@ namespace KwikKwekSnack_ClassLibary
         public int Id { get; set; }
         [DataType(DataType.Currency)]
         [Column(TypeName = "money")]
-        //[Range(0, 100)]
         public decimal Price { get; set; }
         public string Name { get; set; }
         public int SnackLineId { get; set; }

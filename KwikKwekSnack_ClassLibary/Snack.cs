@@ -20,7 +20,6 @@ namespace KwikKwekSnack_ClassLibary
         public string ImageUrl { get; set; }
         [DataType(DataType.Currency)]
         [Column(TypeName = "money")]
-        [Range(0, 100)]
         public decimal StartPrice { get; set; }
         
 

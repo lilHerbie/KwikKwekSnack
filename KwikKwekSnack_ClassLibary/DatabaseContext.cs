@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -81,7 +82,32 @@ namespace KwikKwekSnack_ClassLibary
 
             modelBuilder.Entity<Order>().HasData(order1, order2);
 
+            /*modelBuilder.Entity<Drink>().Property(d => d.StartPrice).HasPrecision(12, 2);
+
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<DrinkLine>().Property(dl => dl.Price).HasPrecision(12, 2);
+
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<Snack>().Property(d => d.StartPrice).HasPrecision(12, 2);
+
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<SnackLine>().Property(sl => sl.Price).HasPrecision(12, 2);
+
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<Order>().Property(o => o.TotalPrice).HasPrecision(12, 2);
+
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<Extra>().Property(e => e.Price).HasPrecision(12, 2);
+
+            base.OnModelCreating(modelBuilder);*/
+
             #endregion
+
 
         }
 

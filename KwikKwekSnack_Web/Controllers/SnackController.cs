@@ -6,13 +6,21 @@ namespace KwikKwekSnack_Web.Controllers
 {
     public class SnackController : Controller
     {
+
+        DatabaseRepo _repo;
+
+        public SnackController()
+        {
+            _repo = new DatabaseRepo();
+        }
+
         // GET: SnackController
         public ActionResult Index()
         {
             using (var ctx = new DatabaseContext())
             {
-                return View(ctx.Snacks.ToList());
-            }    
+                return View(_repo.GetAllSnacks());
+            }
         }
 
         // GET: SnackController/Details/5
@@ -20,16 +28,13 @@ namespace KwikKwekSnack_Web.Controllers
         {
             try
             {
-                using (var ctx = new DatabaseContext())
-                {
-                    return View(ctx.Snacks.Find(id));
-                }
+                return View(_repo.GetSnack(id));
             }
             catch (Exception)
             {
                 return RedirectToAction("Index", "Home");
             }
-            
+
         }
 
         // GET: SnackController/Create
@@ -41,21 +46,17 @@ namespace KwikKwekSnack_Web.Controllers
         // POST: SnackController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Snack model)
+        public ActionResult Create(Snack snack)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
-                    using (var ctx = new DatabaseContext())
-                    {
-                        ctx.Snacks.Add(model);
-                        ctx.SaveChanges();
-                    }
+                    _repo.AddSnack(snack);
                     return RedirectToAction(nameof(Index));
-                    
+
                 }
-                return View(model);
+                return View(snack);
             }
             catch
             {
@@ -68,10 +69,7 @@ namespace KwikKwekSnack_Web.Controllers
         {
             try
             {
-                using (var ctx = new DatabaseContext())
-                {
-                    ctx.Snacks.Find(id);
-                }
+                _repo.GetSnack(id);
                 return View();
             }
             catch (Exception)
@@ -83,21 +81,16 @@ namespace KwikKwekSnack_Web.Controllers
         // POST: SnackController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(Snack model)
+        public ActionResult Edit(Snack snack)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
-                    using (var ctx = new DatabaseContext())
-                    {
-                        ctx.Attach(model);
-                        ctx.Snacks.Update(model);
-                        ctx.SaveChanges();
-                    }
+                    _repo.UpdateSnack(snack);
                     return RedirectToAction(nameof(Index));
                 }
-                return View(model);
+                return View(snack);
             }
             catch
             {
@@ -110,10 +103,7 @@ namespace KwikKwekSnack_Web.Controllers
         {
             try
             {
-                using (var ctx = new DatabaseContext())
-                {
-                    return View(ctx.Snacks.Find(id));
-                }
+                return View(_repo.GetSnack(id));
             }
             catch (Exception)
             {
@@ -124,20 +114,14 @@ namespace KwikKwekSnack_Web.Controllers
         // POST: SnackController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(Snack model)
+        public ActionResult Delete(Snack snack)
         {
             try
             {
-             
-                    using (var ctx = new DatabaseContext())
-                    {
-                        ctx.Snacks.Attach(model);
-                        ctx.Snacks.Remove(model);
-                        ctx.SaveChanges();
-                    }
-                    return RedirectToAction(nameof(Index)
-                        )
-                    ;return View(model);
+                _repo.RemoveSnack(snack);
+                return RedirectToAction(nameof(Index)
+                    )
+                ; return View(snack);
             }
             catch
             {
