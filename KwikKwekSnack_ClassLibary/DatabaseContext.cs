@@ -40,7 +40,6 @@ namespace KwikKwekSnack_ClassLibary
         {
             #region testdata
 
-
             Drink drink1 = new() { Id = 1, Name = "Cola", Description = "Cola", ImageUrl = "https://smartkiosk.nl/wp-content/uploads/2021/11/coca-cola-blik-33cl-800x800-1.jpg", StartPrice = 1.50m };
             Drink drink2 = new() { Id = 2, Name = "Fanta", Description = "Fanta", ImageUrl = "https://smartkiosk.nl/wp-content/uploads/2021/10/9480.jpg", StartPrice = 1.50m };
             Drink drink3 = new() { Id = 3, Name = "Sprite", Description = "Sprite", ImageUrl = "https://smartkiosk.nl/wp-content/uploads/2021/09/2ad47881-f56c-4237-8574-402a84b96b63.jpg", StartPrice = 1.50m };
@@ -49,25 +48,20 @@ namespace KwikKwekSnack_ClassLibary
             Snack snack2 = new() { Id = 2, Name = "Kroket", Description = "Kroket", ImageUrl = "https://images0.persgroep.net/rcs/IFZ8aVdFNg1-Bko2qCSQg5i8G-A/diocontent/101162365/_fitwidth/763?appId=93a17a8fd81db0de025c8abd1cca1279&quality=0.8", StartPrice = 2.75m };
             Snack snack3 = new() { Id = 3, Name = "Bamischijf", Description = "Bamischijf", ImageUrl = "https://veluwe-plaza.huisjebezorgd.nl/wp-content/uploads/2020/03/bami.jpg", StartPrice = 3.00m };
 
-            
-
             Order order1 = new() { Id = 1, Status = Order.status.wachtrij, TotalPrice = 10.00m };
             Order order2 = new() { Id = 2, Status = Order.status.wachtrij, TotalPrice = 10.00m };
 
-            DrinkLine order1DrinkLine1 = new() { OrderId = 1, Id = 1, DrinkId = 1, amount = 2, Size = Size.M, HasStraw = false, HasIce = false, Price = 3.00m };
-            DrinkLine order1DrinkLine2 = new() { OrderId = 1, Id = 2, DrinkId = 2, amount = 1, Size = Size.L, HasStraw = true, HasIce = false, Price = 1.50m };
-            DrinkLine order2DrinkLine1 = new() { OrderId = 2, Id = 3, DrinkId = 3, amount = 1, Size = Size.XL, HasStraw = true, HasIce = false, Price = 1.50m };
+            DrinkLine order1DrinkLine1 = new() { OrderId = 1, Id = 1, DrinkId = 1, Amount = 2, Size = Size.M, HasStraw = false, HasIce = false, Price = 3.00m };
+            DrinkLine order1DrinkLine2 = new() { OrderId = 1, Id = 2, DrinkId = 2, Amount = 1, Size = Size.L, HasStraw = true, HasIce = false, Price = 1.50m };
+            DrinkLine order2DrinkLine1 = new() { OrderId = 2, Id = 3, DrinkId = 3, Amount = 1, Size = Size.XL, HasStraw = true, HasIce = false, Price = 1.50m };
             
-            SnackLine order1SnackLine1 = new() { OrderId = 1, Id = 1, /*Snack = snack1,*/ SnackId = 1, amount = 2, Price = 5.00m};
-            SnackLine order1SnackLine2 = new() { OrderId = 2, Id = 2,/* Snack = snack2,*/ SnackId = 2, amount = 1, Price = 2.75m};
-            SnackLine order2SnackLine1 = new() { OrderId = 2, Id = 3, /*Snack = snack3,*/SnackId = 3, amount = 1, Price = 2.75m};
+            SnackLine order1SnackLine1 = new() { OrderId = 1, Id = 1, SnackId = 1, Amount = 2, Price = 5.00m};
+            SnackLine order1SnackLine2 = new() { OrderId = 2, Id = 2, SnackId = 2, Amount = 1, Price = 2.75m};
+            SnackLine order2SnackLine1 = new() { OrderId = 2, Id = 3, SnackId = 3, Amount = 1, Price = 2.75m};
 
-            Extra extra1 = new() { Id = 1, Name = "Ui", Price = 0.30m, SnackLineId = 1};
-            Extra extra2 = new() { Id = 2, Name = "Broodje", Price = 1.00m, SnackLineId = 2 };
-            Extra extra3 = new() { Id = 3, Name = "Tomaat", Price = 0.20m, SnackLineId = 3 };
-
-
-
+            Extra extra1 = new() { Id = 1, Name = "Ui", Price = 0.30m};
+            Extra extra2 = new() { Id = 2, Name = "Broodje", Price = 1.00m};
+            Extra extra3 = new() { Id = 3, Name = "Tomaat", Price = 0.20m};
 
             #endregion
 
@@ -75,7 +69,6 @@ namespace KwikKwekSnack_ClassLibary
             modelBuilder.Entity<Drink>().HasData(drink1, drink2, drink3);
             modelBuilder.Entity<Snack>().HasData(snack1, snack2, snack3);
             modelBuilder.Entity<Extra>().HasData(extra1, extra2, extra3);
-
 
             modelBuilder.Entity<DrinkLine>().HasData(order1DrinkLine1, order1DrinkLine2, order2DrinkLine1);
             modelBuilder.Entity<SnackLine>().HasData(order1SnackLine1, order1SnackLine2, order2SnackLine1);
@@ -107,9 +100,6 @@ namespace KwikKwekSnack_ClassLibary
             base.OnModelCreating(modelBuilder);*/
 
             #endregion
-
-
         }
-
     }
 }

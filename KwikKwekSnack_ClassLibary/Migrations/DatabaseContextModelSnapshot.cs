@@ -83,6 +83,9 @@ namespace KwikKwekSnack_ClassLibary.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
+                    b.Property<int>("Amount")
+                        .HasColumnType("int");
+
                     b.Property<int>("DrinkId")
                         .HasColumnType("int");
 
@@ -101,9 +104,6 @@ namespace KwikKwekSnack_ClassLibary.Migrations
                     b.Property<int>("Size")
                         .HasColumnType("int");
 
-                    b.Property<int>("amount")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
                     b.HasIndex("DrinkId");
@@ -116,35 +116,35 @@ namespace KwikKwekSnack_ClassLibary.Migrations
                         new
                         {
                             Id = 1,
+                            Amount = 2,
                             DrinkId = 1,
                             HasIce = false,
                             HasStraw = false,
                             OrderId = 1,
                             Price = 3.00m,
-                            Size = 1,
-                            amount = 2
+                            Size = 1
                         },
                         new
                         {
                             Id = 2,
+                            Amount = 1,
                             DrinkId = 2,
                             HasIce = false,
                             HasStraw = true,
                             OrderId = 1,
                             Price = 1.50m,
-                            Size = 2,
-                            amount = 1
+                            Size = 2
                         },
                         new
                         {
                             Id = 3,
+                            Amount = 1,
                             DrinkId = 3,
                             HasIce = false,
                             HasStraw = true,
                             OrderId = 2,
                             Price = 1.50m,
-                            Size = 3,
-                            amount = 1
+                            Size = 3
                         });
                 });
 
@@ -163,12 +163,7 @@ namespace KwikKwekSnack_ClassLibary.Migrations
                     b.Property<decimal>("Price")
                         .HasColumnType("money");
 
-                    b.Property<int>("SnackLineId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("SnackLineId");
 
                     b.ToTable("Extras");
 
@@ -177,22 +172,19 @@ namespace KwikKwekSnack_ClassLibary.Migrations
                         {
                             Id = 1,
                             Name = "Ui",
-                            Price = 0.30m,
-                            SnackLineId = 1
+                            Price = 0.30m
                         },
                         new
                         {
                             Id = 2,
                             Name = "Broodje",
-                            Price = 1.00m,
-                            SnackLineId = 2
+                            Price = 1.00m
                         },
                         new
                         {
                             Id = 3,
                             Name = "Tomaat",
-                            Price = 0.20m,
-                            SnackLineId = 3
+                            Price = 0.20m
                         });
                 });
 
@@ -291,6 +283,9 @@ namespace KwikKwekSnack_ClassLibary.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
+                    b.Property<int>("Amount")
+                        .HasColumnType("int");
+
                     b.Property<int>("OrderId")
                         .HasColumnType("int");
 
@@ -298,9 +293,6 @@ namespace KwikKwekSnack_ClassLibary.Migrations
                         .HasColumnType("money");
 
                     b.Property<int>("SnackId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("amount")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -313,26 +305,26 @@ namespace KwikKwekSnack_ClassLibary.Migrations
                         new
                         {
                             Id = 1,
+                            Amount = 2,
                             OrderId = 1,
                             Price = 5.00m,
-                            SnackId = 1,
-                            amount = 2
+                            SnackId = 1
                         },
                         new
                         {
                             Id = 2,
+                            Amount = 1,
                             OrderId = 2,
                             Price = 2.75m,
-                            SnackId = 2,
-                            amount = 1
+                            SnackId = 2
                         },
                         new
                         {
                             Id = 3,
+                            Amount = 1,
                             OrderId = 2,
                             Price = 2.75m,
-                            SnackId = 3,
-                            amount = 1
+                            SnackId = 3
                         });
                 });
 
@@ -353,17 +345,6 @@ namespace KwikKwekSnack_ClassLibary.Migrations
                     b.Navigation("Drink");
 
                     b.Navigation("Order");
-                });
-
-            modelBuilder.Entity("KwikKwekSnack_ClassLibary.Extra", b =>
-                {
-                    b.HasOne("KwikKwekSnack_ClassLibary.SnackLine", "SnackLine")
-                        .WithMany()
-                        .HasForeignKey("SnackLineId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("SnackLine");
                 });
 
             modelBuilder.Entity("KwikKwekSnack_ClassLibary.SnackLine", b =>
