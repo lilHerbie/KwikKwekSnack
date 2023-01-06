@@ -11,19 +11,12 @@ namespace KwikKwekSnack_ClassLibary
 {
     public class Extra
     {
-        [Key()]
+        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         [DataType(DataType.Currency)]
         [Column(TypeName = "money")]
-        //[Range(0, 100)]
         public decimal Price { get; set; }
+        [Required]
         public string Name { get; set; }
-        public int SnackLineId { get; set; }
-        public SnackLine SnackLine { get; set; }
-
-        public Extra(){
-            
-        }
     }
-
 }
