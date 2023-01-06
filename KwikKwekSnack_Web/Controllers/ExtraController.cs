@@ -38,6 +38,7 @@ namespace KwikKwekSnack_Web.Controllers
         }
 
         // POST: ExtraController/Create
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(Extra model)
@@ -51,7 +52,7 @@ namespace KwikKwekSnack_Web.Controllers
                         ctx.Extras.Add(model);
                         ctx.SaveChanges();
                     }
-                    return RedirectToAction(nameof(Index));
+                    return RedirectToAction("Index");
 
                 }
                 return View(model);

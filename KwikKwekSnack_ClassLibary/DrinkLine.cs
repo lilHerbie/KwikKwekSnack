@@ -11,13 +11,12 @@ namespace KwikKwekSnack_ClassLibary
 {
     public class DrinkLine
     {
-        [Key]
-        [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
+        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         public bool HasStraw { get; set; }
         public bool HasIce { get; set; } 
-        public Size Size { get; set; } 
-        //[ForeignKey("DrinkId")]
+        public Size Size { get; set; }
+        [ForeignKey("DrinkId")]
         public int DrinkId { get; set; }
         public Drink Drink { get; set; }
         public int OrderId { get; set; }
@@ -25,7 +24,7 @@ namespace KwikKwekSnack_ClassLibary
         [DataType(DataType.Currency)]
         [Column(TypeName = "money")]
         public decimal Price { get; set; }
-        public int amount { get; set; }
+        public int Amount { get; set; }
     }
 
     public enum Size

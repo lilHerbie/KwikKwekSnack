@@ -10,23 +10,16 @@ namespace KwikKwekSnack_ClassLibary
 {
     public class SnackLine
     {
-        [Key]
-        [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
+        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         [ForeignKey("SnackId")]
         public int SnackId { get; set; }
-        //public Snack Snack { get; set; }
+        [ForeignKey("OrderId")]
         public int OrderId { get; set; }
         public Order Order { get; set; }
-        //public List<Extra> Extras { get; set; }
         [DataType(DataType.Currency)]
         [Column(TypeName = "money")]
         public decimal Price { get; set; }
-        public int amount { get; set; }
-
-        public SnackLine()
-        {
-            //Extras = new List<Extra>();
-        }
+        public int Amount { get; set; }
     }
 }
