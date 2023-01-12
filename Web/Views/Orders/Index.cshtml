@@ -1,0 +1,45 @@
+﻿@using ClassLibrary;
+﻿
+@model ViewModel;
+@{
+    ViewData["Title"] = "Index";
+}
+
+<html>
+<body>
+    <section class="orderSection">
+        <partial name="@Model.PartialView" />
+        <div class="overzicht">
+            <h1>Overzicht</h1>
+            @{
+                if (Model.SnackLines != null)
+                {
+                    foreach (SnackLine snackline in Model.SnackLines)
+                    {
+                        <p>@snackline.Snack.Name</p>
+                        if (snackline.ExtraLines != null)
+                        {
+                            foreach (ExtraLine extraLine in snackline.ExtraLines)
+                            {
+                                <p2>@extraLine.Extra.Name</p2>
+                            }
+                        }
+
+                    }
+                }
+                if (Model.DrinkLines != null)
+                {
+                    foreach (DrinkLine drinkLine in Model.DrinkLines)
+                    {
+                        <p>@drinkLine.Drink.Name</p>
+                    }
+                }
+
+            }
+        </div>
+    </section>
+
+</body>
+</html>
+
+

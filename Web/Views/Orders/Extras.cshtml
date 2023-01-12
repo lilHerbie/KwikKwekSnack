@@ -1,0 +1,17 @@
+﻿@using ClassLibrary;
+
+@model ViewModel;
+
+<div class="snackContainer">
+    <h1>@Model.SnackName</h1>
+    <img src="@Model.SnackUrl" />
+
+    @{
+        foreach (Extra extra in ViewBag.Extras)
+        {
+            
+            <a asp-action="AddExtra" asp-route-id="@extra.Id">@extra.Name</a>
+        }
+        
+    }
+</div>
