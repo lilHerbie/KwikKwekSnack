@@ -10,7 +10,7 @@ namespace ClassLibrary
         public ICollection<SnackLine> SnackLines { get; set; }
         public Status Status { get; set; }
         [DataType(DataType.Currency)]
-        public decimal TotalCost { get; set; }
+        public float TotalCost { get; set; }
 
     }
 
