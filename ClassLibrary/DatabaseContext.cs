@@ -26,7 +26,6 @@ namespace ClassLibrary
         public DbSet<Snack> Snacks { get; set; }
         public DbSet<SnackLine> SnackLines { get; set; }
         public DbSet<ExtraLine> ExtraLines { get; set; }
-
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
@@ -38,8 +37,7 @@ namespace ClassLibrary
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            #region testdata
-
+            //test data
             Drink drink1 = new() { Id = 1, Name = "Cola", Description = "Cola", ImageUrl = "https://smartkiosk.nl/wp-content/uploads/2021/11/coca-cola-blik-33cl-800x800-1.jpg", Price = 1.60f };
             Drink drink2 = new() { Id = 2, Name = "Fanta", Description = "Fanta", ImageUrl = "https://smartkiosk.nl/wp-content/uploads/2021/10/9480.jpg", Price = 1.50f };
             Drink drink3 = new() { Id = 3, Name = "Sprite", Description = "Sprite", ImageUrl = "https://smartkiosk.nl/wp-content/uploads/2021/09/2ad47881-f56c-4237-8574-402a84b96b63.jpg", Price = 1.50f };
@@ -51,7 +49,26 @@ namespace ClassLibrary
             Extra extra1 = new() { Id = 1, Name = "Ui", Price = 0.30f };
             Extra extra2 = new() { Id = 2, Name = "Broodje", Price = 1.00f };
             Extra extra3 = new() { Id = 3, Name = "Tomaat", Price = 0.20f };
-            #endregion
+
+            ExtraLine extraLine1 = new () { Id = 1, ExtraId = 1, SnackLineId = 1};
+
+            SnackLine snackLine1 = new() { Id = 1, OrderId = 1, SnackId = 1};
+
+            DrinkLine drinkLine1 = new() { Id = 1, OrderId = 1, DrinkId = 1 };
+
+            Order order1 = new Order() { Id = 1, Status = Status.queued };
+
+
+            modelBuilder.Entity<Drink>().HasData(drink1, drink2, drink3);
+            modelBuilder.Entity<Snack>().HasData(snack1, snack2, snack3);
+            modelBuilder.Entity<Extra>().HasData(extra1, extra2, extra3);
+
+            modelBuilder.Entity<SnackLine>().HasData(snackLine1);
+            modelBuilder.Entity<DrinkLine>().HasData(drinkLine1);
+            modelBuilder.Entity<ExtraLine>().HasData(extraLine1);
+
+            modelBuilder.Entity<Order>().HasData(order1);
+
         }
     }
 }

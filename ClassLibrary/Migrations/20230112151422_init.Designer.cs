@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ClassLibrary.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20230112145724_init")]
+    [Migration("20230112151422_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -73,9 +73,14 @@ namespace ClassLibrary.Migrations
                     b.Property<bool>("HasStraw")
                         .HasColumnType("bit");
 
+                    b.Property<int?>("OrderId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("DrinkId");
+
+                    b.HasIndex("OrderId");
 
                     b.ToTable("DrinkLines");
                 });
@@ -95,32 +100,14 @@ namespace ClassLibrary.Migrations
                     b.Property<float>("Price")
                         .HasColumnType("real");
 
-                    b.HasKey("Id");
-
-                    b.ToTable("Extras");
-                });
-
-            modelBuilder.Entity("ClassLibrary.ExtraLine", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("ExtraId")
-                        .HasColumnType("int");
-
                     b.Property<int?>("SnackLineId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ExtraId");
-
                     b.HasIndex("SnackLineId");
 
-                    b.ToTable("ExtraLines");
+                    b.ToTable("Extras");
                 });
 
             modelBuilder.Entity("ClassLibrary.Order", b =>
@@ -201,22 +188,18 @@ namespace ClassLibrary.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("ClassLibrary.Order", null)
+                        .WithMany("DrinkLines")
+                        .HasForeignKey("OrderId");
+
                     b.Navigation("Drink");
                 });
 
-            modelBuilder.Entity("ClassLibrary.ExtraLine", b =>
+            modelBuilder.Entity("ClassLibrary.Extra", b =>
                 {
-                    b.HasOne("ClassLibrary.Extra", "Extra")
-                        .WithMany()
-                        .HasForeignKey("ExtraId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("ClassLibrary.SnackLine", null)
-                        .WithMany("ExtraLines")
+                        .WithMany("Extras")
                         .HasForeignKey("SnackLineId");
-
-                    b.Navigation("Extra");
                 });
 
             modelBuilder.Entity("ClassLibrary.SnackLine", b =>
@@ -236,12 +219,14 @@ namespace ClassLibrary.Migrations
 
             modelBuilder.Entity("ClassLibrary.Order", b =>
                 {
+                    b.Navigation("DrinkLines");
+
                     b.Navigation("SnackLines");
                 });
 
             modelBuilder.Entity("ClassLibrary.SnackLine", b =>
                 {
-                    b.Navigation("ExtraLines");
+                    b.Navigation("Extras");
                 });
 #pragma warning restore 612, 618
         }

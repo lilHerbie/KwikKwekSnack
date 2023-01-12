@@ -12,7 +12,10 @@ namespace ClassLibrary
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
+        public int OrderId { get; set; }
         public Snack Snack { get; set; }
+        [ForeignKey("Snack")]
+        public int SnackId { get; set; }
         public ICollection<ExtraLine> ExtraLines { get; set; }
         
     }

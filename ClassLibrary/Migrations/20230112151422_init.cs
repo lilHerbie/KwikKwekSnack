@@ -28,20 +28,6 @@ namespace ClassLibrary.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Extras",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Price = table.Column<float>(type: "real", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Extras", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Orders",
                 columns: table => new
                 {
@@ -79,7 +65,8 @@ namespace ClassLibrary.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     DrinkId = table.Column<int>(type: "int", nullable: false),
                     HasStraw = table.Column<bool>(type: "bit", nullable: false),
-                    HasIce = table.Column<bool>(type: "bit", nullable: false)
+                    HasIce = table.Column<bool>(type: "bit", nullable: false),
+                    OrderId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -90,6 +77,11 @@ namespace ClassLibrary.Migrations
                         principalTable: "Drinks",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_DrinkLines_Orders_OrderId",
+                        column: x => x.OrderId,
+                        principalTable: "Orders",
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -118,25 +110,20 @@ namespace ClassLibrary.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ExtraLines",
+                name: "Extras",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    ExtraId = table.Column<int>(type: "int", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Price = table.Column<float>(type: "real", nullable: false),
                     SnackLineId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ExtraLines", x => x.Id);
+                    table.PrimaryKey("PK_Extras", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_ExtraLines_Extras_ExtraId",
-                        column: x => x.ExtraId,
-                        principalTable: "Extras",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_ExtraLines_SnackLines_SnackLineId",
+                        name: "FK_Extras_SnackLines_SnackLineId",
                         column: x => x.SnackLineId,
                         principalTable: "SnackLines",
                         principalColumn: "Id");
@@ -148,13 +135,13 @@ namespace ClassLibrary.Migrations
                 column: "DrinkId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ExtraLines_ExtraId",
-                table: "ExtraLines",
-                column: "ExtraId");
+                name: "IX_DrinkLines_OrderId",
+                table: "DrinkLines",
+                column: "OrderId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ExtraLines_SnackLineId",
-                table: "ExtraLines",
+                name: "IX_Extras_SnackLineId",
+                table: "Extras",
                 column: "SnackLineId");
 
             migrationBuilder.CreateIndex(
@@ -175,13 +162,10 @@ namespace ClassLibrary.Migrations
                 name: "DrinkLines");
 
             migrationBuilder.DropTable(
-                name: "ExtraLines");
+                name: "Extras");
 
             migrationBuilder.DropTable(
                 name: "Drinks");
-
-            migrationBuilder.DropTable(
-                name: "Extras");
 
             migrationBuilder.DropTable(
                 name: "SnackLines");
