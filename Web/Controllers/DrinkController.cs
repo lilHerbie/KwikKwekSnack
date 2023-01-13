@@ -42,7 +42,7 @@ namespace Web.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    _repo.AddSnack(drink);
+                    _repo.AddDrink(drink);
                     return RedirectToAction(nameof(Index));
                 }
 
@@ -70,7 +70,7 @@ namespace Web.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    _repo.UpdateSnack(drink);
+                    _repo.UpdateDrink(drink);
                     return RedirectToAction(nameof(Index));
                 }
 
