@@ -17,7 +17,14 @@ namespace Web.Controllers
         // GET: SnackController/Details/5
         public ActionResult Details(int id)
         {
-            return View(_repo.GetSnackById(id));
+            try
+            {
+                return View(_repo.GetSnackById(id));
+            }
+            catch (Exception)
+            {
+                return RedirectToAction("Index", "Home");
+            }
         }
 
         // GET: SnackController/Create
@@ -31,9 +38,22 @@ namespace Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(Snack snack)
         {
-            _repo.AddSnack(snack);
-            return RedirectToAction("Index", "Snacks");
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    _repo.AddSnack(snack);
+                    return RedirectToAction(nameof(Index));
+                }
+
+                return View(snack);
+            }
+            catch
+            {
+                return View();
+            }
         }
+
 
         // GET: SnackController/Edit/5
         public ActionResult Edit(int id)
@@ -46,23 +66,49 @@ namespace Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(int id, Snack snack)
         {
-            _repo.UpdateSnack(snack);
-            return RedirectToAction("Index", "Snacks");
+            try
+            {
+                _repo.GetSnackById(id);
+                return View();
+            }
+            catch (Exception)
+            {
+                return RedirectToAction("Index", "Home");
+            }
         }
 
         // GET: SnackController/Delete/5
         public ActionResult Delete(int id)
         {
-            return View(_repo.GetSnackById(id));
+            try
+            {
+                return View(_repo.GetSnackById(id));
+            }
+            catch (Exception)
+            {
+                return RedirectToAction("Index", "Home");
+            }
         }
+
 
         // POST: SnackController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Delete(Snack snack)
         {
-            _repo.RemoveSnack(snack);
-            return RedirectToAction("Index", "Snacks");
+
+            try
+            {
+                _repo.RemoveSnack(snack);
+                return RedirectToAction(nameof(Index)
+                    )
+                ; return View(snack);
+            }
+            catch
+            {
+                return View();
+            }
+
         }
     }
 }
