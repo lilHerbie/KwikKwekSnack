@@ -20,6 +20,11 @@ namespace ClassLibrary
             return databaseContext.Snacks.Where(i => i.Id == id).FirstOrDefault();
         }
 
+        public Extra GetExtraById(int id)
+        {
+            return databaseContext.Extras.Where(i => i.Id == id).FirstOrDefault();
+        }
+
         public List<Extra> GetExtras()
         {
             return databaseContext.Extras.ToList();

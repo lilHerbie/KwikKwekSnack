@@ -7,11 +7,11 @@ namespace Web.Controllers
     public class OrdersController : Controller
     {
         private readonly Repository repo;
-        public Order _order;
+        public OrderVM _order;
 
-        public OrdersController()
+        public OrdersController(OrderVM orderVM)
         {
-            _order = new Order();
+            _order = orderVM;
             repo = new();
         }
 
@@ -41,9 +41,30 @@ namespace Web.Controllers
             SnackLine snackLine = new SnackLine();
             snackLine.Snack = snack;
             snackLine.SnackId = snackId;
-            snackLine.Id = 2;
             snackLine.SnackName = snack.Name;
             _order.SnackLines.Add(snackLine);
+
+            ViewBag.Extras = repo.GetExtras();
+            ViewBag.PartialView = "./_Extras";
+            ViewBag.Model = snackLine;
+
+            return View("Details", _order);
+        }
+
+        public IActionResult AddExtra(int extraid, SnackLine snackLine)
+        {
+            Extra extra = repo.GetExtraById(extraid);
+            ExtraLine extraLine = new ExtraLine();
+            extraLine.Extra = extra;
+            extraLine.ExtraId = extraid;
+            extraLine.ExtraName = extra.Name;
+            extraLine.SnackLineId = snackLine.Id;
+            snackLine.ExtraLines.Add(extraLine);
+
+            Snack snack = repo.GetSnackById(snackLine.SnackId);
+            snackLine.Snack = snack;
+            snackLine.SnackName = snack.Name;
+            //_order.SnackLines.Where(snackLine => snackLine.SnackId == snackLine.Id).ToList
 
             ViewBag.Extras = repo.GetExtras();
             ViewBag.PartialView = "./_Extras";
@@ -55,7 +76,6 @@ namespace Web.Controllers
         [HttpPost]
         public IActionResult Extras(SnackLine snackLine)
         {
-            _order.SnackLines.Add(snackLine);
             ViewBag.Snacks = repo.GetSnacks();
             ViewBag.PartialView = "./_Snacks";
             return View("Details", _order);
@@ -71,10 +91,10 @@ namespace Web.Controllers
         }
 
         [HttpPost]
-        public IActionResult Details(Order order)
+        public IActionResult Details(OrderVM order)
         {
             _order = order;
-            repo.AddOrder(_order);
+            //repo.AddOrder(_order);
 
             return View("Index");
         }

@@ -50,7 +50,7 @@ namespace ClassLibrary
             Extra extra2 = new() { Id = 2, Name = "Broodje", Price = 1.00f };
             Extra extra3 = new() { Id = 3, Name = "Tomaat", Price = 0.20f };
 
-            ExtraLine extraLine1 = new () { Id = 1, ExtraId = 1, SnackLineId = 1};
+            ExtraLine extraLine1 = new () { Id = 1, ExtraId = 1, SnackLineId = 1, ExtraName = "Ui"};
 
             SnackLine snackLine1 = new() { Id = 1, OrderId = 1, SnackId = 1, SnackName = "Frikandel"};
 

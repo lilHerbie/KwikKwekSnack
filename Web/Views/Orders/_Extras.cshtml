@@ -9,8 +9,14 @@
     @{
         foreach (Extra extra in ViewBag.Extras)
         {
-
-            <a asp-action="AddExtra" asp-route-id="@extra.Id">@extra.Name</a>
+            <form asp-controller="Orders" asp-action="AddExtra" asp-route-extraid="@extra.Id">
+                <input type="hidden" asp-for="Snack" value="@Model.Snack" />
+                <input type="hidden" asp-for="SnackId" value="@Model.SnackId" />
+                <input type="hidden" asp-for="ExtraLines" value="@Model.ExtraLines" />
+                <input type="hidden" asp-for="SnackName" value="@Model.SnackName" />
+                <input type="hidden" asp-for="Id" value="@Model.Id" />
+                <button class="btn" type="submit">@extra.Name</button>
+            </form>
         }
 
     }
