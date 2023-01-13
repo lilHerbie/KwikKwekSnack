@@ -34,7 +34,11 @@
             <input type="hidden" asp-for="ExtraLines" value="@Model.ExtraLines" />
             <input type="hidden" asp-for="SnackName" value="@Model.SnackName" />
             <input type="hidden" asp-for="Id" value="@Model.Id" />
+            
+            <label asp-for="Amount" class="control-label"></label>
+            <input type="number" asp-for="Amount" class="form-control" />
 
+            
             <button asp-controller="Orders" asp-action="Extras" asp-route-remove="false" class="btn submit" type="submit">Bevestigen</button>
 
             <button asp-controller="Orders" asp-action="Extras" asp-route-remove="true" class="btn cancel" type="submit">Annuleren</button>

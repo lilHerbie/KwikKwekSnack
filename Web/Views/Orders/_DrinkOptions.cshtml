@@ -7,21 +7,25 @@
     <img src="@Model.Drink.ImageUrl" />
     <form asp-controller="Orders" asp-action="DrinkOptions">
         <input type="hidden" asp-for="Drink" value="@Model.Drink" />
-        <input type="hidden" asp-for="DrinkId" value="@Model.DrinkId"/>
+        <input type="hidden" asp-for="DrinkId" value="@Model.DrinkId" />
         <input type="hidden" asp-for="DrinkName" value="@Model.DrinkName" />
         <div class="form-group">
-        <label class="form-check-label">
-            <input class="form-check-input" asp-for="HasStraw" /> @Html.DisplayNameFor(model => model.HasStraw)
-        </label>
+            <label class="form-check-label">
+                <input class="form-check-input" asp-for="HasStraw" /> @Html.DisplayNameFor(model => model.HasStraw)
+            </label>
         </div>
         <div class="form-group">
-        <label class="form-check-label">
-            <input class="form-check-input" asp-for="HasIce" /> @Html.DisplayNameFor(model => model.HasIce)
-        </label>
-         </div>
-         <div class="form-group">
-                <label asp-for="Size" class="control-label">Grootte</label>
-                <select asp-for="Size" class="form-control" asp-items="ViewBag.Sizes"></select>
+            <label class="form-check-label">
+                <input class="form-check-input" asp-for="HasIce" /> @Html.DisplayNameFor(model => model.HasIce)
+            </label>
+        </div>
+        <div class="form-group">
+            <label asp-for="Size" class="control-label">Grootte</label>
+            <select asp-for="Size" class="form-control" asp-items="ViewBag.Sizes"></select>
+        </div>
+        <div class="form-group">
+            <label asp-for="Amount" class="control-label"></label>
+            <input type="number" asp-for="Amount" class="form-control" />
         </div>
 
         <button asp-controller="Orders" asp-action="DrinkOptions" asp-route-remove="false" class="btn" type="submit">Bevestigen</button>
