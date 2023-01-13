@@ -110,9 +110,31 @@ namespace ClassLibrary
             _ctx.SaveChanges();
         }
 
+        // Orders
+
         public void AddOrder(Order order)
         {
             _ctx.Orders.Add(order);
+        }
+
+        public List<Order> GetOrders()
+        {
+            return _ctx.Orders.ToList();
+        }
+
+        public void UpdateOrder(Order order)
+        {
+            if(_ctx.Orders.Contains(order))
+            {
+                _ctx.Orders.Update(order);
+            }
+
+            _ctx.SaveChanges();
+        }
+
+        public Order GetMostRecentOrder()
+        {
+            return _ctx.Orders.Where(o => o.Status == Status.queued).FirstOrDefault();
         }
     }
 }

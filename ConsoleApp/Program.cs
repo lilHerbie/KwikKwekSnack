@@ -1,2 +1,12 @@
-﻿// See https://aka.ms/new-console-template for more information
-Console.WriteLine("Hello, World!");
+﻿using ConsoleApp;
+
+public class Program
+{
+    static void Main(string[] args)
+    {
+
+        new MainController().ShowOrders();
+
+
+    }
+}
