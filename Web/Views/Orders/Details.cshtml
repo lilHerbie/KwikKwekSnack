@@ -1,0 +1,82 @@
+﻿@using ClassLibrary;
+﻿
+@model Order;
+@{
+    ViewData["Title"] = "Index";
+    string partialView = ViewBag.PartialView as string;
+}
+
+
+
+
+<html>
+<body>
+    <section class="orderSection">
+        @*<partial name="@ViewBag.PartialView" />*@
+        @{
+            if (partialView == "./_Snacks")
+            {
+                @Html.Partial(partialView, Model)
+            }
+            else if (partialView == "./_Extras")
+            {
+                SnackLine snackLine = ViewBag.Model as SnackLine;
+                @Html.Partial(partialView, snackLine)
+            }
+            else if (partialView == "./_Drinks")
+            {
+                @Html.Partial(partialView, Model)
+            }
+        }
+
+        <div class="overzicht">
+            <h1>Overzicht</h1>
+            
+                @if (Model.SnackLines != null)
+                {
+                    <ul>
+                        @foreach (SnackLine snackline in Model.SnackLines)
+                        {
+
+                        <li>@snackline.SnackName</li>
+                        @if (@snackline.ExtraLines != null)
+                        {
+                        <ul>
+                            @foreach (ExtraLine extraLine in snackline.ExtraLines)
+                            {
+                            <li>@extraLine.Extra.Name</li>
+                            }
+                        </ul>
+                        }
+                        }
+                    </ul>
+                }
+
+                @if (Model.DrinkLines != null)
+                {
+                    <ul>
+                        @foreach (DrinkLine drinkLine in Model.DrinkLines)
+                        {
+                        <li>@drinkLine.Drink.Name</li>
+                        }
+                    </ul>
+                }
+            
+                
+            
+
+
+        </div>
+    </section>
+    <a asp-action="Drinks">Drankjes</a>
+    <div class="col-1">
+        <form method="POST" asp-controller="Orders" asp-action="Extras">
+            <input type="hidden" asp-for="SnackLines" value="@Model.SnackLines" />
+            <input type="hidden" asp-for="DrinkLines" value="@Model.DrinkLines" />
+        </form>
+    </div>
+
+</body>
+</html>
+
+

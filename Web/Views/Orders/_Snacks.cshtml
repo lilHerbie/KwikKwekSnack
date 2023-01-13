@@ -1,0 +1,12 @@
+﻿@using ClassLibrary;
+
+@model Order;
+
+<div class="menuContainer">
+    @{
+        foreach (Snack snack in ViewBag.Snacks)
+        {
+                <a asp-action="Extras" asp-route-snackid="@snack.Id"><img src=@snack.ImageUrl /></a>
+        }
+    }
+</div>

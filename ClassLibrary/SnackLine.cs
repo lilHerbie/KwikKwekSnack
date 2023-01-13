@@ -16,7 +16,14 @@ namespace ClassLibrary
         public Snack Snack { get; set; }
         [ForeignKey("Snack")]
         public int SnackId { get; set; }
+        public string SnackName { get; set; }
         public ICollection<ExtraLine> ExtraLines { get; set; }
+
+        public SnackLine()
+        {
+            ExtraLines = new List<ExtraLine>();
+
+        }
         
     }
 }

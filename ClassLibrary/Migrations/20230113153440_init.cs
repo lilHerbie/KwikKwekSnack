@@ -2,6 +2,8 @@
 
 #nullable disable
 
+#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
+
 namespace ClassLibrary.Migrations
 {
     /// <inheritdoc />
@@ -25,6 +27,20 @@ namespace ClassLibrary.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Drinks", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Extras",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Price = table.Column<float>(type: "real", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Extras", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -63,10 +79,10 @@ namespace ClassLibrary.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    OrderId = table.Column<int>(type: "int", nullable: false),
                     DrinkId = table.Column<int>(type: "int", nullable: false),
                     HasStraw = table.Column<bool>(type: "bit", nullable: false),
-                    HasIce = table.Column<bool>(type: "bit", nullable: false),
-                    OrderId = table.Column<int>(type: "int", nullable: true)
+                    HasIce = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -81,7 +97,8 @@ namespace ClassLibrary.Migrations
                         name: "FK_DrinkLines_Orders_OrderId",
                         column: x => x.OrderId,
                         principalTable: "Orders",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -90,8 +107,9 @@ namespace ClassLibrary.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    OrderId = table.Column<int>(type: "int", nullable: false),
                     SnackId = table.Column<int>(type: "int", nullable: false),
-                    OrderId = table.Column<int>(type: "int", nullable: true)
+                    SnackName = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -100,7 +118,8 @@ namespace ClassLibrary.Migrations
                         name: "FK_SnackLines_Orders_OrderId",
                         column: x => x.OrderId,
                         principalTable: "Orders",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_SnackLines_Snacks_SnackId",
                         column: x => x.SnackId,
@@ -110,24 +129,80 @@ namespace ClassLibrary.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Extras",
+                name: "ExtraLines",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Price = table.Column<float>(type: "real", nullable: false),
-                    SnackLineId = table.Column<int>(type: "int", nullable: true)
+                    ExtraId = table.Column<int>(type: "int", nullable: false),
+                    SnackLineId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Extras", x => x.Id);
+                    table.PrimaryKey("PK_ExtraLines", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Extras_SnackLines_SnackLineId",
+                        name: "FK_ExtraLines_Extras_ExtraId",
+                        column: x => x.ExtraId,
+                        principalTable: "Extras",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ExtraLines_SnackLines_SnackLineId",
                         column: x => x.SnackLineId,
                         principalTable: "SnackLines",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
+
+            migrationBuilder.InsertData(
+                table: "Drinks",
+                columns: new[] { "Id", "Description", "ImageUrl", "Name", "Price", "size" },
+                values: new object[,]
+                {
+                    { 1, "Cola", "https://smartkiosk.nl/wp-content/uploads/2021/11/coca-cola-blik-33cl-800x800-1.jpg", "Cola", 1.6f, 0 },
+                    { 2, "Fanta", "https://smartkiosk.nl/wp-content/uploads/2021/10/9480.jpg", "Fanta", 1.5f, 0 },
+                    { 3, "Sprite", "https://smartkiosk.nl/wp-content/uploads/2021/09/2ad47881-f56c-4237-8574-402a84b96b63.jpg", "Sprite", 1.5f, 0 }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Extras",
+                columns: new[] { "Id", "Name", "Price" },
+                values: new object[,]
+                {
+                    { 1, "Ui", 0.3f },
+                    { 2, "Broodje", 1f },
+                    { 3, "Tomaat", 0.2f }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Orders",
+                columns: new[] { "Id", "Status", "TotalCost" },
+                values: new object[] { 1, 0, 0f });
+
+            migrationBuilder.InsertData(
+                table: "Snacks",
+                columns: new[] { "Id", "Description", "ImageUrl", "Name", "Price" },
+                values: new object[,]
+                {
+                    { 1, "Frikandel", "https://boshuis.huisjebezorgd.nl/wp-content/uploads/2020/03/29512948_652505005141152_1601506864166600704_o.jpg", "Frikandel", 2.5f },
+                    { 2, "Kroket", "https://images0.persgroep.net/rcs/IFZ8aVdFNg1-Bko2qCSQg5i8G-A/diocontent/101162365/_fitwidth/763?appId=93a17a8fd81db0de025c8abd1cca1279&quality=0.8", "Kroket", 2.75f },
+                    { 3, "Bamischijf", "https://veluwe-plaza.huisjebezorgd.nl/wp-content/uploads/2020/03/bami.jpg", "Bamischijf", 3f }
+                });
+
+            migrationBuilder.InsertData(
+                table: "DrinkLines",
+                columns: new[] { "Id", "DrinkId", "HasIce", "HasStraw", "OrderId" },
+                values: new object[] { 1, 1, false, false, 1 });
+
+            migrationBuilder.InsertData(
+                table: "SnackLines",
+                columns: new[] { "Id", "OrderId", "SnackId", "SnackName" },
+                values: new object[] { 1, 1, 1, "Frikandel" });
+
+            migrationBuilder.InsertData(
+                table: "ExtraLines",
+                columns: new[] { "Id", "ExtraId", "SnackLineId" },
+                values: new object[] { 1, 1, 1 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_DrinkLines_DrinkId",
@@ -140,8 +215,13 @@ namespace ClassLibrary.Migrations
                 column: "OrderId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Extras_SnackLineId",
-                table: "Extras",
+                name: "IX_ExtraLines_ExtraId",
+                table: "ExtraLines",
+                column: "ExtraId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ExtraLines_SnackLineId",
+                table: "ExtraLines",
                 column: "SnackLineId");
 
             migrationBuilder.CreateIndex(
@@ -162,10 +242,13 @@ namespace ClassLibrary.Migrations
                 name: "DrinkLines");
 
             migrationBuilder.DropTable(
-                name: "Extras");
+                name: "ExtraLines");
 
             migrationBuilder.DropTable(
                 name: "Drinks");
+
+            migrationBuilder.DropTable(
+                name: "Extras");
 
             migrationBuilder.DropTable(
                 name: "SnackLines");
