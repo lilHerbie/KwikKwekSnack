@@ -79,14 +79,17 @@
             }
         </div>
     </section>
+
+    <div class="finishbox">
+
     @{
         if (partialView == "./_Snacks" || partialView == "./_Extras")
         {
-            <a asp-controller="Orders" asp-action="Drinks">Drankjes</a>
+                <a asp-controller="Orders" asp-action="Drinks" class="finishbtn">Drankjes</a>
         }
         else
         {
-            <a asp-controller="Orders" asp-action="Details">Snacks</a>
+                <a asp-controller="Orders" asp-action="Details" class="finishbtn">Snacks</a>
         }
     }
    
@@ -94,8 +97,10 @@
     <form method="POST" asp-controller="Orders" asp-action="Extras">
         <input type="hidden" asp-for="SnackLines" value="@Model.SnackLines" />
         <input type="hidden" asp-for="DrinkLines" value="@Model.DrinkLines" />
-        <button asp-controller="Orders" asp-action="Extras" type="submit">Afronden</button>
+        <button asp-controller="Orders" asp-action="Extras" type="submit" class="finishbtn">Afronden</button>
     </form>
+
+    </div>
 
 </body>
 </html>

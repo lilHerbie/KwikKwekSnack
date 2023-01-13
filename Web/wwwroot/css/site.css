@@ -123,3 +123,24 @@ section {
 .submit:hover, .cancel:hover {
     color: lightgray;
 }
+
+.finishbox {
+    display: flex;
+    flex-direction: row;
+    width: 20%;
+    column-gap: 20px;
+}
+
+.finishbtn {
+    padding: 10px;
+    color: white;
+    text-decoration: none;
+    background-color: lightgray;
+    border-radius: 5px;
+    border: solid black 0px;
+    padding: 5px 50px;
+}
+
+.finishbtn:hover {
+    color: black;
+}
