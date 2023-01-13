@@ -1,6 +1,6 @@
 ﻿@using ClassLibrary;
 ﻿
-@model Order;
+@model OrderVM;
 @{
     ViewData["Title"] = "Index";
     string partialView = ViewBag.PartialView as string;
@@ -25,6 +25,9 @@
             }
             else if (partialView == "./_Drinks")
             {
+                @Html.Partial(partialView, Model)
+            }
+            else if (partialView == "./DrinkOptions"){
                 @Html.Partial(partialView, Model)
             }
         }
