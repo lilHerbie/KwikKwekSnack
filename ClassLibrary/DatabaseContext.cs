@@ -54,7 +54,7 @@ namespace ClassLibrary
 
             SnackLine snackLine1 = new() { Id = 1, OrderId = 1, SnackId = 1, SnackName = "Frikandel"};
 
-            DrinkLine drinkLine1 = new() { Id = 1, OrderId = 1, DrinkId = 1 };
+            DrinkLine drinkLine1 = new() { Id = 1, OrderId = 1, DrinkId = 1, DrinkName = "Cola" };
 
             Order order1 = new Order() { Id = 1, Status = Status.queued };
 

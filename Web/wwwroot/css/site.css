@@ -68,3 +68,11 @@ section {
     border: solid black 3px;
 }
 
+.extraButtons {
+    display: flex;
+    flex-direction: row;
+    width: 50%;
+    justify-content: space-evenly;
+    align-items: center;
+}
+

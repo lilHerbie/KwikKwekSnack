@@ -10,6 +10,7 @@ namespace ClassLibrary
     {
         DatabaseContext databaseContext = new();
 
+        //snacks
         public List<Snack> GetSnacks()
         {
             return databaseContext.Snacks.ToList();
@@ -20,19 +21,25 @@ namespace ClassLibrary
             return databaseContext.Snacks.Where(i => i.Id == id).FirstOrDefault();
         }
 
+        //extras
+        public List<Extra> GetExtras()
+        {
+            return databaseContext.Extras.ToList();
+        }
         public Extra GetExtraById(int id)
         {
             return databaseContext.Extras.Where(i => i.Id == id).FirstOrDefault();
         }
 
-        public List<Extra> GetExtras()
-        {
-            return databaseContext.Extras.ToList();
-        }
-
+       
+        //drinks
         public List<Drink> GetDrinks()
         {
             return databaseContext.Drinks.ToList();
+        }
+        public Drink GetDrinkById(int id)
+        {
+            return databaseContext.Drinks.Where(i => i.Id == id).FirstOrDefault();
         }
 
         public void AddOrder(Order order)

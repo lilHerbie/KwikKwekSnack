@@ -51,6 +51,7 @@ namespace Web.Controllers
             return View("Details", _order);
         }
 
+        [HttpPost]
         public IActionResult AddExtra(int extraid, SnackLine snackLine)
         {
             Extra extra = repo.GetExtraById(extraid);
@@ -74,8 +75,13 @@ namespace Web.Controllers
         }
 
         [HttpPost]
-        public IActionResult Extras(SnackLine snackLine)
+        public IActionResult Extras(SnackLine snackLine, bool remove)
         {
+
+            if (remove)
+            {
+                _order.SnackLines.Remove(_order.SnackLines.LastOrDefault());
+            }
             ViewBag.Snacks = repo.GetSnacks();
             ViewBag.PartialView = "./_Snacks";
             return View("Details", _order);
@@ -86,6 +92,23 @@ namespace Web.Controllers
         {
             ViewBag.Drinks = repo.GetDrinks();
             ViewBag.PartialView = "./_Drinks";
+
+            return View("Details", _order);
+        }
+
+        [HttpGet]
+        public IActionResult DrinkOptions(int drinkId)
+        {
+            Drink drink = repo.GetDrinkById(drinkId);
+            DrinkLine drinkLine = new();
+
+            drinkLine.Drink = drink;
+            drinkLine.DrinkId = drinkId;
+            drinkLine.DrinkName = drink.Name;
+            _order.DrinkLines.Add(drinkLine);
+
+            ViewBag.PartialView = "./_DrinkOptions";
+            ViewBag.Model = drinkLine;
 
             return View("Details", _order);
         }

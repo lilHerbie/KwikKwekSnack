@@ -27,6 +27,9 @@
             {
                 @Html.Partial(partialView, Model)
             }
+            else if (partialView == "./DrinkOptions"){
+                @Html.Partial(partialView, Model)
+            }
         }
 
         <div class="overzicht">
