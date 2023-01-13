@@ -1,20 +1,23 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using ClassLibrary;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Web.Controllers
 {
     public class SnackController : Controller
     {
+        Repository _repo = new Repository();
+
         // GET: SnackController
         public ActionResult Index()
         {
-            return View();
+            return View(_repo.GetSnacks());
         }
 
         // GET: SnackController/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            return View(_repo.GetSnackById(id));
         }
 
         // GET: SnackController/Create
@@ -26,58 +29,40 @@ namespace Web.Controllers
         // POST: SnackController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Create(Snack snack)
         {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            _repo.AddSnack(snack);
+            return RedirectToAction("Index", "Snacks");
         }
 
         // GET: SnackController/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            return View(_repo.GetSnackById(id));
         }
 
         // POST: SnackController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(int id, Snack snack)
         {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            _repo.UpdateSnack(snack);
+            return RedirectToAction("Index", "Snacks");
         }
 
         // GET: SnackController/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            return View(_repo.GetSnackById(id));
         }
 
         // POST: SnackController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public ActionResult Delete(Snack snack)
         {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            _repo.RemoveSnack(snack);
+            return RedirectToAction("Index", "Snacks");
         }
     }
 }
