@@ -7,11 +7,11 @@ namespace Web.Controllers
     public class OrdersController : Controller
     {
         private readonly Repository repo;
-        public Order _order;
+        public OrderVM _order;
 
-        public OrdersController()
+        public OrdersController(OrderVM orderVM)
         {
-            _order = new Order();
+            _order = orderVM;
             repo = new();
         }
 
@@ -41,7 +41,6 @@ namespace Web.Controllers
             SnackLine snackLine = new SnackLine();
             snackLine.Snack = snack;
             snackLine.SnackId = snackId;
-            snackLine.Id = 2;
             snackLine.SnackName = snack.Name;
             _order.SnackLines.Add(snackLine);
 
@@ -53,9 +52,36 @@ namespace Web.Controllers
         }
 
         [HttpPost]
-        public IActionResult Extras(SnackLine snackLine)
+        public IActionResult AddExtra(int extraid, SnackLine snackLine)
         {
-            _order.SnackLines.Add(snackLine);
+            Extra extra = repo.GetExtraById(extraid);
+            ExtraLine extraLine = new ExtraLine();
+            extraLine.Extra = extra;
+            extraLine.ExtraId = extraid;
+            extraLine.ExtraName = extra.Name;
+            extraLine.SnackLineId = snackLine.Id;
+            snackLine.ExtraLines.Add(extraLine);
+
+            Snack snack = repo.GetSnackById(snackLine.SnackId);
+            snackLine.Snack = snack;
+            snackLine.SnackName = snack.Name;
+            _order.SnackLines.LastOrDefault().ExtraLines.Add(extraLine);
+
+            ViewBag.Extras = repo.GetExtras();
+            ViewBag.PartialView = "./_Extras";
+            ViewBag.Model = snackLine;
+
+            return View("Details", _order);
+        }
+
+        [HttpPost]
+        public IActionResult Extras(SnackLine snackLine, bool remove)
+        {
+
+            if (remove)
+            {
+                _order.SnackLines.Remove(_order.SnackLines.LastOrDefault());
+            }
             ViewBag.Snacks = repo.GetSnacks();
             ViewBag.PartialView = "./_Snacks";
             return View("Details", _order);
@@ -70,11 +96,28 @@ namespace Web.Controllers
             return View("Details", _order);
         }
 
+        [HttpGet]
+        public IActionResult DrinkOptions(int drinkId)
+        {
+            Drink drink = repo.GetDrinkById(drinkId);
+            DrinkLine drinkLine = new();
+
+            drinkLine.Drink = drink;
+            drinkLine.DrinkId = drinkId;
+            drinkLine.DrinkName = drink.Name;
+            _order.DrinkLines.Add(drinkLine);
+
+            ViewBag.PartialView = "./_DrinkOptions";
+            ViewBag.Model = drinkLine;
+
+            return View("Details", _order);
+        }
+
         [HttpPost]
-        public IActionResult Details(Order order)
+        public IActionResult Details(OrderVM order)
         {
             _order = order;
-            repo.AddOrder(_order);
+            //repo.AddOrder(_order);
 
             return View("Index");
         }

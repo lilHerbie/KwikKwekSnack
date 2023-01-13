@@ -11,6 +11,7 @@ namespace ClassLibrary
     {
         DatabaseContext _ctx = new();
 
+        //snacks
         public List<Snack> GetSnacks()
         {
             return _ctx.Snacks.ToList();
@@ -20,14 +21,8 @@ namespace ClassLibrary
         {
             return _ctx.Snacks.Where(s => s.Id == id).FirstOrDefault();
         }
-
-        public void AddSnack(Snack snack)
-        {
-            _ctx.Snacks.Add(snack);
-            _ctx.SaveChanges();
-        }
-
-        public void UpdateSnack(Snack snack)
+        
+          public void UpdateSnack(Snack snack)
         {
             if (_ctx.Snacks.Contains(snack))
             {
@@ -42,6 +37,47 @@ namespace ClassLibrary
             _ctx.SaveChanges();
         }
 
+        //extras      
+        public void AddSnack(Snack snack)
+        {
+            _ctx.Snacks.Add(snack);
+            _ctx.SaveChanges();
+        }
+        
+         public List<Extra> GetExtras()
+        {
+            return _ctx.Extras.ToList();
+        }
+
+        public Extra GetExtraById(int id)
+        {
+            return _ctx.Extras.Where(e => e.Id == id).FirstOrDefault();
+        }
+
+        public void AddExtra(Extra extra)
+        {
+            _ctx.Extras.Add(extra);
+            _ctx.SaveChanges();
+        }
+
+        public void UpdateExtra(Extra extra)
+        {
+            if (_ctx.Extras.Contains(extra))
+            {
+                _ctx.Extras.Update(extra);
+            }
+
+            _ctx.SaveChanges();
+        }
+
+        public void RemoveExtra(Extra extra)
+        {
+            _ctx.Extras.Remove(extra);
+            _ctx.SaveChanges();
+        }
+
+       
+        //drinks
         public List<Drink> GetDrinks()
         {
             return _ctx.Drinks.ToList();
@@ -71,38 +107,6 @@ namespace ClassLibrary
         public void RemoveDrink(Drink drink)
         {
             _ctx.Drinks.Remove(drink);
-            _ctx.SaveChanges();
-        }
-
-        public List<Extra> GetExtras()
-        {
-            return _ctx.Extras.ToList();
-        }
-
-        public Extra GetExtraById(int id)
-        {
-            return _ctx.Extras.Where(e => e.Id == id).FirstOrDefault();
-        }
-
-        public void AddExtra(Extra extra)
-        {
-            _ctx.Extras.Add(extra);
-            _ctx.SaveChanges();
-        }
-
-        public void UpdateExtra(Extra extra)
-        {
-            if (_ctx.Extras.Contains(extra))
-            {
-                _ctx.Extras.Update(extra);
-            }
-
-            _ctx.SaveChanges();
-        }
-
-        public void RemoveExtra(Extra extra)
-        {
-            _ctx.Extras.Remove(extra);
             _ctx.SaveChanges();
         }
 
