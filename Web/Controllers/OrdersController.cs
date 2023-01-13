@@ -111,6 +111,10 @@ namespace Web.Controllers
             ViewBag.PartialView = "./_DrinkOptions";
             ViewBag.Model = drinkLine;
 
+            List<Size> sizes = new List<Size> { Size.S, Size.M, Size.L, Size.XL };
+            SelectList sizesSelectList = new SelectList(sizes, nameof(Size));
+            ViewBag.Sizes = sizesSelectList;
+
             return View("Details", _order);
         }
 
@@ -121,14 +125,15 @@ namespace Web.Controllers
             {
                 _order.DrinkLines.Remove(_order.DrinkLines.LastOrDefault());
             }
-            ;
+
+            _order.DrinkLines.LastOrDefault().HasStraw = drinkLine.HasStraw;
+            _order.DrinkLines.LastOrDefault().HasIce = drinkLine.HasIce;
+            _order.DrinkLines.LastOrDefault().Size = drinkLine.Size;
+
             ViewBag.Model = drinkLine;
             ViewBag.PartialView = "./_Drinks";
             ViewBag.Drinks = repo.GetDrinks();
 
-            List<Size> sizes = new List<Size> { Size.S, Size.M, Size.L, Size.XL };
-            SelectList sizesSelectList = new SelectList(sizes, nameof(Size));
-            ViewBag.Sizes = sizesSelectList;
             return View("Details", _order);
         }
 
