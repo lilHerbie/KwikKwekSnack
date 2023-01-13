@@ -122,6 +122,11 @@ namespace ClassLibrary
             return _ctx.Orders.ToList();
         }
 
+        public Order GetOrderById(int id)
+        {
+            return _ctx.Orders.Where(o => o.Id == id).FirstOrDefault();
+        }
+
         public void UpdateOrder(Order order)
         {
             if(_ctx.Orders.Contains(order))
@@ -134,7 +139,10 @@ namespace ClassLibrary
 
         public Order GetMostRecentOrder()
         {
-            return _ctx.Orders.Where(o => o.Status == Status.queued).FirstOrDefault();
+            var queuedOrders = _ctx.Orders.Where(o => o.Status == Status.queued);
+            var latestQueuedOrderId = queuedOrders.Min(o => o.Id);
+            return GetOrderById(latestQueuedOrderId);
+      
         }
     }
 }
