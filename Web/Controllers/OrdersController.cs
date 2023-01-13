@@ -78,11 +78,18 @@ namespace Web.Controllers
         [HttpPost]
         public IActionResult Extras(SnackLine snackLine, bool remove)
         {
-
             if (remove)
             {
                 _order.SnackLines.Remove(_order.SnackLines.LastOrDefault());
             }
+            else
+            {
+                for (int i = 0; i < snackLine.Amount - 1; i++)
+                {
+                    _order.SnackLines.Add(_order.SnackLines.LastOrDefault());
+                }
+            }
+
             ViewBag.Snacks = repo.GetSnacks();
             ViewBag.PartialView = "./_Snacks";
             return View("Details", _order);
@@ -124,6 +131,13 @@ namespace Web.Controllers
             if (remove)
             {
                 _order.DrinkLines.Remove(_order.DrinkLines.LastOrDefault());
+            }
+            else
+            {
+                for (int i = 0; i < drinkLine.Amount - 1; i++)
+                {
+                    _order.DrinkLines.Add(_order.DrinkLines.LastOrDefault());
+                }
             }
 
             _order.DrinkLines.LastOrDefault().HasStraw = drinkLine.HasStraw;

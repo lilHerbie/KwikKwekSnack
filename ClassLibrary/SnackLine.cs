@@ -17,6 +17,7 @@ namespace ClassLibrary
         [ForeignKey("Snack")]
         public int SnackId { get; set; }
         public string SnackName { get; set; }
+        public int Amount { get; set; }
         public List<ExtraLine> ExtraLines { get; set; }
         [DataType(DataType.Currency)]
         public float TotalPrice

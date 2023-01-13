@@ -18,6 +18,7 @@ namespace ClassLibrary
         public int DrinkId { get; set; }
         public bool HasStraw { get; set; }
         public bool HasIce { get; set; }
+        public int Amount { get; set; }
         public Size Size { get; set; }
         [DataType(DataType.Currency)]
         public float TotalPrice

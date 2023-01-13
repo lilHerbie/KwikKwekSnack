@@ -52,9 +52,9 @@ namespace ClassLibrary
 
             ExtraLine extraLine1 = new () { Id = 1, ExtraId = 1, SnackLineId = 1, ExtraName = "Ui"};
 
-            SnackLine snackLine1 = new() { Id = 1, OrderId = 1, SnackId = 1, SnackName = "Frikandel"};
+            SnackLine snackLine1 = new() { Id = 1, OrderId = 1, SnackId = 1, SnackName = "Frikandel", Amount = 1};
 
-            DrinkLine drinkLine1 = new() { Id = 1, OrderId = 1, DrinkId = 1, DrinkName = "Cola" };
+            DrinkLine drinkLine1 = new() { Id = 1, OrderId = 1, DrinkId = 1, DrinkName = "Cola", Amount = 1 };
 
             Order order1 = new Order() { Id = 1, Status = Status.queued };
 
