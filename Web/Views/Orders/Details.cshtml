@@ -27,7 +27,8 @@
             {
                 @Html.Partial(partialView, Model)
             }
-            else if (partialView == "./_DrinkOptions"){
+            else if (partialView == "./_DrinkOptions")
+            {
                 DrinkLine drinkLine = ViewBag.Model as DrinkLine;
                 @Html.Partial(partialView, drinkLine)
             }
@@ -35,32 +36,32 @@
 
         <div class="overzicht">
             <h1>Overzicht</h1>
-            
-                @if (Model.SnackLines != null)
-                {
-                    <ul>
-                        @foreach (SnackLine snackline in Model.SnackLines)
-                        {
+
+            @if (Model.SnackLines != null)
+            {
+                <ul>
+                    @foreach (SnackLine snackline in Model.SnackLines)
+                    {
 
                         <li>@snackline.SnackName</li>
                         @if (@snackline.ExtraLines != null)
                         {
-                        <ul>
-                            @foreach (ExtraLine extraLine in snackline.ExtraLines)
-                            {
-                            <li>@extraLine.Extra.Name</li>
-                            }
-                        </ul>
+                            <ul>
+                                @foreach (ExtraLine extraLine in snackline.ExtraLines)
+                                {
+                                    <li>@extraLine.Extra.Name</li>
+                                }
+                            </ul>
                         }
-                        }
-                    </ul>
-                }
+                    }
+                </ul>
+            }
 
-                @if (Model.DrinkLines != null)
-                {
-                    <ul>
-                        @foreach (DrinkLine drinkLine in Model.DrinkLines)
-                        {
+            @if (Model.DrinkLines != null)
+            {
+                <ul>
+                    @foreach (DrinkLine drinkLine in Model.DrinkLines)
+                    {
                         <li>@drinkLine.Drink.Name</li>
                         <ul>
                             @if (drinkLine.HasStraw)
@@ -73,18 +74,28 @@
                             }
                             <li>@drinkLine.Size</li>
                         </ul>
-                        }
-                    </ul>
-                }
+                    }
+                </ul>
+            }
         </div>
     </section>
-    <a asp-action="Drinks">Drankjes</a>
-    <div class="col-1">
-        <form method="POST" asp-controller="Orders" asp-action="Extras">
-            <input type="hidden" asp-for="SnackLines" value="@Model.SnackLines" />
-            <input type="hidden" asp-for="DrinkLines" value="@Model.DrinkLines" />
-        </form>
-    </div>
+    @{
+        if (partialView == "./_Snacks" || partialView == "./_Extras")
+        {
+            <a asp-controller="Orders" asp-action="Drinks">Drankjes</a>
+        }
+        else
+        {
+            <a asp-controller="Orders" asp-action="Details">Snacks</a>
+        }
+    }
+   
+
+    <form method="POST" asp-controller="Orders" asp-action="Extras">
+        <input type="hidden" asp-for="SnackLines" value="@Model.SnackLines" />
+        <input type="hidden" asp-for="DrinkLines" value="@Model.DrinkLines" />
+        <button asp-controller="Orders" asp-action="Extras" type="submit">Afronden</button>
+    </form>
 
 </body>
 </html>
