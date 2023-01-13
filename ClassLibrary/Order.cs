@@ -7,8 +7,8 @@ namespace ClassLibrary
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
-        public ICollection<SnackLine> SnackLines { get; set; }
-        public ICollection<DrinkLine> DrinkLines { get; set; }
+        public List<SnackLine> SnackLines { get; set; }
+        public List<DrinkLine> DrinkLines { get; set; }
         public Status Status { get; set; }
         [DataType(DataType.Currency)]
         public float TotalCost { get; set; }

@@ -64,7 +64,7 @@ namespace Web.Controllers
             Snack snack = repo.GetSnackById(snackLine.SnackId);
             snackLine.Snack = snack;
             snackLine.SnackName = snack.Name;
-            //_order.SnackLines.Where(snackLine => snackLine.SnackId == snackLine.Id).ToList
+            _order.SnackLines.LastOrDefault().ExtraLines.Add(extraLine);
 
             ViewBag.Extras = repo.GetExtras();
             ViewBag.PartialView = "./_Extras";
