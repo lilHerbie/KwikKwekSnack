@@ -4,14 +4,14 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Web.Controllers
 {
-    public class SnackController : Controller
+    public class DrinkController : Controller
     {
         Repository _repo = new Repository();
 
         // GET: SnackController
         public ActionResult Index()
         {
-            return View(_repo.GetSnacks());
+            return View(_repo.GetDrinks());
         }
 
         // GET: SnackController/Details/5
@@ -19,7 +19,7 @@ namespace Web.Controllers
         {
             try
             {
-                return View(_repo.GetSnackById(id));
+                return View(_repo.GetDrinkById(id));
             }
             catch (Exception)
             {
@@ -36,17 +36,17 @@ namespace Web.Controllers
         // POST: SnackController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Snack snack)
+        public ActionResult Create(Drink drink)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
-                    _repo.AddSnack(snack);
+                    _repo.AddSnack(drink);
                     return RedirectToAction(nameof(Index));
                 }
 
-                return View(snack);
+                return View(drink);
             }
             catch
             {
@@ -58,23 +58,23 @@ namespace Web.Controllers
         // GET: SnackController/Edit/5
         public ActionResult Edit(int id)
         {
-            return View(_repo.GetSnackById(id));
+            return View(_repo.GetDrinkById(id));
         }
 
         // POST: SnackController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(Snack snack)
+        public ActionResult Edit(Drink drink)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
-                    _repo.UpdateSnack(snack);
+                    _repo.UpdateSnack(drink);
                     return RedirectToAction(nameof(Index));
                 }
 
-                return View(snack);
+                return View(drink);
             }
             catch (Exception)
             {
@@ -87,7 +87,7 @@ namespace Web.Controllers
         {
             try
             {
-                return View(_repo.GetSnackById(id));
+                return View(_repo.GetDrinkById(id));
             }
             catch (Exception)
             {
@@ -99,15 +99,15 @@ namespace Web.Controllers
         // POST: SnackController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(Snack snack)
+        public ActionResult Delete(Drink drink)
         {
 
             try
             {
-                _repo.RemoveSnack(snack);
+                _repo.RemoveDrink(drink);
                 return RedirectToAction(nameof(Index)
                     )
-                ; return View(snack);
+                ; return View(drink);
             }
             catch
             {
