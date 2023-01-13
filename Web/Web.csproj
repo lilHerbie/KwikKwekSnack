@@ -23,4 +23,8 @@
     <ProjectReference Include="..\ClassLibrary\ClassLibrary.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Views\Drink\" />
+  </ItemGroup>
+
 </Project>

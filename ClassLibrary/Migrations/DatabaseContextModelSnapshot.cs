@@ -286,6 +286,10 @@ namespace ClassLibrary.Migrations
                     b.Property<int>("SnackId")
                         .HasColumnType("int");
 
+                    b.Property<string>("SnackName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
 
                     b.HasIndex("OrderId");
@@ -299,7 +303,8 @@ namespace ClassLibrary.Migrations
                         {
                             Id = 1,
                             OrderId = 1,
-                            SnackId = 1
+                            SnackId = 1,
+                            SnackName = "Frikandel"
                         });
                 });
 
