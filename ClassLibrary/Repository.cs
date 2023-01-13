@@ -25,6 +25,11 @@ namespace ClassLibrary
             return databaseContext.Extras.ToList();
         }
 
+        public List<Drink> GetDrinks()
+        {
+            return databaseContext.Drinks.ToList();
+        }
+
         public void AddOrder(Order order)
         {
             databaseContext.Orders.Add(order);

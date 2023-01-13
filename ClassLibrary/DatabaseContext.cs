@@ -52,7 +52,7 @@ namespace ClassLibrary
 
             ExtraLine extraLine1 = new () { Id = 1, ExtraId = 1, SnackLineId = 1};
 
-            SnackLine snackLine1 = new() { Id = 1, OrderId = 1, SnackId = 1};
+            SnackLine snackLine1 = new() { Id = 1, OrderId = 1, SnackId = 1, SnackName = "Frikandel"};
 
             DrinkLine drinkLine1 = new() { Id = 1, OrderId = 1, DrinkId = 1 };
 

@@ -7,20 +7,22 @@ namespace Web.Controllers
     public class OrdersController : Controller
     {
         private readonly Repository repo;
-        private Order order;
+        public Order _order;
 
         public OrdersController()
-        {      
+        {
+            _order = new Order();
             repo = new();
         }
 
         public IActionResult Index()
         {
-            order = new();
-            return RedirectToAction("Details", order);
+
+            return RedirectToAction("Details");
         }
 
-        public IActionResult Details(Order order)
+        [HttpGet]
+        public IActionResult Details()
         {
             //possibly pas partialview
 
@@ -29,53 +31,50 @@ namespace Web.Controllers
 
 
 
-            return View(order);
+            return View(_order);
         }
 
         [HttpGet]
-
-        public IActionResult Extras(int snackId, Order order)
+        public IActionResult Extras(int snackId)
         {
             Snack snack = repo.GetSnackById(snackId);
             SnackLine snackLine = new SnackLine();
             snackLine.Snack = snack;
             snackLine.SnackId = snackId;
-            order.SnackLines.Add(snackLine);
+            snackLine.Id = 2;
+            snackLine.SnackName = snack.Name;
+            _order.SnackLines.Add(snackLine);
 
             ViewBag.Extras = repo.GetExtras();
             ViewBag.PartialView = "./_Extras";
             ViewBag.Model = snackLine;
 
-            return View("Details", order);
+            return View("Details", _order);
         }
 
-        //[HttpPost]
-        //public IActionResult Extras(ViewModel vm)
-        //{
-           
-        //    foreach(int Extraid in vm.ExtraIds)
-        //    {
-        //        ExtraLine extraLine = new();
-        //        extraLine.ExtraId = Extraid;
-        //        vm.CurrentSnackLine.ExtraLines.Add(extraLine);
-        //    }
+        [HttpPost]
+        public IActionResult Extras(SnackLine snackLine)
+        {
+            _order.SnackLines.Add(snackLine);
+            ViewBag.Snacks = repo.GetSnacks();
+            ViewBag.PartialView = "./_Snacks";
+            return View("Details", _order);
+        }
 
-        //    vm.PartialView = "./Snacks";
+        [HttpGet]
+        public IActionResult Drinks()
+        {
+            ViewBag.Drinks = repo.GetDrinks();
+            ViewBag.PartialView = "./_Drinks";
 
-        //    return View("Index", vm);
-        //}
-
-        //public IActionResult AddExtra(int extraId, ViewModel vm)
-        //{
-        //    vm.ExtraIds.Add(extraId);
-        //    vm.PartialView = "./Extras";
-        //    return View("Index", vm);
-        //}
+            return View("Details", _order);
+        }
 
         [HttpPost]
-        public IActionResult SubmitOrder()
+        public IActionResult Details(Order order)
         {
-            repo.AddOrder(order);
+            _order = order;
+            repo.AddOrder(_order);
 
             return View("Index");
         }

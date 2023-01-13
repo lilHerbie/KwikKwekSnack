@@ -7,6 +7,8 @@
 }
 
 
+
+
 <html>
 <body>
     <section class="orderSection">
@@ -21,6 +23,10 @@
                 SnackLine snackLine = ViewBag.Model as SnackLine;
                 @Html.Partial(partialView, snackLine)
             }
+            else if (partialView == "./_Drinks")
+            {
+                @Html.Partial(partialView, Model)
+            }
         }
 
         <div class="overzicht">
@@ -32,7 +38,7 @@
                         @foreach (SnackLine snackline in Model.SnackLines)
                         {
 
-                        <li>@snackline.Snack.Name</li>
+                        <li>@snackline.SnackName</li>
                         @if (@snackline.ExtraLines != null)
                         {
                         <ul>
@@ -62,6 +68,13 @@
 
         </div>
     </section>
+    <a asp-action="Drinks">Drankjes</a>
+    <div class="col-1">
+        <form method="POST" asp-controller="Orders" asp-action="Extras">
+            <input type="hidden" asp-for="SnackLines" value="@Model.SnackLines" />
+            <input type="hidden" asp-for="DrinkLines" value="@Model.DrinkLines" />
+        </form>
+    </div>
 
 </body>
 </html>
