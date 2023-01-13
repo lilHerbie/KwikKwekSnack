@@ -19,9 +19,37 @@ namespace ClassLibrary
         public bool HasStraw { get; set; }
         public bool HasIce { get; set; }
         public Size Size { get; set; }
-        
-    }
+        [DataType(DataType.Currency)]
+        public float TotalPrice
+        {
+            get
+            {
+                if (Drink != null)
+                {
 
+                    float totalPrice = Drink.Price;
+                    if (Size == Size.M)
+                    {
+                        totalPrice = totalPrice * 1.25f;
+                    }
+                    else if (Size == Size.L)
+                    {
+                        totalPrice = totalPrice * 1.50f;
+                    }
+                    else if (Size == Size.XL)
+                    {
+                        totalPrice = totalPrice * 1.75f;
+                    }
+                    if (HasIce) { totalPrice += 0.15f; }
+                    if (HasStraw) { totalPrice += 0.10f; }
+                    return totalPrice;
+                }
+                return 0;
+            }
+
+
+        }
+    }
     public enum Size
     {
         S,
@@ -30,3 +58,7 @@ namespace ClassLibrary
         XL
     }
 }
+    
+
+
+
