@@ -5,31 +5,41 @@
 <div class="snackContainer">
     <h1>@Model.Snack.Name</h1>
     <img src="@Model.Snack.ImageUrl" />
+    <ul class="snacklist">
 
-    @{
-        foreach (Extra extra in ViewBag.Extras)
-        {
-            <form asp-controller="Orders" asp-action="AddExtra" asp-route-extraid="@extra.Id">
-                <input type="hidden" asp-for="Snack" value="@Model.Snack" />
-                <input type="hidden" asp-for="SnackId" value="@Model.SnackId" />
-                <input type="hidden" asp-for="ExtraLines" value="@Model.ExtraLines" />
-                <input type="hidden" asp-for="SnackName" value="@Model.SnackName" />
-                <input type="hidden" asp-for="Id" value="@Model.Id" />
-                <button class="btn" type="submit">@extra.Name</button>
-            </form>
+        @{
+
+
+            foreach (Extra extra in ViewBag.Extras)
+            {
+                <form asp-controller="Orders" class="snackrow" asp-action="AddExtra" asp-route-extraid="@extra.Id">
+                    <input type="hidden" asp-for="Snack" value="@Model.Snack" />
+                    <input type="hidden" asp-for="SnackId" value="@Model.SnackId" />
+                    <input type="hidden" asp-for="ExtraLines" value="@Model.ExtraLines" />
+                    <input type="hidden" asp-for="SnackName" value="@Model.SnackName" />
+                    <input type="hidden" asp-for="Id" value="@Model.Id" />
+
+                <li><button class="btn extra" type="submit">@extra.Name - € @extra.Price</button></li>
+
+                </form>
+            }
+
         }
 
-    }
-    <div class="col-1">
-        <form class="extraButtons" asp-controller="Orders" asp-action="Extras">
-            <input type="hidden" asp-for="Snack" value="@Model.Snack"/>
+
+        <form class="snackrow" asp-controller="Orders" asp-action="Extras">
+
+            <input type="hidden" asp-for="Snack" value="@Model.Snack" />
             <input type="hidden" asp-for="SnackId" value="@Model.SnackId" />
             <input type="hidden" asp-for="ExtraLines" value="@Model.ExtraLines" />
             <input type="hidden" asp-for="SnackName" value="@Model.SnackName" />
             <input type="hidden" asp-for="Id" value="@Model.Id" />
-            <button asp-controller="Orders" asp-action="Extras" asp-route-remove="false" class="btn" type="submit">Bevestigen</button>
-            <button asp-controller="Orders" asp-action="Extras" asp-route-remove="true" class="btn" type="submit">Annuleren</button>
-        </form>
-    </div>
 
+            <button asp-controller="Orders" asp-action="Extras" asp-route-remove="false" class="btn submit" type="submit">Bevestigen</button>
+
+            <button asp-controller="Orders" asp-action="Extras" asp-route-remove="true" class="btn cancel" type="submit">Annuleren</button>
+
+        </form>
+
+    </ul>
 </div>
