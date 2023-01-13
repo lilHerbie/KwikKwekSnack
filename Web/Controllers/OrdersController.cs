@@ -151,14 +151,32 @@ namespace Web.Controllers
             return View("Details", _order);
         }
 
-        [HttpPost]
-        public IActionResult Details(OrderVM order)
+        [HttpGet]
+        public IActionResult Overview()
         {
-            _order = order;
-            //repo.AddOrder(_order);
-
-            return View("Index");
+            return View(_order);
         }
+
+        [HttpPost]
+        public IActionResult Submit()
+        {
+            Order order = new Order();
+            order.SnackLines = _order.SnackLines;
+            order.DrinkLines = _order.DrinkLines;
+            order.TotalCost = _order.TotalCost;
+            repo.AddOrder(order);
+
+            return RedirectToAction("Index");
+        }
+
+        //[HttpPost]
+        //public IActionResult Details(OrderVM order)
+        //{
+        //    _order = order;
+        //    //repo.AddOrder(_order);
+
+        //    return View("Index");
+        //}
 
     }
 }

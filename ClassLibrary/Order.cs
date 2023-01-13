@@ -26,6 +26,10 @@ namespace ClassLibrary
                 }
                 return totalCost;
             }
+            set
+            {
+
+            }
         }
 
         public Order()
