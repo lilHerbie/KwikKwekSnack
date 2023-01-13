@@ -18,6 +18,15 @@ namespace ClassLibrary
         public int DrinkId { get; set; }
         public bool HasStraw { get; set; }
         public bool HasIce { get; set; }
+        public Size Size { get; set; }
+        
+    }
 
+    public enum Size
+    {
+        S,
+        M,
+        L,
+        XL
     }
 }

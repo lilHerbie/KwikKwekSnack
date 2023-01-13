@@ -27,8 +27,9 @@
             {
                 @Html.Partial(partialView, Model)
             }
-            else if (partialView == "./DrinkOptions"){
-                @Html.Partial(partialView, Model)
+            else if (partialView == "./_DrinkOptions"){
+                DrinkLine drinkLine = ViewBag.Model as DrinkLine;
+                @Html.Partial(partialView, drinkLine)
             }
         }
 
@@ -61,14 +62,20 @@
                         @foreach (DrinkLine drinkLine in Model.DrinkLines)
                         {
                         <li>@drinkLine.Drink.Name</li>
+                        <ul>
+                            @if (drinkLine.HasStraw)
+                            {
+                                <li>rietje</li>
+                            }
+                            @if (drinkLine.HasIce)
+                            {
+                                <li>ijs</li>
+                            }
+                            <li>@drinkLine.Size</li>
+                        </ul>
                         }
                     </ul>
                 }
-            
-                
-            
-
-
         </div>
     </section>
     <a asp-action="Drinks">Drankjes</a>

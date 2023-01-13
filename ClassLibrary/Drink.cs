@@ -17,14 +17,7 @@ namespace ClassLibrary
         public string Description { get; set; }
         [DataType(DataType.Currency)]
         public float Price { get; set; }
-        public Size size { get; set; }
     }
 
-    public enum Size
-    {
-        S,
-        M,
-        L,
-        XL
-    }
+    
 }
