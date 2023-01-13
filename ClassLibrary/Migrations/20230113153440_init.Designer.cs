@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ClassLibrary.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20230112154813_seed2")]
-    partial class seed2
+    [Migration("20230113153440_init")]
+    partial class init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -289,6 +289,10 @@ namespace ClassLibrary.Migrations
                     b.Property<int>("SnackId")
                         .HasColumnType("int");
 
+                    b.Property<string>("SnackName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
 
                     b.HasIndex("OrderId");
@@ -302,7 +306,8 @@ namespace ClassLibrary.Migrations
                         {
                             Id = 1,
                             OrderId = 1,
-                            SnackId = 1
+                            SnackId = 1,
+                            SnackName = "Frikandel"
                         });
                 });
 

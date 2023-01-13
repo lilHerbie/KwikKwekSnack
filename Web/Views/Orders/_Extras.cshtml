@@ -1,0 +1,28 @@
+﻿@using ClassLibrary;
+
+@model SnackLine;
+
+<div class="snackContainer">
+    <h1>@Model.Snack.Name</h1>
+    <img src="@Model.Snack.ImageUrl" />
+
+    @{
+        foreach (Extra extra in ViewBag.Extras)
+        {
+
+            <a asp-action="AddExtra" asp-route-id="@extra.Id">@extra.Name</a>
+        }
+
+    }
+    <div class="col-1">
+        <form method="POST" asp-controller="Orders" asp-action="Extras">
+            <input type="hidden" asp-for="Snack" value="@Model.Snack"/>
+            <input type="hidden" asp-for="SnackId" value="@Model.SnackId" />
+            <input type="hidden" asp-for="ExtraLines" value="@Model.ExtraLines" />
+            <input type="hidden" asp-for="SnackName" value="@Model.SnackName" />
+            <input type="hidden" asp-for="Id" value="@Model.Id" />
+            <button class="btn" type="submit">Bevestigen</button>
+        </form>
+    </div>
+
+</div>
