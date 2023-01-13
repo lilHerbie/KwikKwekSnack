@@ -43,7 +43,7 @@
                     @foreach (SnackLine snackline in Model.SnackLines)
                     {
 
-                        <li>@snackline.SnackName</li>
+                        <li>@snackline.SnackName </li>
                         @if (@snackline.ExtraLines != null)
                         {
                             <ul>
@@ -53,6 +53,7 @@
                                 }
                             </ul>
                         }
+                        <p>@snackline.TotalPrice</p>
                     }
                 </ul>
             }
@@ -74,10 +75,14 @@
                             }
                             <li>@drinkLine.Size</li>
                         </ul>
+                        <p>@drinkLine.TotalPrice</p>
                     }
+                    
                 </ul>
             }
+            <p>Totaal prijs : @Model.TotalCost</p>
         </div>
+        
     </section>
     @{
         if (partialView == "./_Snacks" || partialView == "./_Extras")
