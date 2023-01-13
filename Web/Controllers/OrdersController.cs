@@ -10,64 +10,67 @@ namespace Web.Controllers
         private Order order;
 
         public OrdersController()
-        {
-            order = new();
+        {      
             repo = new();
         }
 
         public IActionResult Index()
         {
-            ViewModel vm = new();
-            vm.PartialView = "./Snacks";
+            order = new();
+            return RedirectToAction("Details", order);
+        }
+
+        public IActionResult Details(Order order)
+        {
+            //possibly pas partialview
 
             ViewBag.Snacks = repo.GetSnacks();
+            ViewBag.PartialView = "./_Snacks";
 
-            return View(vm);
+
+
+            return View(order);
         }
 
         [HttpGet]
-        public IActionResult Extras(int snackId, ViewModel vm)
+
+        public IActionResult Extras(int snackId, Order order)
         {
             Snack snack = repo.GetSnackById(snackId);
-            vm.CurrentSnackLine = new();
-            vm.CurrentSnackLine.SnackId = vm.SnackId;
-
-            vm.PartialView = "./Extras";
-            vm.SnackId = snackId;
-            vm.SnackName = snack.Name;
-            vm.SnackUrl = snack.ImageUrl;
+            SnackLine snackLine = new SnackLine();
+            snackLine.Snack = snack;
+            snackLine.SnackId = snackId;
+            order.SnackLines.Add(snackLine);
 
             ViewBag.Extras = repo.GetExtras();
+            ViewBag.PartialView = "./_Extras";
+            ViewBag.Model = snackLine;
 
-            return View("Index", vm);
+            return View("Details", order);
         }
 
-        [HttpPost]
-        public IActionResult Extras(ViewModel vm)
-        {
-          
-
+        //[HttpPost]
+        //public IActionResult Extras(ViewModel vm)
+        //{
            
-            foreach(int Extraid in vm.ExtraIds)
-            {
-                ExtraLine extraLine = new();
-                extraLine.ExtraId = Extraid;
-                vm.CurrentSnackLine.ExtraLines.Add(extraLine);
-            }
+        //    foreach(int Extraid in vm.ExtraIds)
+        //    {
+        //        ExtraLine extraLine = new();
+        //        extraLine.ExtraId = Extraid;
+        //        vm.CurrentSnackLine.ExtraLines.Add(extraLine);
+        //    }
 
-            vm.SnackLines.Add(vm.CurrentSnackLine);
-            vm.CurrentSnackLine = null;
-            vm.PartialView = "./Snacks";
+        //    vm.PartialView = "./Snacks";
 
-            return View("Index", vm);
-        }
+        //    return View("Index", vm);
+        //}
 
-        public IActionResult AddExtra(int extraId, ViewModel vm)
-        {
-            vm.ExtraIds.Add(extraId);
-            vm.PartialView = "./Extras";
-            return View("Index", vm);
-        }
+        //public IActionResult AddExtra(int extraId, ViewModel vm)
+        //{
+        //    vm.ExtraIds.Add(extraId);
+        //    vm.PartialView = "./Extras";
+        //    return View("Index", vm);
+        //}
 
         [HttpPost]
         public IActionResult SubmitOrder()

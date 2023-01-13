@@ -1,10 +1,10 @@
 ﻿@using ClassLibrary;
 
-@model ViewModel;
+@model SnackLine;
 
 <div class="snackContainer">
-    <h1>@Model.SnackName</h1>
-    <img src="@Model.SnackUrl" />
+    <h1>@Model.Snack.Name</h1>
+    <img src="@Model.Snack.ImageUrl" />
 
     @{
         foreach (Extra extra in ViewBag.Extras)
@@ -14,4 +14,5 @@
         }
         
     }
+
 </div>
