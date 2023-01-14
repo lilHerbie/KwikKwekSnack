@@ -112,9 +112,40 @@ namespace ClassLibrary
 
         // Orders
 
+        //adding order
+
+        public void AddExtraLine(ExtraLine extraLine)
+        {
+            _ctx.ExtraLines.Add(extraLine);
+            _ctx.SaveChanges();
+        }
+
+        public void AddSnackLine(SnackLine snackLine)
+        {
+            _ctx.SnackLines.Add(snackLine);
+            _ctx.SaveChanges();
+        }
+
+        public void AddDrinkLine(DrinkLine drinkLine)
+        {
+            _ctx.DrinkLines.Add(drinkLine);
+            _ctx.SaveChanges();
+        }
+
         public void AddOrder(Order order)
         {
             _ctx.Orders.Add(order);
+            _ctx.SaveChanges();
+        }
+
+        public Order GetLastOrder()
+        {
+            return _ctx.Orders.OrderBy(n => n).LastOrDefault();
+        }
+
+        public SnackLine GetLastSnackLine()
+        {
+            return _ctx.SnackLines.OrderBy(n => n).LastOrDefault();
         }
 
         public List<Order> GetOrders()

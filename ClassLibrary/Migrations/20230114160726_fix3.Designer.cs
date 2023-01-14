@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ClassLibrary.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20230113153440_init")]
-    partial class init
+    [Migration("20230114160726_fix3")]
+    partial class fix3
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -47,9 +47,6 @@ namespace ClassLibrary.Migrations
                     b.Property<float>("Price")
                         .HasColumnType("real");
 
-                    b.Property<int>("size")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
                     b.ToTable("Drinks");
@@ -57,30 +54,27 @@ namespace ClassLibrary.Migrations
                     b.HasData(
                         new
                         {
-                            Id = 1,
+                            Id = -1,
                             Description = "Cola",
                             ImageUrl = "https://smartkiosk.nl/wp-content/uploads/2021/11/coca-cola-blik-33cl-800x800-1.jpg",
                             Name = "Cola",
-                            Price = 1.6f,
-                            size = 0
+                            Price = 1.6f
                         },
                         new
                         {
-                            Id = 2,
+                            Id = -2,
                             Description = "Fanta",
                             ImageUrl = "https://smartkiosk.nl/wp-content/uploads/2021/10/9480.jpg",
                             Name = "Fanta",
-                            Price = 1.5f,
-                            size = 0
+                            Price = 1.5f
                         },
                         new
                         {
-                            Id = 3,
+                            Id = -3,
                             Description = "Sprite",
                             ImageUrl = "https://smartkiosk.nl/wp-content/uploads/2021/09/2ad47881-f56c-4237-8574-402a84b96b63.jpg",
                             Name = "Sprite",
-                            Price = 1.5f,
-                            size = 0
+                            Price = 1.5f
                         });
                 });
 
@@ -91,6 +85,9 @@ namespace ClassLibrary.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("Amount")
+                        .HasColumnType("int");
 
                     b.Property<int>("DrinkId")
                         .HasColumnType("int");
@@ -104,6 +101,9 @@ namespace ClassLibrary.Migrations
                     b.Property<int>("OrderId")
                         .HasColumnType("int");
 
+                    b.Property<int>("Size")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("DrinkId");
@@ -115,11 +115,13 @@ namespace ClassLibrary.Migrations
                     b.HasData(
                         new
                         {
-                            Id = 1,
-                            DrinkId = 1,
-                            HasIce = false,
-                            HasStraw = false,
-                            OrderId = 1
+                            Id = -1,
+                            Amount = 1,
+                            DrinkId = -1,
+                            HasIce = true,
+                            HasStraw = true,
+                            OrderId = -1,
+                            Size = 0
                         });
                 });
 
@@ -145,19 +147,19 @@ namespace ClassLibrary.Migrations
                     b.HasData(
                         new
                         {
-                            Id = 1,
+                            Id = -1,
                             Name = "Ui",
                             Price = 0.3f
                         },
                         new
                         {
-                            Id = 2,
+                            Id = -2,
                             Name = "Broodje",
                             Price = 1f
                         },
                         new
                         {
-                            Id = 3,
+                            Id = -3,
                             Name = "Tomaat",
                             Price = 0.2f
                         });
@@ -188,9 +190,9 @@ namespace ClassLibrary.Migrations
                     b.HasData(
                         new
                         {
-                            Id = 1,
-                            ExtraId = 1,
-                            SnackLineId = 1
+                            Id = -1,
+                            ExtraId = -1,
+                            SnackLineId = -1
                         });
                 });
 
@@ -215,7 +217,7 @@ namespace ClassLibrary.Migrations
                     b.HasData(
                         new
                         {
-                            Id = 1,
+                            Id = -1,
                             Status = 0,
                             TotalCost = 0f
                         });
@@ -251,7 +253,7 @@ namespace ClassLibrary.Migrations
                     b.HasData(
                         new
                         {
-                            Id = 1,
+                            Id = -1,
                             Description = "Frikandel",
                             ImageUrl = "https://boshuis.huisjebezorgd.nl/wp-content/uploads/2020/03/29512948_652505005141152_1601506864166600704_o.jpg",
                             Name = "Frikandel",
@@ -259,7 +261,7 @@ namespace ClassLibrary.Migrations
                         },
                         new
                         {
-                            Id = 2,
+                            Id = -2,
                             Description = "Kroket",
                             ImageUrl = "https://images0.persgroep.net/rcs/IFZ8aVdFNg1-Bko2qCSQg5i8G-A/diocontent/101162365/_fitwidth/763?appId=93a17a8fd81db0de025c8abd1cca1279&quality=0.8",
                             Name = "Kroket",
@@ -267,7 +269,7 @@ namespace ClassLibrary.Migrations
                         },
                         new
                         {
-                            Id = 3,
+                            Id = -3,
                             Description = "Bamischijf",
                             ImageUrl = "https://veluwe-plaza.huisjebezorgd.nl/wp-content/uploads/2020/03/bami.jpg",
                             Name = "Bamischijf",
@@ -283,15 +285,14 @@ namespace ClassLibrary.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<int>("Amount")
+                        .HasColumnType("int");
+
                     b.Property<int>("OrderId")
                         .HasColumnType("int");
 
                     b.Property<int>("SnackId")
                         .HasColumnType("int");
-
-                    b.Property<string>("SnackName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -304,10 +305,10 @@ namespace ClassLibrary.Migrations
                     b.HasData(
                         new
                         {
-                            Id = 1,
-                            OrderId = 1,
-                            SnackId = 1,
-                            SnackName = "Frikandel"
+                            Id = -1,
+                            Amount = 1,
+                            OrderId = -1,
+                            SnackId = -1
                         });
                 });
 
