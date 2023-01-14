@@ -95,6 +95,11 @@ namespace Web.Controllers
                 {
                     _order.SnackLines.Add(_order.SnackLines.LastOrDefault());
                 }
+                foreach(ExtraLine extraLine in snackLine.ExtraLines)
+                {
+                    _order.SnackLines.LastOrDefault().ExtraLines.Add(extraLine);
+                }
+              
             }
 
             ViewBag.Snacks = repo.GetSnacks();
@@ -145,11 +150,13 @@ namespace Web.Controllers
                 {
                     _order.DrinkLines.Add(_order.DrinkLines.LastOrDefault());
                 }
+                _order.DrinkLines.LastOrDefault().HasStraw = drinkLine.HasStraw;
+                _order.DrinkLines.LastOrDefault().HasIce = drinkLine.HasIce;
+                _order.DrinkLines.LastOrDefault().Size = drinkLine.Size;
+                _order.DrinkLines.LastOrDefault().Amount = drinkLine.Amount;
             }
 
-            _order.DrinkLines.LastOrDefault().HasStraw = drinkLine.HasStraw;
-            _order.DrinkLines.LastOrDefault().HasIce = drinkLine.HasIce;
-            _order.DrinkLines.LastOrDefault().Size = drinkLine.Size;
+            
 
             ViewBag.Model = drinkLine;
             ViewBag.PartialView = "./_Drinks";
@@ -193,15 +200,15 @@ namespace Web.Controllers
             }
             foreach (DrinkLine _drinkLine in _order.DrinkLines)
             {
-                DrinkLine drinkLine = new();
-                drinkLine.OrderId = _drinkLine.OrderId;
+                DrinkLine drinkLine = new DrinkLine();
+                drinkLine.OrderId = orderId;
                 drinkLine.DrinkId = _drinkLine.DrinkId;
                 drinkLine.HasStraw = _drinkLine.HasStraw;
                 drinkLine.Size = _drinkLine.Size;
                 drinkLine.Amount = _drinkLine.Amount;
                 drinkLine.HasIce = _drinkLine.HasIce;
 
-                repo.AddDrinkLine(_drinkLine);
+                repo.AddDrinkLine(drinkLine);
             }
 
             return RedirectToAction("Index");
