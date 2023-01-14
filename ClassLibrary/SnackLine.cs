@@ -16,10 +16,12 @@ namespace ClassLibrary
         public Snack Snack { get; set; }
         [ForeignKey("Snack")]
         public int SnackId { get; set; }
+        [NotMapped]
         public string SnackName { get; set; }
         public int Amount { get; set; }
         public List<ExtraLine> ExtraLines { get; set; }
         [DataType(DataType.Currency)]
+        [NotMapped]
         public float TotalPrice
         {
             get
@@ -34,6 +36,10 @@ namespace ClassLibrary
                     return totalPrice;
                 }
                 return 0;
+            }
+            set
+            {
+
             }
         }
 

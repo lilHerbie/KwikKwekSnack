@@ -52,7 +52,12 @@
         }
         <p>Totaal prijs : @Model.TotalCost</p>
     </div>
+    <form>
+        <input class="form-check-input" asp-for="TakeAway" /> @Html.DisplayNameFor(model => model.TakeAway)
+        <a asp-controller="Orders" asp-action="Submit">Bevestigen</a>
+    </form>
 
-    <a asp-controller="Orders" asp-action="Submit">Bevestigen</a>
+
+    
     </body>
 </html>

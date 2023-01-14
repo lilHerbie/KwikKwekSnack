@@ -16,8 +16,21 @@ namespace Web.Controllers
             repo = new();
         }
 
+        [HttpGet]
         public IActionResult Index()
         {
+            
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult NewOrder()
+        {
+
+            _order.SnackLines = new List<SnackLine>();
+            _order.DrinkLines = new List<DrinkLine>();
+            _order.Status = Status.queued;
+            _order.TakeAway = false;
 
             return RedirectToAction("Details");
         }
@@ -78,7 +91,7 @@ namespace Web.Controllers
         [HttpPost]
         public IActionResult Extras(SnackLine snackLine, bool remove)
         {
-            if (remove)
+            if (remove || snackLine.Amount <= 0)
             {
                 _order.SnackLines.Remove(_order.SnackLines.LastOrDefault());
             }
@@ -128,7 +141,7 @@ namespace Web.Controllers
         [HttpPost]
         public IActionResult DrinkOptions(DrinkLine drinkLine, bool remove)
         {
-            if (remove)
+            if (remove || drinkLine.Amount <= 0)
             {
                 _order.DrinkLines.Remove(_order.DrinkLines.LastOrDefault());
             }
@@ -160,38 +173,42 @@ namespace Web.Controllers
         public IActionResult Submit()
         {
             Order order = new Order();
-            order.SnackLines = _order.SnackLines;
-            order.DrinkLines = _order.DrinkLines;
             order.TotalCost = _order.TotalCost;
             order.Status = Status.queued;
-
-            //foreach(SnackLine snackLine in order.SnackLines)
-            //{
-            //    foreach(ExtraLine extraLine in snackLine.ExtraLines)
-            //    {
-            //        ExtraLine _extraLine = new ExtraLine();
-            //        _extraLine.ExtraName = _extraLine.ExtraName;
-                    
-            //        repo.AddExtraLine(extraLine);
-            //    }
-            //    repo.AddSnackLine(snackLine);
-            //}
-            //foreach(DrinkLine drinkLine in order.DrinkLines)
-            //{
-            //    repo.AddDrinkLine(drinkLine);
-            //}
+            order.TakeAway = _order.TakeAway;
             repo.AddOrder(order);
+
+            int orderId = repo.GetLastOrder().Id;
+            foreach (SnackLine _snackLine in _order.SnackLines)
+            {
+                SnackLine snackLine = new SnackLine();
+                snackLine.SnackId = _snackLine.SnackId;
+                snackLine.OrderId = orderId;
+                snackLine.Amount = _snackLine.Amount;
+                repo.AddSnackLine(snackLine);
+
+                int snackLineId = repo.GetLastSnackLine().Id;
+                foreach (ExtraLine _extraLine in _snackLine.ExtraLines)
+                {
+                    ExtraLine extraLine = new();
+                    extraLine.ExtraId = _extraLine.Id;
+                    extraLine.SnackLineId = snackLineId;
+
+                    repo.AddExtraLine(extraLine);
+                }
+            }
+            foreach (DrinkLine _drinkLine in _order.DrinkLines)
+            {
+                DrinkLine drinkLine = new();
+                drinkLine.OrderId = _drinkLine.OrderId;
+                drinkLine.DrinkId = _drinkLine.DrinkId;
+                drinkLine.HasStraw = _drinkLine.HasStraw;
+                drinkLine.Size = _drinkLine.Size;
+
+                repo.AddDrinkLine(_drinkLine);
+            }
 
             return RedirectToAction("Index");
         }
-
-        //[HttpPost]
-        //public IActionResult Details(OrderVM order)
-        //{
-        //    _order = order;
-        //    //repo.AddOrder(_order);
-
-        //    return View("Index");
-        //}
     }
 }
