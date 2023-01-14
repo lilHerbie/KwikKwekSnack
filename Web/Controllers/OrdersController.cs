@@ -16,14 +16,12 @@ namespace Web.Controllers
             repo = new();
         }
 
-        [HttpGet]
         public IActionResult Index()
         {
             
             return View();
         }
 
-        [HttpPost]
         public IActionResult NewOrder()
         {
 
@@ -38,12 +36,8 @@ namespace Web.Controllers
         [HttpGet]
         public IActionResult Details()
         {
-            //possibly pas partialview
-
             ViewBag.Snacks = repo.GetSnacks();
             ViewBag.PartialView = "./_Snacks";
-
-
 
             return View(_order);
         }
