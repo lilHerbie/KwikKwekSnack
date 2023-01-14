@@ -110,9 +110,31 @@ namespace ClassLibrary
             _ctx.SaveChanges();
         }
 
+
+        //adding order
+
+        public void AddExtraLine(ExtraLine extraLine)
+        {
+            _ctx.ExtraLines.Add(extraLine);
+            _ctx.SaveChanges();
+        }
+
+        public void AddSnackLine(SnackLine snackLine)
+        {
+            _ctx.SnackLines.Add(snackLine);
+            _ctx.SaveChanges();
+        }
+
+        public void AddDrinkLine(DrinkLine drinkLine)
+        {
+            _ctx.DrinkLines.Add(drinkLine);
+            _ctx.SaveChanges();
+        }
+
         public void AddOrder(Order order)
         {
             _ctx.Orders.Add(order);
+            _ctx.SaveChanges();
         }
     }
 }

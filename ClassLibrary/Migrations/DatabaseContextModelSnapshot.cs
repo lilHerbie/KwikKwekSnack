@@ -44,9 +44,6 @@ namespace ClassLibrary.Migrations
                     b.Property<float>("Price")
                         .HasColumnType("real");
 
-                    b.Property<int>("size")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
                     b.ToTable("Drinks");
@@ -58,8 +55,7 @@ namespace ClassLibrary.Migrations
                             Description = "Cola",
                             ImageUrl = "https://smartkiosk.nl/wp-content/uploads/2021/11/coca-cola-blik-33cl-800x800-1.jpg",
                             Name = "Cola",
-                            Price = 1.6f,
-                            size = 0
+                            Price = 1.6f
                         },
                         new
                         {
@@ -67,8 +63,7 @@ namespace ClassLibrary.Migrations
                             Description = "Fanta",
                             ImageUrl = "https://smartkiosk.nl/wp-content/uploads/2021/10/9480.jpg",
                             Name = "Fanta",
-                            Price = 1.5f,
-                            size = 0
+                            Price = 1.5f
                         },
                         new
                         {
@@ -76,8 +71,7 @@ namespace ClassLibrary.Migrations
                             Description = "Sprite",
                             ImageUrl = "https://smartkiosk.nl/wp-content/uploads/2021/09/2ad47881-f56c-4237-8574-402a84b96b63.jpg",
                             Name = "Sprite",
-                            Price = 1.5f,
-                            size = 0
+                            Price = 1.5f
                         });
                 });
 
@@ -89,8 +83,15 @@ namespace ClassLibrary.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<int>("Amount")
+                        .HasColumnType("int");
+
                     b.Property<int>("DrinkId")
                         .HasColumnType("int");
+
+                    b.Property<string>("DrinkName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("HasIce")
                         .HasColumnType("bit");
@@ -99,6 +100,9 @@ namespace ClassLibrary.Migrations
                         .HasColumnType("bit");
 
                     b.Property<int>("OrderId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Size")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -113,10 +117,13 @@ namespace ClassLibrary.Migrations
                         new
                         {
                             Id = 1,
+                            Amount = 1,
                             DrinkId = 1,
+                            DrinkName = "Cola",
                             HasIce = false,
                             HasStraw = false,
-                            OrderId = 1
+                            OrderId = 1,
+                            Size = 0
                         });
                 });
 
@@ -285,6 +292,9 @@ namespace ClassLibrary.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<int>("Amount")
+                        .HasColumnType("int");
+
                     b.Property<int>("OrderId")
                         .HasColumnType("int");
 
@@ -307,6 +317,7 @@ namespace ClassLibrary.Migrations
                         new
                         {
                             Id = 1,
+                            Amount = 1,
                             OrderId = 1,
                             SnackId = 1,
                             SnackName = "Frikandel"

@@ -99,10 +99,12 @@
     }
    
 
-    <form method="POST" asp-controller="Orders" asp-action="Extras">
+    <form method="get" asp-controller="Orders" asp-action="OverView">
         <input type="hidden" asp-for="SnackLines" value="@Model.SnackLines" />
         <input type="hidden" asp-for="DrinkLines" value="@Model.DrinkLines" />
-        <button asp-controller="Orders" asp-action="Extras" type="submit" class="finishbtn">Afronden</button>
+        <input type="hidden" asp-for="DrinkLines" value="@Model.DrinkLines" />
+
+        <button asp-controller="Orders" asp-action="OverView" type="submit" class="finishbtn">Afronden</button>
     </form>
 
     </div>

@@ -151,14 +151,47 @@ namespace Web.Controllers
             return View("Details", _order);
         }
 
-        [HttpPost]
-        public IActionResult Details(OrderVM order)
+        [HttpGet]
+        public IActionResult Overview()
         {
-            _order = order;
-            //repo.AddOrder(_order);
-
-            return View("Index");
+            return View(_order);
         }
 
+        public IActionResult Submit()
+        {
+            Order order = new Order();
+            order.SnackLines = _order.SnackLines;
+            order.DrinkLines = _order.DrinkLines;
+            order.TotalCost = _order.TotalCost;
+            order.Status = Status.queued;
+
+            //foreach(SnackLine snackLine in order.SnackLines)
+            //{
+            //    foreach(ExtraLine extraLine in snackLine.ExtraLines)
+            //    {
+            //        ExtraLine _extraLine = new ExtraLine();
+            //        _extraLine.ExtraName = _extraLine.ExtraName;
+                    
+            //        repo.AddExtraLine(extraLine);
+            //    }
+            //    repo.AddSnackLine(snackLine);
+            //}
+            //foreach(DrinkLine drinkLine in order.DrinkLines)
+            //{
+            //    repo.AddDrinkLine(drinkLine);
+            //}
+            repo.AddOrder(order);
+
+            return RedirectToAction("Index");
+        }
+
+        //[HttpPost]
+        //public IActionResult Details(OrderVM order)
+        //{
+        //    _order = order;
+        //    //repo.AddOrder(_order);
+
+        //    return View("Index");
+        //}
     }
 }

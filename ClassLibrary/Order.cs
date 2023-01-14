@@ -6,7 +6,7 @@ namespace ClassLibrary
     public class Order
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
+        public int? Id { get; set; }
         public List<SnackLine> SnackLines { get; set; }
         public List<DrinkLine> DrinkLines { get; set; }
         public Status Status { get; set; }
@@ -25,6 +25,10 @@ namespace ClassLibrary
                     totalCost += drinkLine.TotalPrice;
                 }
                 return totalCost;
+            }
+            set
+            {
+
             }
         }
 

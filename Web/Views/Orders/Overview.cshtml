@@ -4,8 +4,55 @@
 
 <html>
     <body>
+    <div class="overview">
+        <h1>Overzicht</h1>
 
+        @if (Model.SnackLines != null)
+        {
+            <ul>
+                @foreach (SnackLine snackline in Model.SnackLines)
+                {
 
+                    <li>@snackline.SnackName </li>
+                    @if (@snackline.ExtraLines != null)
+                    {
+                        <ul>
+                            @foreach (ExtraLine extraLine in snackline.ExtraLines)
+                            {
+                                <li>@extraLine.Extra.Name</li>
+                            }
+                        </ul>
+                    }
+                    <p>@snackline.TotalPrice</p>
+                }
+            </ul>
+        }
 
+        @if (Model.DrinkLines != null)
+        {
+            <ul>
+                @foreach (DrinkLine drinkLine in Model.DrinkLines)
+                {
+                    <li>@drinkLine.Drink.Name</li>
+                    <ul>
+                        @if (drinkLine.HasStraw)
+                        {
+                            <li>rietje</li>
+                        }
+                        @if (drinkLine.HasIce)
+                        {
+                            <li>ijs</li>
+                        }
+                        <li>@drinkLine.Size</li>
+                    </ul>
+                    <p>@drinkLine.TotalPrice</p>
+                }
+
+            </ul>
+        }
+        <p>Totaal prijs : @Model.TotalCost</p>
+    </div>
+
+    <a asp-controller="Orders" asp-action="Submit">Bevestigen</a>
     </body>
 </html>
