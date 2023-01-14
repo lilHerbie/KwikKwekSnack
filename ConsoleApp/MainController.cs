@@ -12,43 +12,43 @@ namespace ConsoleApp
 {
     public class MainController
     {
-        private Repository _repo;
-        private List<Order> _orders;
-        private Order _curOrder;
-        private Order _lastCompletedOrder;
+        private readonly Repository _repo;
         private System.Timers.Timer _timer; 
 
         public MainController()
         {
+            _repo = new Repository();
             _timer = new(interval: 1000);
             TestTimer();
-            _repo = new Repository();
-            _orders = new List<Order>();
         }
 
-        public void ShowOrders()
+        private void ShowOrders()
         {
-            _orders = GetOrders();
-            foreach (var o in _orders)
+            foreach (var o in GetOrders())
             {
-                Console.WriteLine(o.Status);
+                Console.WriteLine(o.Id + ":" + o.Status.ToString());
             }
+            
         }
 
         private List<Order> GetOrders()
         {
-            return _repo.GetOrders().ToList();
+            List<Order> orders = new List<Order>();
+            orders.Add(_repo.GetActiveOrder());
+            foreach(Order order in _repo.GetQueuedOrders())
+            {
+                orders.Add(order);
+            }
+            orders.Add(_repo.GetLastFinishedOrder());
+
+            return orders;
+
         }
 
-        private void OnTimedEvent()
-        {
-            GetOrders();
-            ShowOrders();
-        }
 
         private void TestTimer()
         {
-            _timer.Elapsed += (sender, e) => OnTimedEvent();
+            _timer.Elapsed += (sender, e) => ShowOrders();
             _timer.Start();
 
             Console.ReadLine();

@@ -168,12 +168,22 @@ namespace ClassLibrary
             _ctx.SaveChanges();
         }
 
-        public Order GetMostRecentOrder()
+        public Order GetActiveOrder()
         {
-            var queuedOrders = _ctx.Orders.Where(o => o.Status == Status.queued);
-            var latestQueuedOrderId = queuedOrders.Min(o => o.Id);
-            return GetOrderById(latestQueuedOrderId);
+            return _ctx.Orders.Where(o => o.Status == Status.isBeingPrepared).FirstOrDefault();
       
+        }
+
+        public List<Order> GetQueuedOrders()
+        {
+            return _ctx.Orders.Where(o => o.Status == Status.queued).Take(6).ToList();
+        }
+
+        public Order GetLastFinishedOrder()
+        {
+            List<Order> finishedOrders = _ctx.Orders.Where(o => o.Status == Status.ready).ToList();
+            int latestFinishedOrder = finishedOrders.Max(o => o.Id);
+            return GetOrderById(latestFinishedOrder);
         }
     }
 }
