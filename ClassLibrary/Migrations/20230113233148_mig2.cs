@@ -7,7 +7,7 @@
 namespace ClassLibrary.Migrations
 {
     /// <inheritdoc />
-    public partial class init : Migration
+    public partial class mig2 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -21,8 +21,7 @@ namespace ClassLibrary.Migrations
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Price = table.Column<float>(type: "real", nullable: false),
-                    size = table.Column<int>(type: "int", nullable: false)
+                    Price = table.Column<float>(type: "real", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -80,9 +79,12 @@ namespace ClassLibrary.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     OrderId = table.Column<int>(type: "int", nullable: false),
+                    DrinkName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     DrinkId = table.Column<int>(type: "int", nullable: false),
                     HasStraw = table.Column<bool>(type: "bit", nullable: false),
-                    HasIce = table.Column<bool>(type: "bit", nullable: false)
+                    HasIce = table.Column<bool>(type: "bit", nullable: false),
+                    Amount = table.Column<int>(type: "int", nullable: false),
+                    Size = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -109,7 +111,8 @@ namespace ClassLibrary.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     OrderId = table.Column<int>(type: "int", nullable: false),
                     SnackId = table.Column<int>(type: "int", nullable: false),
-                    SnackName = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    SnackName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Amount = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -134,6 +137,7 @@ namespace ClassLibrary.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    ExtraName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ExtraId = table.Column<int>(type: "int", nullable: false),
                     SnackLineId = table.Column<int>(type: "int", nullable: false)
                 },
@@ -156,12 +160,12 @@ namespace ClassLibrary.Migrations
 
             migrationBuilder.InsertData(
                 table: "Drinks",
-                columns: new[] { "Id", "Description", "ImageUrl", "Name", "Price", "size" },
+                columns: new[] { "Id", "Description", "ImageUrl", "Name", "Price" },
                 values: new object[,]
                 {
-                    { 1, "Cola", "https://smartkiosk.nl/wp-content/uploads/2021/11/coca-cola-blik-33cl-800x800-1.jpg", "Cola", 1.6f, 0 },
-                    { 2, "Fanta", "https://smartkiosk.nl/wp-content/uploads/2021/10/9480.jpg", "Fanta", 1.5f, 0 },
-                    { 3, "Sprite", "https://smartkiosk.nl/wp-content/uploads/2021/09/2ad47881-f56c-4237-8574-402a84b96b63.jpg", "Sprite", 1.5f, 0 }
+                    { 1, "Cola", "https://smartkiosk.nl/wp-content/uploads/2021/11/coca-cola-blik-33cl-800x800-1.jpg", "Cola", 1.6f },
+                    { 2, "Fanta", "https://smartkiosk.nl/wp-content/uploads/2021/10/9480.jpg", "Fanta", 1.5f },
+                    { 3, "Sprite", "https://smartkiosk.nl/wp-content/uploads/2021/09/2ad47881-f56c-4237-8574-402a84b96b63.jpg", "Sprite", 1.5f }
                 });
 
             migrationBuilder.InsertData(
@@ -191,18 +195,18 @@ namespace ClassLibrary.Migrations
 
             migrationBuilder.InsertData(
                 table: "DrinkLines",
-                columns: new[] { "Id", "DrinkId", "HasIce", "HasStraw", "OrderId" },
-                values: new object[] { 1, 1, false, false, 1 });
+                columns: new[] { "Id", "Amount", "DrinkId", "DrinkName", "HasIce", "HasStraw", "OrderId", "Size" },
+                values: new object[] { 1, 1, 1, "Cola", false, false, 1, 0 });
 
             migrationBuilder.InsertData(
                 table: "SnackLines",
-                columns: new[] { "Id", "OrderId", "SnackId", "SnackName" },
-                values: new object[] { 1, 1, 1, "Frikandel" });
+                columns: new[] { "Id", "Amount", "OrderId", "SnackId", "SnackName" },
+                values: new object[] { 1, 1, 1, 1, "Frikandel" });
 
             migrationBuilder.InsertData(
                 table: "ExtraLines",
-                columns: new[] { "Id", "ExtraId", "SnackLineId" },
-                values: new object[] { 1, 1, 1 });
+                columns: new[] { "Id", "ExtraId", "ExtraName", "SnackLineId" },
+                values: new object[] { 1, 1, "Ui", 1 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_DrinkLines_DrinkId",
