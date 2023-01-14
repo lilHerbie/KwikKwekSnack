@@ -136,5 +136,15 @@ namespace ClassLibrary
             _ctx.Orders.Add(order);
             _ctx.SaveChanges();
         }
+
+        public Order GetLastOrder()
+        {
+            return _ctx.Orders.OrderBy(n => n).LastOrDefault();
+        }
+
+        public SnackLine GetLastSnackLine()
+        {
+            return _ctx.SnackLines.OrderBy(n => n).LastOrDefault();
+        }
     }
 }

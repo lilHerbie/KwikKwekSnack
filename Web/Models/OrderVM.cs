@@ -9,6 +9,7 @@ namespace Web.Models
         public List<DrinkLine> DrinkLines { get; set; }
         public Status Status { get; set; }
         [DataType(DataType.Currency)]
+        public bool TakeAway { get; set; }
         public float TotalCost
         {
             get

@@ -3,6 +3,7 @@ using ClassLibrary;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ClassLibrary.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20230114160449_fix2")]
+    partial class fix2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -101,6 +104,9 @@ namespace ClassLibrary.Migrations
                     b.Property<int>("Size")
                         .HasColumnType("int");
 
+                    b.Property<float>("TotalPrice")
+                        .HasColumnType("real");
+
                     b.HasKey("Id");
 
                     b.HasIndex("DrinkId");
@@ -118,7 +124,8 @@ namespace ClassLibrary.Migrations
                             HasIce = true,
                             HasStraw = true,
                             OrderId = -1,
-                            Size = 0
+                            Size = 0,
+                            TotalPrice = 0f
                         });
                 });
 
@@ -204,9 +211,6 @@ namespace ClassLibrary.Migrations
                     b.Property<int>("Status")
                         .HasColumnType("int");
 
-                    b.Property<bool>("TakeAway")
-                        .HasColumnType("bit");
-
                     b.Property<float>("TotalCost")
                         .HasColumnType("real");
 
@@ -219,8 +223,7 @@ namespace ClassLibrary.Migrations
                         {
                             Id = -1,
                             Status = 0,
-                            TakeAway = false,
-                            TotalCost = 4.4f
+                            TotalCost = 0f
                         });
                 });
 
@@ -295,6 +298,9 @@ namespace ClassLibrary.Migrations
                     b.Property<int>("SnackId")
                         .HasColumnType("int");
 
+                    b.Property<float>("TotalPrice")
+                        .HasColumnType("real");
+
                     b.HasKey("Id");
 
                     b.HasIndex("OrderId");
@@ -309,7 +315,8 @@ namespace ClassLibrary.Migrations
                             Id = -1,
                             Amount = 1,
                             OrderId = -1,
-                            SnackId = -1
+                            SnackId = -1,
+                            TotalPrice = 0f
                         });
                 });
 

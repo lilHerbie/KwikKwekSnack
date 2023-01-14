@@ -36,7 +36,7 @@
             <input type="hidden" asp-for="Id" value="@Model.Id" />
             
             <label asp-for="Amount" class="control-label"></label>
-            <input type="number" asp-for="Amount" class="form-control" />
+            <input type="number" asp-for="Amount" value="1" min="1" class="form-control" />
 
             
             <button asp-controller="Orders" asp-action="Extras" asp-route-remove="false" class="btn submit" type="submit">Bevestigen</button>

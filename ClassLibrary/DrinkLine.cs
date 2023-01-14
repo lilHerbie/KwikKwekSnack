@@ -14,6 +14,7 @@ namespace ClassLibrary
         public int Id { get; set; }
         public int OrderId { get; set; }
         public Drink Drink { get; set; }
+        [NotMapped]
         public string DrinkName { get; set; }
         public int DrinkId { get; set; }
         public bool HasStraw { get; set; }
@@ -21,6 +22,7 @@ namespace ClassLibrary
         public int Amount { get; set; }
         public Size Size { get; set; }
         [DataType(DataType.Currency)]
+        [NotMapped]
         public float TotalPrice
         {
             get
@@ -47,6 +49,11 @@ namespace ClassLibrary
                 }
                 return 0;
             }
+            set
+            {
+
+            }
+            
 
 
         }
