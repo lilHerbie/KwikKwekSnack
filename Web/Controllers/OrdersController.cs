@@ -164,12 +164,12 @@ namespace Web.Controllers
             return View(_order);
         }
 
-        public IActionResult Submit()
+        public IActionResult Submit(OrderVM orderVM)
         {
             Order order = new Order();
             order.TotalCost = _order.TotalCost;
             order.Status = Status.queued;
-            order.TakeAway = _order.TakeAway;
+            order.TakeAway = orderVM.TakeAway;
             repo.AddOrder(order);
 
             int orderId = repo.GetLastOrder().Id;
@@ -185,7 +185,7 @@ namespace Web.Controllers
                 foreach (ExtraLine _extraLine in _snackLine.ExtraLines)
                 {
                     ExtraLine extraLine = new();
-                    extraLine.ExtraId = _extraLine.Id;
+                    extraLine.ExtraId = _extraLine.ExtraId;
                     extraLine.SnackLineId = snackLineId;
 
                     repo.AddExtraLine(extraLine);

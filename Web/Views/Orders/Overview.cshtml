@@ -52,9 +52,13 @@
         }
         <p>Totaal prijs : @Model.TotalCost</p>
     </div>
-    <form>
-        <input class="form-check-input" asp-for="TakeAway" /> @Html.DisplayNameFor(model => model.TakeAway)
-        <a asp-controller="Orders" asp-action="Submit">Bevestigen</a>
+    <form asp-controller="Orders" asp-action="Submit">
+        <div class="form-group">
+            <label class="form-check-label">
+                <input class="form-check-input" asp-for="TakeAway" /> @Html.DisplayNameFor(model => model.TakeAway)
+            </label>
+        </div>
+        <button asp-controller="Orders" asp-action="Submit" asp-route-remove="false" class="btn" type="submit">Bevestigen</button>
     </form>
 
 
