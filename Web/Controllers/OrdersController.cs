@@ -198,6 +198,8 @@ namespace Web.Controllers
                 drinkLine.DrinkId = _drinkLine.DrinkId;
                 drinkLine.HasStraw = _drinkLine.HasStraw;
                 drinkLine.Size = _drinkLine.Size;
+                drinkLine.Amount = _drinkLine.Amount;
+                drinkLine.HasIce = _drinkLine.HasIce;
 
                 repo.AddDrinkLine(_drinkLine);
             }
