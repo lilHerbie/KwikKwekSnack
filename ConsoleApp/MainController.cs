@@ -12,47 +12,100 @@ namespace ConsoleApp
 {
     public class MainController
     {
-        private readonly Repository _repo;
-        private System.Timers.Timer _timer; 
+        private int _orderTime;
+        private Repository _repo;
+        private List<Order> _orders;
+        private Order _mostRecentOrder;
 
-        public MainController()
+        public MainController(Repository repo)
         {
-            _repo = new Repository();
-            _timer = new(interval: 1000);
-            TestTimer();
+            _repo = repo;
         }
 
-        private void ShowOrders()
+        public void PrintStartup()
         {
-            foreach (var o in GetOrders())
+            Console.WriteLine("Beste medewerker, +\n hier een lijst met de te verwerken bestellingen. +\n Bestellingen die klaar zijn worden in het groen weergegeven.");
+
+            Console.WriteLine();
+
+            Console.WriteLine("Hoeveel seconden zijn er nodig om één bestelling te verwerken? (Kies een getal tussen de 5 en 60 seconden)");
+            Console.WriteLine();
+
+            bool IsJuist = false;
+            while (!IsJuist)
             {
-                Console.WriteLine(o.Id + ":" + o.Status.ToString());
+                Console.Write("Seconden: ");
+                var input = Console.ReadLine();
+                string line = input == null ? "" : input.ToString();
+
+                _orderTime = int.Parse(line);
+                if (_orderTime >= 5 && _orderTime <= 60)
+                {
+                    IsJuist = true;
+                } else
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("kies tussen de 5 en 60 seconden");
+                    Console.ResetColor();
+                    Console.WriteLine();
+                }
+
             }
-            
+
+
         }
 
-        private List<Order> GetOrders()
+        public void ShowOrders()
         {
-            List<Order> orders = new List<Order>();
-            orders.Add(_repo.GetActiveOrder());
-            foreach(Order order in _repo.GetQueuedOrders())
+            _orders = _repo.GetQueuedOrders();
+            Console.Clear();
+            Console.WriteLine($"Id \tStatus");
+
+            for (int i = 0; i < _orders.Count; i++)
             {
-                orders.Add(order);
+
+                if (i == 0)
+                {
+                    _orders[i].Status = Status.isBeingPrepared;
+                    _repo.UpdateOrder(_orders[i]);
+                }
+                Console.WriteLine($"{_orders[i].Id} \t{_orders[i].Status.ToString().Replace("_", " ")} ");
+
             }
-            orders.Add(_repo.GetLastFinishedOrder());
 
-            return orders;
+            Console.WriteLine("");
+
+           if (_mostRecentOrder != null)
+            {
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine($"{_mostRecentOrder.Id} \t{_mostRecentOrder.Status.ToString().Replace("_", " ")} ");
+                Console.ResetColor();
+            }
+
+            Console.WriteLine();
 
         }
 
-
-        private void TestTimer()
+        public void Start()
         {
-            _timer.Elapsed += (sender, e) => ShowOrders();
-            _timer.Start();
+            while (_orders.Count > 0)
+            {
+                foreach (var order in _orders)
+                {
+                    Thread.Sleep(_orderTime * 1000);
+                    order.Status = Status.ready;
+                    _repo.UpdateOrder(order);
+                    _mostRecentOrder = order;
+                    ShowOrders();
+                }
+            }
 
-            Console.ReadLine();
-            System.Threading.Thread.Sleep(1000);
+            Console.Clear();
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.WriteLine("Er staan geen bestellingen meer open.");
+            Console.ResetColor();
+
         }
+
     }
 }
