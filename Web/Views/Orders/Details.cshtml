@@ -53,7 +53,7 @@
                                 }
                             </ul>
                         }
-                        <p>€ @snackline.TotalPrice</p>
+                        <p>€ @snackline.TotalPrice.ToString("n2")</p>
                     }
                 </ul>
             }
@@ -80,7 +80,7 @@
                     
                 </ul>
             }
-            <p>Totale prijs : € @Model.TotalCost</p>
+            <p>Totale prijs : € @Model.TotalCost.ToString("n2")</p>
         </div>
         
     </section>

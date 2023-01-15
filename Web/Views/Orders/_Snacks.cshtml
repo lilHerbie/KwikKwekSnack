@@ -6,7 +6,7 @@
     @{
         foreach (Snack snack in ViewBag.Snacks)
         {
-            <a asp-action="Extras" asp-route-snackid="@snack.Id"><img src=@snack.ImageUrl /><p>@snack.Name - € @snack.Price</p></a>
+            <a asp-action="Extras" asp-route-snackid="@snack.Id"><img src=@snack.ImageUrl /><p>@snack.Name - € @snack.Price.ToString("n2")</p></a>
         }
     }
 </div>

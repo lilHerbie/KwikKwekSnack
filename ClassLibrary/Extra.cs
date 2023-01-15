@@ -11,9 +11,10 @@ namespace ClassLibrary
     public class Extra
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
-        [DataType(DataType.Currency)]
+        public int Id { get; set; } 
         public string Name { get; set; }
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:F2}")]
+        [RegularExpression(@"^\d+(\.\d{1,2})?$", ErrorMessage = "Price can only have 2 decimal places.")]
         public float Price { get; set; }
     }
 }

@@ -19,7 +19,7 @@
                     <input type="hidden" asp-for="SnackName" value="@Model.SnackName" />
                     <input type="hidden" asp-for="Id" value="@Model.Id" />
 
-                <li><button class="btn extra" type="submit">@extra.Name - € @extra.Price</button></li>
+                <li><button class="btn extra" type="submit">@extra.Name - € @extra.Price.ToString("n2")</button></li>
 
                 </form>
             }
