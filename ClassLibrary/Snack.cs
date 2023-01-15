@@ -15,7 +15,8 @@ namespace ClassLibrary
         public string Name { get; set; }
         public string ImageUrl { get; set; }
         public string Description { get; set; }
-        [DataType(DataType.Currency)]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:F2}")]
+        [RegularExpression(@"^\d+(\.\d{1,2})?$", ErrorMessage = "Price can only have 2 decimal places.")]
         public float Price { get; set; }
     }
 }

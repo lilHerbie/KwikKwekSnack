@@ -7,7 +7,7 @@
 namespace ClassLibrary.Migrations
 {
     /// <inheritdoc />
-    public partial class dbinit : Migration
+    public partial class fix : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
