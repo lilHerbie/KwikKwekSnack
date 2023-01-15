@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ClassLibrary.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20230115170013_fix")]
-    partial class fix
+    [Migration("20230115205027_dbinit")]
+    partial class dbinit
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -75,6 +75,22 @@ namespace ClassLibrary.Migrations
                             ImageUrl = "https://smartkiosk.nl/wp-content/uploads/2021/09/2ad47881-f56c-4237-8574-402a84b96b63.jpg",
                             Name = "Sprite",
                             Price = 1.5f
+                        },
+                        new
+                        {
+                            Id = -4,
+                            Description = "Bier",
+                            ImageUrl = "https://www.plus.nl/INTERSHOP/static/WFS/PLUS-Site/-/PLUS/nl_NL/product/L/853866.png",
+                            Name = "Bier",
+                            Price = 1.5f
+                        },
+                        new
+                        {
+                            Id = -5,
+                            Description = "Baco",
+                            ImageUrl = "https://www.horecagoedkoop.nl/media/catalog/product/cache/d6a5bc6be806788c48ed774973599767/b/a/bac_cola-blik.jpeg",
+                            Name = "Baco",
+                            Price = 1.5f
                         });
                 });
 
@@ -122,6 +138,36 @@ namespace ClassLibrary.Migrations
                             HasStraw = true,
                             OrderId = -1,
                             Size = 0
+                        },
+                        new
+                        {
+                            Id = -2,
+                            Amount = 32,
+                            DrinkId = -4,
+                            HasIce = false,
+                            HasStraw = true,
+                            OrderId = -2,
+                            Size = 3
+                        },
+                        new
+                        {
+                            Id = -3,
+                            Amount = 32,
+                            DrinkId = -5,
+                            HasIce = true,
+                            HasStraw = true,
+                            OrderId = -2,
+                            Size = 3
+                        },
+                        new
+                        {
+                            Id = -4,
+                            Amount = 1,
+                            DrinkId = -2,
+                            HasIce = false,
+                            HasStraw = false,
+                            OrderId = -3,
+                            Size = 1
                         });
                 });
 
@@ -162,6 +208,18 @@ namespace ClassLibrary.Migrations
                             Id = -3,
                             Name = "Tomaat",
                             Price = 0.2f
+                        },
+                        new
+                        {
+                            Id = -4,
+                            Name = "Mayonaise",
+                            Price = 0.5f
+                        },
+                        new
+                        {
+                            Id = -5,
+                            Name = "Ketchup",
+                            Price = 0.5f
                         });
                 });
 
@@ -193,6 +251,18 @@ namespace ClassLibrary.Migrations
                             Id = -1,
                             ExtraId = -1,
                             SnackLineId = -1
+                        },
+                        new
+                        {
+                            Id = -2,
+                            ExtraId = -2,
+                            SnackLineId = -2
+                        },
+                        new
+                        {
+                            Id = -3,
+                            ExtraId = -4,
+                            SnackLineId = -3
                         });
                 });
 
@@ -224,6 +294,20 @@ namespace ClassLibrary.Migrations
                             Status = 0,
                             TakeAway = false,
                             TotalCost = 4.4f
+                        },
+                        new
+                        {
+                            Id = -2,
+                            Status = 0,
+                            TakeAway = false,
+                            TotalCost = 62f
+                        },
+                        new
+                        {
+                            Id = -3,
+                            Status = 0,
+                            TakeAway = false,
+                            TotalCost = 20f
                         });
                 });
 
@@ -278,6 +362,22 @@ namespace ClassLibrary.Migrations
                             ImageUrl = "https://veluwe-plaza.huisjebezorgd.nl/wp-content/uploads/2020/03/bami.jpg",
                             Name = "Bamischijf",
                             Price = 3f
+                        },
+                        new
+                        {
+                            Id = -4,
+                            Description = "Kaassouflé",
+                            ImageUrl = "https://www.ahealthylife.nl/wp-content/uploads/2021/06/Kaassouffle_voedingswaarde-1.jpg",
+                            Name = "Kaassouflé",
+                            Price = 4.5f
+                        },
+                        new
+                        {
+                            Id = -5,
+                            Description = "Mexicano",
+                            ImageUrl = "https://mexicano.nl/wp-content/uploads/Mexicano-630x312.png",
+                            Name = "Mexicano",
+                            Price = 2.5f
                         });
                 });
 
@@ -313,6 +413,20 @@ namespace ClassLibrary.Migrations
                             Amount = 1,
                             OrderId = -1,
                             SnackId = -1
+                        },
+                        new
+                        {
+                            Id = -2,
+                            Amount = 2,
+                            OrderId = -2,
+                            SnackId = -3
+                        },
+                        new
+                        {
+                            Id = -3,
+                            Amount = 1,
+                            OrderId = -3,
+                            SnackId = -4
                         });
                 });
 

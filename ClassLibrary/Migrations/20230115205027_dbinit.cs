@@ -7,7 +7,7 @@
 namespace ClassLibrary.Migrations
 {
     /// <inheritdoc />
-    public partial class fix : Migration
+    public partial class dbinit : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -161,6 +161,8 @@ namespace ClassLibrary.Migrations
                 columns: new[] { "Id", "Description", "ImageUrl", "Name", "Price" },
                 values: new object[,]
                 {
+                    { -5, "Baco", "https://www.horecagoedkoop.nl/media/catalog/product/cache/d6a5bc6be806788c48ed774973599767/b/a/bac_cola-blik.jpeg", "Baco", 1.5f },
+                    { -4, "Bier", "https://www.plus.nl/INTERSHOP/static/WFS/PLUS-Site/-/PLUS/nl_NL/product/L/853866.png", "Bier", 1.5f },
                     { -3, "Sprite", "https://smartkiosk.nl/wp-content/uploads/2021/09/2ad47881-f56c-4237-8574-402a84b96b63.jpg", "Sprite", 1.5f },
                     { -2, "Fanta", "https://smartkiosk.nl/wp-content/uploads/2021/10/9480.jpg", "Fanta", 1.5f },
                     { -1, "Cola", "https://smartkiosk.nl/wp-content/uploads/2021/11/coca-cola-blik-33cl-800x800-1.jpg", "Cola", 1.6f }
@@ -171,6 +173,8 @@ namespace ClassLibrary.Migrations
                 columns: new[] { "Id", "Name", "Price" },
                 values: new object[,]
                 {
+                    { -5, "Ketchup", 0.5f },
+                    { -4, "Mayonaise", 0.5f },
                     { -3, "Tomaat", 0.2f },
                     { -2, "Broodje", 1f },
                     { -1, "Ui", 0.3f }
@@ -179,13 +183,20 @@ namespace ClassLibrary.Migrations
             migrationBuilder.InsertData(
                 table: "Orders",
                 columns: new[] { "Id", "Status", "TakeAway", "TotalCost" },
-                values: new object[] { -1, 0, false, 4.4f });
+                values: new object[,]
+                {
+                    { -3, 0, false, 20f },
+                    { -2, 0, false, 62f },
+                    { -1, 0, false, 4.4f }
+                });
 
             migrationBuilder.InsertData(
                 table: "Snacks",
                 columns: new[] { "Id", "Description", "ImageUrl", "Name", "Price" },
                 values: new object[,]
                 {
+                    { -5, "Mexicano", "https://mexicano.nl/wp-content/uploads/Mexicano-630x312.png", "Mexicano", 2.5f },
+                    { -4, "Kaassouflé", "https://www.ahealthylife.nl/wp-content/uploads/2021/06/Kaassouffle_voedingswaarde-1.jpg", "Kaassouflé", 4.5f },
                     { -3, "Bamischijf", "https://veluwe-plaza.huisjebezorgd.nl/wp-content/uploads/2020/03/bami.jpg", "Bamischijf", 3f },
                     { -2, "Kroket", "https://images0.persgroep.net/rcs/IFZ8aVdFNg1-Bko2qCSQg5i8G-A/diocontent/101162365/_fitwidth/763?appId=93a17a8fd81db0de025c8abd1cca1279&quality=0.8", "Kroket", 2.75f },
                     { -1, "Frikandel", "https://boshuis.huisjebezorgd.nl/wp-content/uploads/2020/03/29512948_652505005141152_1601506864166600704_o.jpg", "Frikandel", 2.5f }
@@ -194,17 +205,33 @@ namespace ClassLibrary.Migrations
             migrationBuilder.InsertData(
                 table: "DrinkLines",
                 columns: new[] { "Id", "Amount", "DrinkId", "HasIce", "HasStraw", "OrderId", "Size" },
-                values: new object[] { -1, 1, -1, true, true, -1, 0 });
+                values: new object[,]
+                {
+                    { -4, 1, -2, false, false, -3, 1 },
+                    { -3, 32, -5, true, true, -2, 3 },
+                    { -2, 32, -4, false, true, -2, 3 },
+                    { -1, 1, -1, true, true, -1, 0 }
+                });
 
             migrationBuilder.InsertData(
                 table: "SnackLines",
                 columns: new[] { "Id", "Amount", "OrderId", "SnackId" },
-                values: new object[] { -1, 1, -1, -1 });
+                values: new object[,]
+                {
+                    { -3, 1, -3, -4 },
+                    { -2, 2, -2, -3 },
+                    { -1, 1, -1, -1 }
+                });
 
             migrationBuilder.InsertData(
                 table: "ExtraLines",
                 columns: new[] { "Id", "ExtraId", "SnackLineId" },
-                values: new object[] { -1, -1, -1 });
+                values: new object[,]
+                {
+                    { -3, -4, -3 },
+                    { -2, -2, -2 },
+                    { -1, -1, -1 }
+                });
 
             migrationBuilder.CreateIndex(
                 name: "IX_DrinkLines_DrinkId",
