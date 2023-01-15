@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ClassLibrary.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20230115205027_dbinit")]
-    partial class dbinit
+    [Migration("20230115212226_init")]
+    partial class init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -88,9 +88,17 @@ namespace ClassLibrary.Migrations
                         {
                             Id = -5,
                             Description = "Baco",
-                            ImageUrl = "https://www.horecagoedkoop.nl/media/catalog/product/cache/d6a5bc6be806788c48ed774973599767/b/a/bac_cola-blik.jpeg",
+                            ImageUrl = "https://goedkoopdrankslijterij.nl/image/cache/catalog/Sterke%20drank/Rum/bacardi/Bacardi-Cola-Mix-Blikjes-kopen-800x800.jpg",
                             Name = "Baco",
-                            Price = 1.5f
+                            Price = 3.5f
+                        },
+                        new
+                        {
+                            Id = -6,
+                            Description = "Stroh80",
+                            ImageUrl = "https://static.gall.nl/images/IMG_685854_500.png?rev=0.2",
+                            Name = "Stroh80",
+                            Price = 5f
                         });
                 });
 
@@ -378,6 +386,14 @@ namespace ClassLibrary.Migrations
                             ImageUrl = "https://mexicano.nl/wp-content/uploads/Mexicano-630x312.png",
                             Name = "Mexicano",
                             Price = 2.5f
+                        },
+                        new
+                        {
+                            Id = -6,
+                            Description = "Friet",
+                            ImageUrl = "https://www.ahealthylife.nl/wp-content/uploads/2019/05/patat_friet_voedingswaarde.jpg",
+                            Name = "Friet",
+                            Price = 1.5f
                         });
                 });
 

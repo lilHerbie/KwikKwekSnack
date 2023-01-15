@@ -7,7 +7,7 @@
 namespace ClassLibrary.Migrations
 {
     /// <inheritdoc />
-    public partial class dbinit : Migration
+    public partial class init : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -161,7 +161,8 @@ namespace ClassLibrary.Migrations
                 columns: new[] { "Id", "Description", "ImageUrl", "Name", "Price" },
                 values: new object[,]
                 {
-                    { -5, "Baco", "https://www.horecagoedkoop.nl/media/catalog/product/cache/d6a5bc6be806788c48ed774973599767/b/a/bac_cola-blik.jpeg", "Baco", 1.5f },
+                    { -6, "Stroh80", "https://static.gall.nl/images/IMG_685854_500.png?rev=0.2", "Stroh80", 5f },
+                    { -5, "Baco", "https://goedkoopdrankslijterij.nl/image/cache/catalog/Sterke%20drank/Rum/bacardi/Bacardi-Cola-Mix-Blikjes-kopen-800x800.jpg", "Baco", 3.5f },
                     { -4, "Bier", "https://www.plus.nl/INTERSHOP/static/WFS/PLUS-Site/-/PLUS/nl_NL/product/L/853866.png", "Bier", 1.5f },
                     { -3, "Sprite", "https://smartkiosk.nl/wp-content/uploads/2021/09/2ad47881-f56c-4237-8574-402a84b96b63.jpg", "Sprite", 1.5f },
                     { -2, "Fanta", "https://smartkiosk.nl/wp-content/uploads/2021/10/9480.jpg", "Fanta", 1.5f },
@@ -195,6 +196,7 @@ namespace ClassLibrary.Migrations
                 columns: new[] { "Id", "Description", "ImageUrl", "Name", "Price" },
                 values: new object[,]
                 {
+                    { -6, "Friet", "https://www.ahealthylife.nl/wp-content/uploads/2019/05/patat_friet_voedingswaarde.jpg", "Friet", 1.5f },
                     { -5, "Mexicano", "https://mexicano.nl/wp-content/uploads/Mexicano-630x312.png", "Mexicano", 2.5f },
                     { -4, "Kaassouflé", "https://www.ahealthylife.nl/wp-content/uploads/2021/06/Kaassouffle_voedingswaarde-1.jpg", "Kaassouflé", 4.5f },
                     { -3, "Bamischijf", "https://veluwe-plaza.huisjebezorgd.nl/wp-content/uploads/2020/03/bami.jpg", "Bamischijf", 3f },

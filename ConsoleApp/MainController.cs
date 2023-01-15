@@ -88,22 +88,30 @@ namespace ConsoleApp
 
         public void Start()
         {
-            while (_orders.Count > 0)
+            while (true)
             {
-                foreach (var order in _orders)
+                while (_orders.Count > 0)
                 {
-                    Thread.Sleep(_orderTime * 1000);
-                    order.Status = Status.ready;
-                    _repo.UpdateOrder(order);
-                    _mostRecentOrder = order;
-                    ShowOrders();
+                    foreach (var order in _orders)
+                    {
+                        Thread.Sleep(_orderTime * 1000);
+                        order.Status = Status.ready;
+                        _repo.UpdateOrder(order);
+                        _mostRecentOrder = order;
+                        ShowOrders();
+                    }
                 }
+                Thread.Sleep(_orderTime);
+                if(_repo.GetQueuedOrders().Count > 0)
+                {
+                     ShowOrders();
+                }
+
             }
 
-            Console.Clear();
-            Console.ForegroundColor = ConsoleColor.Blue;
-            Console.WriteLine("Er staan geen bestellingen meer open.");
-            Console.ResetColor();
+            
+            
+
 
         }
 
