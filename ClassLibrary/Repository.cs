@@ -110,6 +110,7 @@ namespace ClassLibrary
             _ctx.SaveChanges();
         }
 
+        // Orders
 
         //adding order
 
@@ -145,6 +146,31 @@ namespace ClassLibrary
         public SnackLine GetLastSnackLine()
         {
             return _ctx.SnackLines.OrderBy(n => n).LastOrDefault();
+        }
+
+        public List<Order> GetOrders()
+        {
+            return _ctx.Orders.ToList();
+        }
+
+        public Order GetOrderById(int id)
+        {
+            return _ctx.Orders.Where(o => o.Id == id).FirstOrDefault();
+        }
+
+        public void UpdateOrder(Order order)
+        {
+            if(_ctx.Orders.Contains(order))
+            {
+                _ctx.Orders.Update(order);
+            }
+
+            _ctx.SaveChanges();
+        }
+
+        public List<Order> GetQueuedOrders()
+        {
+            return _ctx.Orders.Where(o => o.Status == Status.queued).Take(6).ToList();
         }
     }
 }
