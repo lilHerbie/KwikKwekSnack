@@ -90,17 +90,16 @@ namespace ConsoleApp
         {
             while (true)
             {
-                while (_orders.Count > 0)
+                
+                foreach (var order in _orders)
                 {
-                    foreach (var order in _orders)
-                    {
-                        Thread.Sleep(_orderTime * 1000);
-                        order.Status = Status.ready;
-                        _repo.UpdateOrder(order);
-                        _mostRecentOrder = order;
-                        ShowOrders();
-                    }
+                    Thread.Sleep(_orderTime * 1000);
+                    order.Status = Status.ready;
+                    _repo.UpdateOrder(order);
+                    _mostRecentOrder = order;
+                    ShowOrders();
                 }
+         
                 Thread.Sleep(_orderTime);
                 if(_repo.GetQueuedOrders().Count > 0)
                 {
