@@ -27,22 +27,22 @@
         }
 
 
-        <form class="snackrow" asp-controller="Orders" asp-action="Extras">
+        <form class="extrarow" asp-controller="Orders" asp-action="Extras">
 
             <input type="hidden" asp-for="Snack" value="@Model.Snack" />
             <input type="hidden" asp-for="SnackId" value="@Model.SnackId" />
             <input type="hidden" asp-for="ExtraLines" value="@Model.ExtraLines" />
             <input type="hidden" asp-for="SnackName" value="@Model.SnackName" />
             <input type="hidden" asp-for="Id" value="@Model.Id" />
-            
-            <label asp-for="Amount" class="control-label"></label>
+
+            <label asp-for="Amount" class="control-label">Hoeveelheid:</label>
             <input type="number" asp-for="Amount" value="1" min="1" class="form-control amountbox" />
-
             <div class="subcancontainer">
-                <button asp-controller="Orders" asp-action="Extras" asp-route-remove="false" class="btn" type="submit">Bevestigen</button>
-                <button asp-controller="Orders" asp-action="Extras" asp-route-remove="true" class="btn" type="submit">Annuleren</button>
-            </div>
+                <button asp-controller="Orders" asp-action="Extras" asp-route-remove="false" class="btn submit" type="submit">Bevestigen</button>
+                <button asp-controller="Orders" asp-action="Extras" asp-route-remove="true" class="btn cancel" type="submit">Annuleren</button>
 
+            </div>
+          
         </form>
 
     </ul>

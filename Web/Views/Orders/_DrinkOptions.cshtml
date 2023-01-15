@@ -11,12 +11,12 @@
         <input type="hidden" asp-for="DrinkName" value="@Model.DrinkName" />
         <div class="form-group">
             <label class="form-check-label">
-                <input class="form-check-input" asp-for="HasStraw" /> @Html.DisplayNameFor(model => model.HasStraw)
+                <input class="form-check-input" asp-for="HasStraw" /> Rietje
             </label>
         </div>
         <div class="form-group">
             <label class="form-check-label">
-                <input class="form-check-input" asp-for="HasIce" /> @Html.DisplayNameFor(model => model.HasIce)
+                <input class="form-check-input" asp-for="HasIce" /> ijs
             </label>
         </div>
         <div class="form-group">
@@ -24,12 +24,12 @@
             <select asp-for="Size" class="form-control" asp-items="ViewBag.Sizes"></select>
         </div>
         <div class="form-group">
-            <label asp-for="Amount" class="control-label"></label>
+            <label asp-for="Amount" class="control-label">Hoeveelheid:</label>
             <input type="number" asp-for="Amount" value="1" min="1" class="form-control amountbox" />
         </div>
-        <div class="subcancontainer">
-            <button asp-controller="Orders" asp-action="DrinkOptions" asp-route-remove="false" class="btn" type="submit">Bevestigen</button>
-            <button asp-controller="Orders" asp-action="DrinkOptions" asp-route-remove="true" class="btn" type="submit">Annuleren</button>
+        <div class="form-group subcancontainer">
+            <button asp-controller="Orders" asp-action="DrinkOptions" asp-route-remove="false" class="btn submit" type="submit">Bevestigen</button>
+            <button asp-controller="Orders" asp-action="DrinkOptions" asp-route-remove="true" class="btn cancel" type="cancel">Annuleren</button>
         </div>
     </form>
 </div>

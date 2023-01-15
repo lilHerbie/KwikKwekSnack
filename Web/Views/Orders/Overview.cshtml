@@ -23,7 +23,7 @@
                             }
                         </ul>
                     }
-                    <p>@snackline.TotalPrice</p>
+                    <p>€ @snackline.TotalPrice</p>
                 }
             </ul>
         }
@@ -45,20 +45,20 @@
                         }
                         <li>@drinkLine.Size</li>
                     </ul>
-                    <p>@drinkLine.TotalPrice</p>
+                    <p>€ @drinkLine.TotalPrice</p>
                 }
 
             </ul>
         }
-        <p>Totaal prijs : @Model.TotalCost</p>
+        <p>Totale prijs : € @Model.TotalCost</p>
     </div>
     <form asp-controller="Orders" asp-action="Submit">
         <div class="form-group">
             <label class="form-check-label">
-                <input class="form-check-input" asp-for="TakeAway" /> @Html.DisplayNameFor(model => model.TakeAway)
+                <input class="form-check-input" asp-for="TakeAway" /> Afhalen
             </label>
         </div>
-        <button asp-controller="Orders" asp-action="Submit" asp-route-remove="false" class="btn" type="submit">Bevestigen</button>
+        <button asp-controller="Orders" asp-action="Submit" asp-route-remove="false" class="btn submit" type="submit">Bevestigen</button>
     </form>
 
 

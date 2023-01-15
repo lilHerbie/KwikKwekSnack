@@ -80,34 +80,15 @@ section {
         text-align: center;
     }
 
-.submit, .cancel {
-    width: 30%;
-    margin-top: 50px;
-    color: white;
-}
-
-.submit {
-    background-color: green;
-}
-
-.cancel {
-    background-color: red;
-}
-
 .snacklist {
     display: flex;
     flex-direction: column;
     list-style-type: none;
     width: 75%;
+    
 }
 
 
-.snackrow {
-    display: flex;
-    flex-direction: row;
-    column-gap: 25px;
-    width: 100%;
-}
 
 .extra {
     padding: 0px;
@@ -168,11 +149,36 @@ section {
 
 .amountbox {
     width: 100px;
-    height: 30px;
+    height: 35px;
+}
+
+
+.submit, .cancel {
+    width: 100%;
+    margin-top: 10px;
+    color: white;
+}
+
+.submit {
+    background-color: green;
+}
+
+.cancel {
+    background-color: red;
+}
+
+
+
+
+.extrarow {
+    display: flex;
+    flex-direction: column;
+    column-gap: 25px;
+    width: 75%;
 }
 
 .subcancontainer {
     display: flex;
     flex-direction: row;
-    align-content: left;
+    column-gap: 25px;
 }
