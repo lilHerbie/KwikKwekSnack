@@ -36,12 +36,12 @@
             <input type="hidden" asp-for="Id" value="@Model.Id" />
             
             <label asp-for="Amount" class="control-label"></label>
-            <input type="number" asp-for="Amount" value="1" min="1" class="form-control" />
+            <input type="number" asp-for="Amount" value="1" min="1" class="form-control amountbox" />
 
-            
-            <button asp-controller="Orders" asp-action="Extras" asp-route-remove="false" class="btn submit" type="submit">Bevestigen</button>
-
-            <button asp-controller="Orders" asp-action="Extras" asp-route-remove="true" class="btn cancel" type="submit">Annuleren</button>
+            <div class="subcancontainer">
+                <button asp-controller="Orders" asp-action="Extras" asp-route-remove="false" class="btn" type="submit">Bevestigen</button>
+                <button asp-controller="Orders" asp-action="Extras" asp-route-remove="true" class="btn" type="submit">Annuleren</button>
+            </div>
 
         </form>
 

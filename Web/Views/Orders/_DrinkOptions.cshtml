@@ -25,10 +25,11 @@
         </div>
         <div class="form-group">
             <label asp-for="Amount" class="control-label"></label>
-            <input type="number" asp-for="Amount" value="1" min="1" class="form-control" />
+            <input type="number" asp-for="Amount" value="1" min="1" class="form-control amountbox" />
         </div>
-
-        <button asp-controller="Orders" asp-action="DrinkOptions" asp-route-remove="false" class="btn" type="submit">Bevestigen</button>
-        <button asp-controller="Orders" asp-action="DrinkOptions" asp-route-remove="true" class="btn" type="submit">Annuleren</button>
+        <div class="subcancontainer">
+            <button asp-controller="Orders" asp-action="DrinkOptions" asp-route-remove="false" class="btn" type="submit">Bevestigen</button>
+            <button asp-controller="Orders" asp-action="DrinkOptions" asp-route-remove="true" class="btn" type="submit">Annuleren</button>
+        </div>
     </form>
 </div>
