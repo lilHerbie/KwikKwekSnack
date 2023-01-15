@@ -12,8 +12,8 @@ namespace ClassLibrary
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
-        [DataType(DataType.Currency)]
+        //[DataType(DataType.Currency)]
         public string Name { get; set; }
-        public float Price { get; set; }
+        public decimal Price { get; set; }
     }
 }

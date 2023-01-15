@@ -13,7 +13,7 @@ namespace ClassLibrary
         [DataType(DataType.Currency)]
         public bool TakeAway { get; set; }
 
-        public float TotalCost { get; set; }
+        public decimal TotalCost { get; set; }
 
         public Order()
         {

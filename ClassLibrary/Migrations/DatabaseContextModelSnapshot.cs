@@ -41,8 +41,8 @@ namespace ClassLibrary.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<float>("Price")
-                        .HasColumnType("real");
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)");
 
                     b.HasKey("Id");
 
@@ -55,7 +55,7 @@ namespace ClassLibrary.Migrations
                             Description = "Cola",
                             ImageUrl = "https://smartkiosk.nl/wp-content/uploads/2021/11/coca-cola-blik-33cl-800x800-1.jpg",
                             Name = "Cola",
-                            Price = 1.6f
+                            Price = 1.60m
                         },
                         new
                         {
@@ -63,7 +63,7 @@ namespace ClassLibrary.Migrations
                             Description = "Fanta",
                             ImageUrl = "https://smartkiosk.nl/wp-content/uploads/2021/10/9480.jpg",
                             Name = "Fanta",
-                            Price = 1.5f
+                            Price = 1.50m
                         },
                         new
                         {
@@ -71,7 +71,7 @@ namespace ClassLibrary.Migrations
                             Description = "Sprite",
                             ImageUrl = "https://smartkiosk.nl/wp-content/uploads/2021/09/2ad47881-f56c-4237-8574-402a84b96b63.jpg",
                             Name = "Sprite",
-                            Price = 1.5f
+                            Price = 1.50m
                         });
                 });
 
@@ -134,8 +134,8 @@ namespace ClassLibrary.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<float>("Price")
-                        .HasColumnType("real");
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)");
 
                     b.HasKey("Id");
 
@@ -146,19 +146,19 @@ namespace ClassLibrary.Migrations
                         {
                             Id = -1,
                             Name = "Ui",
-                            Price = 0.3f
+                            Price = 0.30m
                         },
                         new
                         {
                             Id = -2,
                             Name = "Broodje",
-                            Price = 1f
+                            Price = 1.00m
                         },
                         new
                         {
                             Id = -3,
                             Name = "Tomaat",
-                            Price = 0.2f
+                            Price = 0.20m
                         });
                 });
 
@@ -207,8 +207,8 @@ namespace ClassLibrary.Migrations
                     b.Property<bool>("TakeAway")
                         .HasColumnType("bit");
 
-                    b.Property<float>("TotalCost")
-                        .HasColumnType("real");
+                    b.Property<decimal>("TotalCost")
+                        .HasColumnType("decimal(18,2)");
 
                     b.HasKey("Id");
 
@@ -220,7 +220,7 @@ namespace ClassLibrary.Migrations
                             Id = -1,
                             Status = 0,
                             TakeAway = false,
-                            TotalCost = 4.4f
+                            TotalCost = 4.40m
                         });
                 });
 
@@ -244,8 +244,8 @@ namespace ClassLibrary.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<float>("Price")
-                        .HasColumnType("real");
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)");
 
                     b.HasKey("Id");
 
@@ -258,7 +258,7 @@ namespace ClassLibrary.Migrations
                             Description = "Frikandel",
                             ImageUrl = "https://boshuis.huisjebezorgd.nl/wp-content/uploads/2020/03/29512948_652505005141152_1601506864166600704_o.jpg",
                             Name = "Frikandel",
-                            Price = 2.5f
+                            Price = 2.50m
                         },
                         new
                         {
@@ -266,7 +266,7 @@ namespace ClassLibrary.Migrations
                             Description = "Kroket",
                             ImageUrl = "https://images0.persgroep.net/rcs/IFZ8aVdFNg1-Bko2qCSQg5i8G-A/diocontent/101162365/_fitwidth/763?appId=93a17a8fd81db0de025c8abd1cca1279&quality=0.8",
                             Name = "Kroket",
-                            Price = 2.75f
+                            Price = 2.75m
                         },
                         new
                         {
@@ -274,7 +274,7 @@ namespace ClassLibrary.Migrations
                             Description = "Bamischijf",
                             ImageUrl = "https://veluwe-plaza.huisjebezorgd.nl/wp-content/uploads/2020/03/bami.jpg",
                             Name = "Bamischijf",
-                            Price = 3f
+                            Price = 3.00m
                         });
                 });
 

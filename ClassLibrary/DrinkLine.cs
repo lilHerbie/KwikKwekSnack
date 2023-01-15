@@ -23,28 +23,28 @@ namespace ClassLibrary
         public Size Size { get; set; }
         [DataType(DataType.Currency)]
         [NotMapped]
-        public float TotalPrice
+        public decimal TotalPrice
         {
             get
             {
                 if (Drink != null)
                 {
 
-                    float totalPrice = Drink.Price;
+                    decimal totalPrice = Drink.Price;
                     if (Size == Size.M)
                     {
-                        totalPrice = totalPrice * 1.25f;
+                        totalPrice = totalPrice * 1.25m;
                     }
                     else if (Size == Size.L)
                     {
-                        totalPrice = totalPrice * 1.50f;
+                        totalPrice = totalPrice * 1.50m;
                     }
                     else if (Size == Size.XL)
                     {
-                        totalPrice = totalPrice * 1.75f;
+                        totalPrice = totalPrice * 1.75m;
                     }
-                    if (HasIce) { totalPrice += 0.15f; }
-                    if (HasStraw) { totalPrice += 0.10f; }
+                    if (HasIce) { totalPrice += 0.15m; }
+                    if (HasStraw) { totalPrice += 0.10m; }
                     return totalPrice;
                 }
                 return 0;

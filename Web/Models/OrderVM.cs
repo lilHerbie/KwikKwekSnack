@@ -10,11 +10,11 @@ namespace Web.Models
         public Status Status { get; set; }
         [DataType(DataType.Currency)]
         public bool TakeAway { get; set; }
-        public float TotalCost
+        public decimal TotalCost
         {
             get
             {
-                float totalCost = 0;
+                decimal totalCost = 0;
                 foreach (SnackLine snackLine in SnackLines)
                 {
                     totalCost += snackLine.TotalPrice;

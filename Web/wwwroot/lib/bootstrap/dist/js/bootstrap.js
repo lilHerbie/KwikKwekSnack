@@ -112,17 +112,17 @@
       transitionDuration,
       transitionDelay
     } = window.getComputedStyle(element);
-    const floatTransitionDuration = Number.parseFloat(transitionDuration);
-    const floatTransitionDelay = Number.parseFloat(transitionDelay); // Return 0 if element or transition duration is not found
+    const decimalTransitionDuration = Number.parsedecimal(transitionDuration);
+    const decimalTransitionDelay = Number.parsedecimal(transitionDelay); // Return 0 if element or transition duration is not found
 
-    if (!floatTransitionDuration && !floatTransitionDelay) {
+    if (!decimalTransitionDuration && !decimalTransitionDelay) {
       return 0;
     } // If multiple durations are defined, take the first
 
 
     transitionDuration = transitionDuration.split(',')[0];
     transitionDelay = transitionDelay.split(',')[0];
-    return (Number.parseFloat(transitionDuration) + Number.parseFloat(transitionDelay)) * MILLISECONDS_MULTIPLIER;
+    return (Number.parsedecimal(transitionDuration) + Number.parsedecimal(transitionDelay)) * MILLISECONDS_MULTIPLIER;
   };
 
   const triggerTransitionEnd = element => {
@@ -2457,7 +2457,7 @@
         this._saveInitialAttribute(element, styleProp);
 
         const calculatedValue = window.getComputedStyle(element)[styleProp];
-        element.style[styleProp] = `${callback(Number.parseFloat(calculatedValue))}px`;
+        element.style[styleProp] = `${callback(Number.parsedecimal(calculatedValue))}px`;
       };
 
       this._applyManipulationCallback(selector, manipulationCallBack);

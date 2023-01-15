@@ -7,7 +7,7 @@
 namespace ClassLibrary.Migrations
 {
     /// <inheritdoc />
-    public partial class dbinit : Migration
+    public partial class fix : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -21,7 +21,7 @@ namespace ClassLibrary.Migrations
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Price = table.Column<float>(type: "real", nullable: false)
+                    Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -35,7 +35,7 @@ namespace ClassLibrary.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Price = table.Column<float>(type: "real", nullable: false)
+                    Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -50,7 +50,7 @@ namespace ClassLibrary.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Status = table.Column<int>(type: "int", nullable: false),
                     TakeAway = table.Column<bool>(type: "bit", nullable: false),
-                    TotalCost = table.Column<float>(type: "real", nullable: false)
+                    TotalCost = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -66,7 +66,7 @@ namespace ClassLibrary.Migrations
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Price = table.Column<float>(type: "real", nullable: false)
+                    Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -161,9 +161,9 @@ namespace ClassLibrary.Migrations
                 columns: new[] { "Id", "Description", "ImageUrl", "Name", "Price" },
                 values: new object[,]
                 {
-                    { -3, "Sprite", "https://smartkiosk.nl/wp-content/uploads/2021/09/2ad47881-f56c-4237-8574-402a84b96b63.jpg", "Sprite", 1.5f },
-                    { -2, "Fanta", "https://smartkiosk.nl/wp-content/uploads/2021/10/9480.jpg", "Fanta", 1.5f },
-                    { -1, "Cola", "https://smartkiosk.nl/wp-content/uploads/2021/11/coca-cola-blik-33cl-800x800-1.jpg", "Cola", 1.6f }
+                    { -3, "Sprite", "https://smartkiosk.nl/wp-content/uploads/2021/09/2ad47881-f56c-4237-8574-402a84b96b63.jpg", "Sprite", 1.50m },
+                    { -2, "Fanta", "https://smartkiosk.nl/wp-content/uploads/2021/10/9480.jpg", "Fanta", 1.50m },
+                    { -1, "Cola", "https://smartkiosk.nl/wp-content/uploads/2021/11/coca-cola-blik-33cl-800x800-1.jpg", "Cola", 1.60m }
                 });
 
             migrationBuilder.InsertData(
@@ -171,24 +171,24 @@ namespace ClassLibrary.Migrations
                 columns: new[] { "Id", "Name", "Price" },
                 values: new object[,]
                 {
-                    { -3, "Tomaat", 0.2f },
-                    { -2, "Broodje", 1f },
-                    { -1, "Ui", 0.3f }
+                    { -3, "Tomaat", 0.20m },
+                    { -2, "Broodje", 1.00m },
+                    { -1, "Ui", 0.30m }
                 });
 
             migrationBuilder.InsertData(
                 table: "Orders",
                 columns: new[] { "Id", "Status", "TakeAway", "TotalCost" },
-                values: new object[] { -1, 0, false, 4.4f });
+                values: new object[] { -1, 0, false, 4.40m });
 
             migrationBuilder.InsertData(
                 table: "Snacks",
                 columns: new[] { "Id", "Description", "ImageUrl", "Name", "Price" },
                 values: new object[,]
                 {
-                    { -3, "Bamischijf", "https://veluwe-plaza.huisjebezorgd.nl/wp-content/uploads/2020/03/bami.jpg", "Bamischijf", 3f },
-                    { -2, "Kroket", "https://images0.persgroep.net/rcs/IFZ8aVdFNg1-Bko2qCSQg5i8G-A/diocontent/101162365/_fitwidth/763?appId=93a17a8fd81db0de025c8abd1cca1279&quality=0.8", "Kroket", 2.75f },
-                    { -1, "Frikandel", "https://boshuis.huisjebezorgd.nl/wp-content/uploads/2020/03/29512948_652505005141152_1601506864166600704_o.jpg", "Frikandel", 2.5f }
+                    { -3, "Bamischijf", "https://veluwe-plaza.huisjebezorgd.nl/wp-content/uploads/2020/03/bami.jpg", "Bamischijf", 3.00m },
+                    { -2, "Kroket", "https://images0.persgroep.net/rcs/IFZ8aVdFNg1-Bko2qCSQg5i8G-A/diocontent/101162365/_fitwidth/763?appId=93a17a8fd81db0de025c8abd1cca1279&quality=0.8", "Kroket", 2.75m },
+                    { -1, "Frikandel", "https://boshuis.huisjebezorgd.nl/wp-content/uploads/2020/03/29512948_652505005141152_1601506864166600704_o.jpg", "Frikandel", 2.50m }
                 });
 
             migrationBuilder.InsertData(

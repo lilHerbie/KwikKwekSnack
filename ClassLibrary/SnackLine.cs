@@ -22,13 +22,13 @@ namespace ClassLibrary
         public List<ExtraLine> ExtraLines { get; set; }
         [DataType(DataType.Currency)]
         [NotMapped]
-        public float TotalPrice
+        public decimal TotalPrice
         {
             get
             {
                 if(Snack != null)
                 {
-                    float totalPrice = Snack.Price;
+                    decimal totalPrice = Snack.Price;
                     foreach (ExtraLine extraLine in ExtraLines)
                     {
                         totalPrice += extraLine.Extra.Price;

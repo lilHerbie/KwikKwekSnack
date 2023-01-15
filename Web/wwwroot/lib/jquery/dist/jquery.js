@@ -6495,7 +6495,7 @@ var rboxStyle = new RegExp( cssExpand.join( "|" ), "i" );
 	}
 
 	function roundPixelMeasures( measure ) {
-		return Math.round( parseFloat( measure ) );
+		return Math.round( parsedecimal( measure ) );
 	}
 
 	var pixelPositionVal, boxSizingReliableVal, scrollboxSizeVal, pixelBoxStylesVal,
@@ -6809,7 +6809,7 @@ function getWidthOrHeight( elem, dimension, extra ) {
 
 		// Support: Android <=4.1 - 4.3 only
 		// Also use offsetWidth/offsetHeight for misreported inline dimensions (gh-3602)
-		!parseFloat( val ) && jQuery.css( elem, "display", false, styles ) === "inline" ) &&
+		!parsedecimal( val ) && jQuery.css( elem, "display", false, styles ) === "inline" ) &&
 
 		// Make sure the element is visible & connected
 		elem.getClientRects().length ) {
@@ -6826,7 +6826,7 @@ function getWidthOrHeight( elem, dimension, extra ) {
 	}
 
 	// Normalize "" and auto
-	val = parseFloat( val ) || 0;
+	val = parsedecimal( val ) || 0;
 
 	// Adjust for the element's box model
 	return ( val +
@@ -6998,7 +6998,7 @@ jQuery.extend( {
 
 		// Make numeric if forced or a qualifier was provided and val looks numeric
 		if ( extra === "" || extra ) {
-			num = parseFloat( val );
+			num = parsedecimal( val );
 			return extra === true || isFinite( num ) ? num || 0 : val;
 		}
 
@@ -7057,7 +7057,7 @@ jQuery.each( [ "height", "width" ], function( _i, dimension ) {
 			if ( isBorderBox && scrollboxSizeBuggy ) {
 				subtract -= Math.ceil(
 					elem[ "offset" + dimension[ 0 ].toUpperCase() + dimension.slice( 1 ) ] -
-					parseFloat( styles[ dimension ] ) -
+					parsedecimal( styles[ dimension ] ) -
 					boxModelAdjustment( elem, dimension, "border", false, styles ) -
 					0.5
 				);
@@ -7079,7 +7079,7 @@ jQuery.each( [ "height", "width" ], function( _i, dimension ) {
 jQuery.cssHooks.marginLeft = addGetHookIf( support.reliableMarginLeft,
 	function( elem, computed ) {
 		if ( computed ) {
-			return ( parseFloat( curCSS( elem, "marginLeft" ) ) ||
+			return ( parsedecimal( curCSS( elem, "marginLeft" ) ) ||
 				elem.getBoundingClientRect().left -
 					swap( elem, { marginLeft: 0 }, function() {
 						return elem.getBoundingClientRect().left;
@@ -7207,8 +7207,8 @@ Tween.propHooks = {
 			}
 
 			// Passing an empty string as a 3rd parameter to .css will automatically
-			// attempt a parseFloat and fallback to a string if the parse fails.
-			// Simple values such as "10px" are parsed to Float;
+			// attempt a parsedecimal and fallback to a string if the parse fails.
+			// Simple values such as "10px" are parsed to decimal;
 			// complex values such as "rotate(1rad)" are returned as-is.
 			result = jQuery.css( tween.elem, tween.prop, "" );
 
@@ -7414,7 +7414,7 @@ function defaultPrefilter( elem, props, opts ) {
 
 		// Animate inline elements as inline-block
 		if ( display === "inline" || display === "inline-block" && restoreDisplay != null ) {
-			if ( jQuery.css( elem, "float" ) === "none" ) {
+			if ( jQuery.css( elem, "decimal" ) === "none" ) {
 
 				// Restore the original display value at the end of pure show/hide animations
 				if ( !propTween ) {
@@ -10445,8 +10445,8 @@ jQuery.offset = {
 			curLeft = curPosition.left;
 
 		} else {
-			curTop = parseFloat( curCSSTop ) || 0;
-			curLeft = parseFloat( curCSSLeft ) || 0;
+			curTop = parsedecimal( curCSSTop ) || 0;
+			curLeft = parsedecimal( curCSSLeft ) || 0;
 		}
 
 		if ( isFunction( options ) ) {
@@ -10674,7 +10674,7 @@ jQuery.each( { Height: "height", Width: "width" }, function( name, type ) {
 
 				return value === undefined ?
 
-					// Get width or height on the element, requesting but not forcing parseFloat
+					// Get width or height on the element, requesting but not forcing parsedecimal
 					jQuery.css( elem, type, extra ) :
 
 					// Set width or height on the element
@@ -10802,10 +10802,10 @@ jQuery.isNumeric = function( obj ) {
 	var type = jQuery.type( obj );
 	return ( type === "number" || type === "string" ) &&
 
-		// parseFloat NaNs numeric-cast false positives ("")
+		// parsedecimal NaNs numeric-cast false positives ("")
 		// ...but misinterprets leading-number strings, particularly hex literals ("0x...")
 		// subtraction forces infinities to NaN
-		!isNaN( obj - parseFloat( obj ) );
+		!isNaN( obj - parsedecimal( obj ) );
 };
 
 jQuery.trim = function( text ) {

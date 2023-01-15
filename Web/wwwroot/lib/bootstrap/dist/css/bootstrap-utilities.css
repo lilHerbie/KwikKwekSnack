@@ -238,16 +238,16 @@
   vertical-align: text-top !important;
 }
 
-.float-start {
-  float: left !important;
+.decimal-start {
+  decimal: left !important;
 }
 
-.float-end {
-  float: right !important;
+.decimal-end {
+  decimal: right !important;
 }
 
-.float-none {
-  float: none !important;
+.decimal-none {
+  decimal: none !important;
 }
 
 .opacity-0 {
@@ -1550,16 +1550,16 @@
 }
 
 @media (min-width: 576px) {
-  .float-sm-start {
-    float: left !important;
+  .decimal-sm-start {
+    decimal: left !important;
   }
 
-  .float-sm-end {
-    float: right !important;
+  .decimal-sm-end {
+    decimal: right !important;
   }
 
-  .float-sm-none {
-    float: none !important;
+  .decimal-sm-none {
+    decimal: none !important;
   }
 
   .d-sm-inline {
@@ -2201,16 +2201,16 @@
   }
 }
 @media (min-width: 768px) {
-  .float-md-start {
-    float: left !important;
+  .decimal-md-start {
+    decimal: left !important;
   }
 
-  .float-md-end {
-    float: right !important;
+  .decimal-md-end {
+    decimal: right !important;
   }
 
-  .float-md-none {
-    float: none !important;
+  .decimal-md-none {
+    decimal: none !important;
   }
 
   .d-md-inline {
@@ -2852,16 +2852,16 @@
   }
 }
 @media (min-width: 992px) {
-  .float-lg-start {
-    float: left !important;
+  .decimal-lg-start {
+    decimal: left !important;
   }
 
-  .float-lg-end {
-    float: right !important;
+  .decimal-lg-end {
+    decimal: right !important;
   }
 
-  .float-lg-none {
-    float: none !important;
+  .decimal-lg-none {
+    decimal: none !important;
   }
 
   .d-lg-inline {
@@ -3503,16 +3503,16 @@
   }
 }
 @media (min-width: 1200px) {
-  .float-xl-start {
-    float: left !important;
+  .decimal-xl-start {
+    decimal: left !important;
   }
 
-  .float-xl-end {
-    float: right !important;
+  .decimal-xl-end {
+    decimal: right !important;
   }
 
-  .float-xl-none {
-    float: none !important;
+  .decimal-xl-none {
+    decimal: none !important;
   }
 
   .d-xl-inline {
@@ -4154,16 +4154,16 @@
   }
 }
 @media (min-width: 1400px) {
-  .float-xxl-start {
-    float: left !important;
+  .decimal-xxl-start {
+    decimal: left !important;
   }
 
-  .float-xxl-end {
-    float: right !important;
+  .decimal-xxl-end {
+    decimal: right !important;
   }
 
-  .float-xxl-none {
-    float: none !important;
+  .decimal-xxl-none {
+    decimal: none !important;
   }
 
   .d-xxl-inline {

@@ -16,6 +16,6 @@ namespace ClassLibrary
         public string ImageUrl { get; set; }
         public string Description { get; set; }
         [DataType(DataType.Currency)]
-        public float Price { get; set; }
+        public decimal Price { get; set; }
     }
 }
